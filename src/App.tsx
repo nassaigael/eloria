@@ -2,6 +2,7 @@ import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import { Heart, Star, Truck, Shield, RotateCcw, ShoppingBag } from 'lucide-react';
 import Hero from './components/sections/Hero';
+import Categories from './components/sections/Categories';
 
 // Données factices pour les produits (inchangé)
 const produitsPopulaires = [
@@ -63,13 +64,6 @@ const produitsPopulaires = [
   }
 ];
 
-const categories = [
-  { nom: "Robes", image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=400&auto=format" },
-  { nom: "Accessoires", image: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=400&auto=format" },
-  { nom: "Mariage", image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&auto=format" },
-  { nom: "Soirée", image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&auto=format" },
-];
-
 const avis = [
   {
     nom: "Sophie Martin",
@@ -128,34 +122,7 @@ function App() {
       <main>
         <Hero />
 
-        {/* Section Catégories */}
-        <section className="container-custom">
-          <div className="section-title">
-            <h2>Nos Catégories</h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {categories.map((categorie, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden cursor-pointer"
-                onClick={() => alert(`Catégorie ${categorie.nom} sélectionnée`)}
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={categorie.image}
-                    alt={categorie.nom}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-bordeaux-dark via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-center">
-                  <h3 className="text-xl font-serif text-champagne">{categorie.nom}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <Categories />
 
         {/* Section Produits Populaires */}
         <section className="container-custom">
