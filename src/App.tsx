@@ -1,6 +1,7 @@
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import { Heart, Star, Truck, Shield, RotateCcw, ShoppingBag } from 'lucide-react';
+import Hero from './components/sections/Hero';
 
 // Données factices pour les produits (inchangé)
 const produitsPopulaires = [
@@ -125,33 +126,7 @@ function App() {
       />
 
       <main>
-        {/* Hero Section avec grande image pour tester le scroll */}
-        <section className="relative h-screen">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600&auto=format)',
-              filter: 'brightness(0.6)'
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-bordeaux/90" />
-
-          <div className="relative h-full flex items-center justify-center text-center">
-            <div className="container-custom">
-              <span className="label mb-4 block">COLLECTION PRINTEMPS-ÉTÉ 2024</span>
-              <h1 className="text-5xl md:text-7xl text-champagne mb-6">
-                L'Élégance <br />à l'État Pur
-              </h1>
-              <p className="text-lg md:text-xl text-champagne/80 mb-8 max-w-2xl mx-auto">
-                Découvrez notre nouvelle collection de prêt-à-porter premium,
-                conçue pour les femmes qui aiment allier sophistication et confort.
-              </p>
-              <button className="btn-primary">
-                Découvrir
-              </button>
-            </div>
-          </div>
-        </section>
+        <Hero />
 
         {/* Section Catégories */}
         <section className="container-custom">
@@ -310,7 +285,7 @@ function App() {
             </div>
           </div>
         </section>
-        
+
         <Footer />
 
       </main>
