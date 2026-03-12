@@ -136,7 +136,7 @@ const PopularProducts = () => {
                       transition={{ duration: 0.8 }}
                     />
 
-                    {/* Overlay au hover */}
+                    {/* Overlay au hover (seulement sur desktop) */}
                     <motion.div
                       className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent"
                       initial={{ opacity: 0 }}
@@ -144,10 +144,12 @@ const PopularProducts = () => {
                       transition={{ duration: 0.4 }}
                     />
 
-                    {/* Boutons d'action au hover */}
-                    <motion.div
-                      className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500"
-                    >
+                    {/* Boutons d'action - toujours visibles sur mobile, au hover sur desktop */}
+                    <div className={`
+                      absolute inset-x-0 bottom-0 p-4
+                      transition-transform duration-500
+                      ${window.innerWidth < 768 ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'}
+                    `}>
                       <div className="flex space-x-2">
                         <motion.button
                           className="flex-1 bg-gold text-bordeaux-dark py-3 text-sm uppercase tracking-wider font-medium flex items-center justify-center space-x-2 hover:bg-gold-light transition-colors"
@@ -166,7 +168,7 @@ const PopularProducts = () => {
                           <Eye size={16} />
                         </motion.button>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
 
                   {/* Informations produit */}
