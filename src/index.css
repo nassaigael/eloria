@@ -447,3 +447,13 @@
   motion-offset: 2px;
   border-left-color: var(--color-bordeaux);
 }
+
+/* Masquer la scrollbar tout en gardant la fonctionnalité */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
