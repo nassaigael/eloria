@@ -1,9 +1,10 @@
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
-import { Star, Truck, Shield, RotateCcw, ShoppingBag } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Hero from './components/sections/Hero';
 import Categories from './components/sections/Categories';
 import PopularProducts from './components/sections/PopularProducts';
+import Benefits from './components/sections/Benefits';
 
 
 const avis = [
@@ -59,33 +60,7 @@ function App() {
 
         <PopularProducts />
 
-        {/* Section Avantages */}
-        <section className="bg-bordeaux-dark/50 py-16">
-          <div className="container-custom">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <Truck className="mx-auto text-gold mb-4" size={32} />
-                <h4 className="text-lg font-serif text-champagne mb-2">Livraison Offerte</h4>
-                <p className="text-sm text-champagne/60">Dès 150€ d'achat</p>
-              </div>
-              <div className="text-center">
-                <Shield className="mx-auto text-gold mb-4" size={32} />
-                <h4 className="text-lg font-serif text-champagne mb-2">Paiement Sécurisé</h4>
-                <p className="text-sm text-champagne/60">CB, PayPal, Apple Pay</p>
-              </div>
-              <div className="text-center">
-                <RotateCcw className="mx-auto text-gold mb-4" size={32} />
-                <h4 className="text-lg font-serif text-champagne mb-2">Retours Gratuits</h4>
-                <p className="text-sm text-champagne/60">Sous 30 jours</p>
-              </div>
-              <div className="text-center">
-                <ShoppingBag className="mx-auto text-gold mb-4" size={32} />
-                <h4 className="text-lg font-serif text-champagne mb-2">Service Premium</h4>
-                <p className="text-sm text-champagne/60">7j/7 de 9h à 20h</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Benefits />
 
         {/* Section Avis Clients */}
         <section className="container-custom">
@@ -113,7 +88,7 @@ function App() {
 
         {/* Section Newsletter */}
         <section className="container-custom">
-          <div className="bg-gradient-to-r from-gold/10 to-gold/5 p-12 text-center border border-gold/20">
+          <div className="bg-linear-to-r from-gold/10 to-gold/5 p-12 text-center border border-gold/20">
             <h2 className="text-3xl md:text-4xl text-champagne mb-4">
               Restez Inspirée
             </h2>

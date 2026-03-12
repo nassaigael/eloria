@@ -73,9 +73,6 @@ const PopularProducts = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="text-gold text-sm uppercase tracking-[0.3em] mb-4 block">
-              Les Plus Prisés
-            </span>
             <h2 className="text-4xl md:text-5xl font-serif text-champagne mb-4">
               Nos <span className="text-gold">Incontournables</span>
             </h2>
