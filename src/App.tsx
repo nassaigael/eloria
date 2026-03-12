@@ -1,3 +1,4 @@
+import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import { Heart, Star, Truck, Shield, RotateCcw, ShoppingBag } from 'lucide-react';
 
@@ -115,7 +116,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-bordeaux">
-      <Header 
+      <Header
         initialCartCount={3}
         initialFavoritesCount={2}
         onSearchClick={handleSearchClick}
@@ -126,7 +127,7 @@ function App() {
       <main>
         {/* Hero Section avec grande image pour tester le scroll */}
         <section className="relative h-screen">
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: 'url(https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600&auto=format)',
@@ -134,7 +135,7 @@ function App() {
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-bordeaux/90" />
-          
+
           <div className="relative h-full flex items-center justify-center text-center">
             <div className="container-custom">
               <span className="label mb-4 block">COLLECTION PRINTEMPS-ÉTÉ 2024</span>
@@ -160,14 +161,14 @@ function App() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {categories.map((categorie, index) => (
-              <div 
+              <div
                 key={index}
                 className="group relative overflow-hidden cursor-pointer"
                 onClick={() => alert(`Catégorie ${categorie.nom} sélectionnée`)}
               >
                 <div className="aspect-square overflow-hidden">
-                  <img 
-                    src={categorie.image} 
+                  <img
+                    src={categorie.image}
                     alt={categorie.nom}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
@@ -194,19 +195,19 @@ function App() {
             {produitsPopulaires.map((produit) => (
               <div key={produit.id} className="product-card group">
                 <div className="relative overflow-hidden">
-                  <img 
-                    src={produit.image} 
+                  <img
+                    src={produit.image}
                     alt={produit.nom}
                     className="product-image w-full aspect-[3/4] object-cover"
                   />
-                  <button 
+                  <button
                     className="absolute top-4 right-4 favorite-inactive"
                     onClick={() => handleToggleFavorite(produit.id)}
                   >
                     <Heart size={20} />
                   </button>
                   <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <button 
+                    <button
                       className="btn-primary w-full"
                       onClick={() => handleAddToCart(produit.id)}
                     >
@@ -298,8 +299,8 @@ function App() {
               Inscrivez-vous à notre newsletter et recevez -10% sur votre première commande
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input 
-                type="email" 
+              <input
+                type="email"
                 placeholder="Votre adresse email"
                 className="search-input flex-1"
               />
@@ -309,51 +310,9 @@ function App() {
             </div>
           </div>
         </section>
+        
+        <Footer />
 
-        {/* Footer */}
-        <footer className="bg-bordeaux-dark border-t border-gold/10 mt-16">
-          <div className="container-custom py-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div>
-                <h6 className="text-gold mb-4">Eloria</h6>
-                <ul className="space-y-2">
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Notre histoire'); }}>Notre histoire</a></li>
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Nos boutiques'); }}>Nos boutiques</a></li>
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Carrières'); }}>Carrières</a></li>
-                </ul>
-              </div>
-              <div>
-                <h6 className="text-gold mb-4">Service client</h6>
-                <ul className="space-y-2">
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Contact'); }}>Contact</a></li>
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Livraison'); }}>Livraison</a></li>
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Retours'); }}>Retours</a></li>
-                </ul>
-              </div>
-              <div>
-                <h6 className="text-gold mb-4">Informations</h6>
-                <ul className="space-y-2">
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page FAQ'); }}>FAQ</a></li>
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Guide des tailles'); }}>Guide des tailles</a></li>
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Mentions légales'); }}>Mentions légales</a></li>
-                </ul>
-              </div>
-              <div>
-                <h6 className="text-gold mb-4">Suivez-nous</h6>
-                <ul className="space-y-2">
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Instagram'); }}>Instagram</a></li>
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Facebook'); }}>Facebook</a></li>
-                  <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Page Pinterest'); }}>Pinterest</a></li>
-                </ul>
-              </div>
-            </div>
-            <div className="border-t border-gold/10 mt-8 pt-8 text-center">
-              <p className="text-sm text-champagne/50">
-                © 2024 Eloria. Tous droits réservés.
-              </p>
-            </div>
-          </div>
-        </footer>
       </main>
     </div>
   );
