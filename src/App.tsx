@@ -1,68 +1,10 @@
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
-import { Heart, Star, Truck, Shield, RotateCcw, ShoppingBag } from 'lucide-react';
+import { Star, Truck, Shield, RotateCcw, ShoppingBag } from 'lucide-react';
 import Hero from './components/sections/Hero';
 import Categories from './components/sections/Categories';
+import PopularProducts from './components/sections/PopularProducts';
 
-// Données factices pour les produits (inchangé)
-const produitsPopulaires = [
-  {
-    id: 1,
-    nom: "Robe de Soirée Émeraude",
-    prix: 299,
-    image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400&auto=format",
-    categorie: "Robes"
-  },
-  {
-    id: 2,
-    nom: "Ensemble Chic Doré",
-    prix: 449,
-    image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&auto=format",
-    categorie: "Ensembles"
-  },
-  {
-    id: 3,
-    nom: "Blouse en Soie",
-    prix: 189,
-    image: "https://images.unsplash.com/photo-1551163943-3f6a855d1153?w=400&auto=format",
-    categorie: "Hauts"
-  },
-  {
-    id: 4,
-    nom: "Jupe Plissée Rubis",
-    prix: 159,
-    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=400&auto=format",
-    categorie: "Jupes"
-  },
-  {
-    id: 5,
-    nom: "Robe de Cocktail Noire",
-    prix: 259,
-    image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&auto=format",
-    categorie: "Robes"
-  },
-  {
-    id: 6,
-    nom: "Pantalon Tailleur",
-    prix: 199,
-    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&auto=format",
-    categorie: "Pantalons"
-  },
-  {
-    id: 7,
-    nom: "Blazer Cérémonie",
-    prix: 349,
-    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&auto=format",
-    categorie: "Vestes"
-  },
-  {
-    id: 8,
-    nom: "Roche de Bal Rose",
-    prix: 399,
-    image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=400&auto=format",
-    categorie: "Robes"
-  }
-];
 
 const avis = [
   {
@@ -99,15 +41,6 @@ function App() {
     alert('Favoris - Fonctionnalité à venir !');
   };
 
-  // Fonction pour gérer l'ajout au panier depuis les cartes produits
-  const handleAddToCart = (produitId: number) => {
-    alert(`Produit ${produitId} ajouté au panier !`);
-  };
-
-  // Fonction pour gérer les favoris depuis les cartes produits
-  const handleToggleFavorite = (produitId: number) => {
-    alert(`Produit ${produitId} ajouté aux favoris !`);
-  };
 
   return (
     <div className="min-h-screen bg-bordeaux">
@@ -124,60 +57,7 @@ function App() {
 
         <Categories />
 
-        {/* Section Produits Populaires */}
-        <section className="container-custom">
-          <div className="section-title">
-            <h2>Nos Produits Populaires</h2>
-            <p className="text-champagne/70 max-w-2xl mx-auto">
-              Découvrez les pièces les plus appréciées de notre collection
-            </p>
-          </div>
-
-          <div className="grid-products">
-            {produitsPopulaires.map((produit) => (
-              <div key={produit.id} className="product-card group">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={produit.image}
-                    alt={produit.nom}
-                    className="product-image w-full aspect-[3/4] object-cover"
-                  />
-                  <button
-                    className="absolute top-4 right-4 favorite-inactive"
-                    onClick={() => handleToggleFavorite(produit.id)}
-                  >
-                    <Heart size={20} />
-                  </button>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <button
-                      className="btn-primary w-full"
-                      onClick={() => handleAddToCart(produit.id)}
-                    >
-                      Ajouter au panier
-                    </button>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <span className="product-category">{produit.categorie}</span>
-                  <h3 className="product-title mt-1">{produit.nom}</h3>
-                  <div className="flex items-center justify-between mt-2">
-                    <span className="price">{produit.prix.toFixed(2)} €</span>
-                    <div className="flex items-center space-x-1">
-                      <Star size={16} className="fill-gold text-gold" />
-                      <span className="text-sm text-champagne/70">4.8</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <button className="btn-secondary">
-              Voir tous les produits
-            </button>
-          </div>
-        </section>
+        <PopularProducts />
 
         {/* Section Avantages */}
         <section className="bg-bordeaux-dark/50 py-16">
