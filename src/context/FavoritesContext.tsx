@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export interface FavoriteItem {
+  slug: string;
   id: number;
   name: string;
   price: number;

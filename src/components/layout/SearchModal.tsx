@@ -95,7 +95,11 @@ const SearchModal = () => {
                     </p>
                   )}
 
-                  {!searchQuery}
+                  {!searchQuery && (
+                    <p className="text-center text-champagne/50 py-8">
+                      Commencez à taper pour rechercher un produit
+                    </p>
+                  )}
 
                   <div className="space-y-4">
                     {searchResults.map((product: Product) => (
@@ -155,7 +159,8 @@ const SearchModal = () => {
                                   name: product.name,
                                   price: product.price,
                                   image: product.image,
-                                  category: product.category
+                                  category: product.category,
+                                  slug: product.slug // slug est string, conforme à l'interface
                                 });
                               }
                             }}

@@ -10,6 +10,7 @@ import Categories from './components/sections/Categories';
 import PopularProducts from './components/sections/PopularProducts';
 import Benefits from './components/sections/Benefits';
 import Category from './pages/Category';
+import Favorites from './pages/Favorites';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                     </>
                   } />
                   <Route path="/categorie/:slug" element={<Category />} />
+                  <Route path="/favoris" element={<Favorites />} />
                 </Routes>
               </main>
               <Footer />

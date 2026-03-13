@@ -9,7 +9,7 @@ import { useFavorites } from '../../context/FavoritesContext';
 const PopularProducts = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  
+
   const { addToCart } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
@@ -26,7 +26,7 @@ const PopularProducts = () => {
 
   const nextImage = () => {
     if (selectedProduct) {
-      setSelectedImageIndex((prev) => 
+      setSelectedImageIndex((prev) =>
         (prev + 1) % 3
       );
     }
@@ -34,7 +34,7 @@ const PopularProducts = () => {
 
   const prevImage = () => {
     if (selectedProduct) {
-      setSelectedImageIndex((prev) => 
+      setSelectedImageIndex((prev) =>
         (prev - 1 + 3) % 3
       );
     }
@@ -59,7 +59,8 @@ const PopularProducts = () => {
         name: product.name,
         price: product.price,
         image: product.image,
-        category: product.category
+        category: product.category,
+        slug: product.slug
       });
     }
   };
@@ -137,13 +138,12 @@ const PopularProducts = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Heart 
-                      size={18} 
-                      className={`transition-colors ${
-                        isFavorite(product.id) 
-                          ? 'fill-gold text-gold' 
+                    <Heart
+                      size={18}
+                      className={`transition-colors ${isFavorite(product.id)
+                          ? 'fill-gold text-gold'
                           : 'text-champagne'
-                      }`}
+                        }`}
                     />
                   </motion.button>
 
@@ -225,7 +225,7 @@ const PopularProducts = () => {
                           </span>
                         )}
                       </div>
-                      
+
                       {/* Note */}
                       <div className="flex items-center space-x-1">
                         <Star size={14} className="fill-gold text-gold" />
@@ -272,8 +272,8 @@ const PopularProducts = () => {
               <motion.span
                 className="absolute inset-0 bg-gold"
                 initial={{ scale: 0, opacity: 0 }}
-                whileHover={{ 
-                  scale: 1, 
+                whileHover={{
+                  scale: 1,
                   opacity: 1,
                   transition: { duration: 0.4 }
                 }}
@@ -382,11 +382,10 @@ const PopularProducts = () => {
                             <button
                               key={i}
                               onClick={() => setSelectedImageIndex(i)}
-                              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                i === selectedImageIndex 
-                                  ? 'w-6 bg-gold' 
+                              className={`w-2 h-2 rounded-full transition-all duration-300 ${i === selectedImageIndex
+                                  ? 'w-6 bg-gold'
                                   : 'bg-gold/30 hover:bg-gold/50'
-                              }`}
+                                }`}
                             />
                           ))}
                         </div>
@@ -537,13 +536,12 @@ const PopularProducts = () => {
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          <Heart 
-                            size={20} 
-                            className={`transition-colors ${
-                              isFavorite(selectedProduct.id) 
-                                ? 'fill-gold text-gold' 
+                          <Heart
+                            size={20}
+                            className={`transition-colors ${isFavorite(selectedProduct.id)
+                                ? 'fill-gold text-gold'
                                 : 'text-champagne'
-                            }`}
+                              }`}
                           />
                         </motion.button>
                       </div>
