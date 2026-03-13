@@ -1,20 +1,17 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Heart, ShoppingBag, Star, Eye, X, ChevronLeft, ChevronRight, RotateCcw, Shield, Truck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { productsData, type Product } from '../../data/productsData';
+import { useCart } from '../../context/CartContext';
+import { useFavorites } from '../../context/FavoritesContext';
 
 const PopularProducts = () => {
-  const [favorites, setFavorites] = useState<number[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
-  const toggleFavorite = (productId: number) => {
-    setFavorites(prev => 
-      prev.includes(productId) 
-        ? prev.filter(id => id !== productId)
-        : [...prev, productId]
-    );
-  };
+  
+  const { addToCart } = useCart();
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const openQuickView = (product: Product) => {
     setSelectedProduct(product);
@@ -40,6 +37,30 @@ const PopularProducts = () => {
       setSelectedImageIndex((prev) => 
         (prev - 1 + 3) % 3
       );
+    }
+  };
+
+  const handleAddToCart = (product: Product) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1
+    });
+  };
+
+  const handleToggleFavorite = (product: Product) => {
+    if (isFavorite(product.id)) {
+      removeFromFavorites(product.id);
+    } else {
+      addToFavorites({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        category: product.category
+      });
     }
   };
 
@@ -73,6 +94,9 @@ const PopularProducts = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
+            <span className="text-gold text-sm uppercase tracking-[0.3em] mb-4 block">
+              Les Plus Prisés
+            </span>
             <h2 className="text-4xl md:text-5xl font-serif text-champagne mb-4">
               Nos <span className="text-gold">Incontournables</span>
             </h2>
@@ -108,7 +132,7 @@ const PopularProducts = () => {
 
                   {/* Bouton favoris */}
                   <motion.button
-                    onClick={() => toggleFavorite(product.id)}
+                    onClick={() => handleToggleFavorite(product)}
                     className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold bg-bordeaux-dark/50 backdrop-blur-sm transition-all duration-300"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
@@ -116,7 +140,7 @@ const PopularProducts = () => {
                     <Heart 
                       size={18} 
                       className={`transition-colors ${
-                        favorites.includes(product.id) 
+                        isFavorite(product.id) 
                           ? 'fill-gold text-gold' 
                           : 'text-champagne'
                       }`}
@@ -124,61 +148,70 @@ const PopularProducts = () => {
                   </motion.button>
 
                   {/* Image */}
-                  <div className="relative aspect-3/4 overflow-hidden">
-                    <motion.img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.8 }}
-                    />
+                  <Link to={`/produit/${product.slug}`}>
+                    <div className="relative aspect-3/4 overflow-hidden">
+                      <motion.img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.8 }}
+                      />
 
-                    {/* Overlay au hover (seulement sur desktop) */}
-                    <motion.div
-                      className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 0.7 }}
-                      transition={{ duration: 0.4 }}
-                    />
+                      {/* Overlay au hover */}
+                      <motion.div
+                        className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 0.7 }}
+                        transition={{ duration: 0.4 }}
+                      />
 
-                    {/* Boutons d'action - toujours visibles sur mobile, au hover sur desktop */}
-                    <div className={`
-                      absolute inset-x-0 bottom-0 p-4
-                      transition-transform duration-500
-                      ${window.innerWidth < 768 ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'}
-                    `}>
-                      <div className="flex space-x-2">
-                        <motion.button
-                          className="flex-1 bg-gold text-bordeaux-dark py-3 text-sm uppercase tracking-wider font-medium flex items-center justify-center space-x-2 hover:bg-gold-light transition-colors"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <ShoppingBag size={16} />
-                          <span>Ajouter</span>
-                        </motion.button>
-                        <motion.button
-                          onClick={() => openQuickView(product)}
-                          className="w-12 bg-champagne/20 backdrop-blur-sm border border-gold/30 text-champagne flex items-center justify-center hover:border-gold transition-colors"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Eye size={16} />
-                        </motion.button>
+                      {/* Boutons d'action */}
+                      <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                        <div className="flex space-x-2">
+                          <motion.button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleAddToCart(product);
+                            }}
+                            className="flex-1 bg-gold text-bordeaux-dark py-3 text-sm uppercase tracking-wider font-medium flex items-center justify-center space-x-2 hover:bg-gold-light transition-colors"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <ShoppingBag size={16} />
+                            <span>Ajouter</span>
+                          </motion.button>
+                          <motion.button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              openQuickView(product);
+                            }}
+                            className="w-12 bg-champagne/20 backdrop-blur-sm border border-gold/30 text-champagne flex items-center justify-center hover:border-gold transition-colors"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <Eye size={16} />
+                          </motion.button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Informations produit */}
                   <div className="p-4">
                     {/* Catégorie */}
-                    <span className="text-xs text-gold/70 uppercase tracking-wider">
-                      {product.category}
-                    </span>
+                    <Link to={`/categorie/${product.category.toLowerCase()}`}>
+                      <span className="text-xs text-gold/70 uppercase tracking-wider hover:text-gold transition-colors">
+                        {product.category}
+                      </span>
+                    </Link>
 
                     {/* Nom */}
-                    <h3 className="text-lg font-serif text-champagne mt-1 mb-2 line-clamp-1">
-                      {product.name}
-                    </h3>
+                    <Link to={`/produit/${product.slug}`}>
+                      <h3 className="text-lg font-serif text-champagne hover:text-gold transition-colors mt-1 mb-2 line-clamp-1">
+                        {product.name}
+                      </h3>
+                    </Link>
 
                     {/* Prix et note */}
                     <div className="flex items-center justify-between">
@@ -232,10 +265,9 @@ const PopularProducts = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="text-center mt-16"
           >
-            <motion.a
-              href="/boutique"
+            <Link
+              to="/boutique"
               className="group relative inline-flex items-center px-10 py-4 border border-gold text-gold text-sm uppercase tracking-wider font-medium overflow-hidden"
-              whileHover="hover"
             >
               <motion.span
                 className="absolute inset-0 bg-gold"
@@ -256,7 +288,7 @@ const PopularProducts = () => {
                   →
                 </motion.span>
               </span>
-            </motion.a>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -324,7 +356,7 @@ const PopularProducts = () => {
                           )}
                         </div>
 
-                        {/* Navigation des images (simulée) */}
+                        {/* Navigation des images */}
                         <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4">
                           <motion.button
                             onClick={prevImage}
@@ -364,9 +396,11 @@ const PopularProducts = () => {
                     {/* Informations détaillées */}
                     <div className="space-y-6">
                       {/* Catégorie */}
-                      <span className="text-gold text-sm uppercase tracking-[0.2em]">
-                        {selectedProduct.category}
-                      </span>
+                      <Link to={`/categorie/${selectedProduct.category.toLowerCase()}`} onClick={closeQuickView}>
+                        <span className="text-gold text-sm uppercase tracking-[0.2em] hover:underline">
+                          {selectedProduct.category}
+                        </span>
+                      </Link>
 
                       {/* Titre */}
                       <h2 className="text-3xl md:text-4xl font-serif text-champagne">
@@ -403,6 +437,14 @@ const PopularProducts = () => {
                         {selectedProduct.description}
                       </p>
 
+                      {/* Matière */}
+                      {selectedProduct.material && (
+                        <div className="space-y-2">
+                          <h4 className="text-sm uppercase tracking-wider text-champagne">Matière</h4>
+                          <p className="text-champagne/70">{selectedProduct.material}</p>
+                        </div>
+                      )}
+
                       {/* Couleurs disponibles */}
                       {selectedProduct.colors && (
                         <div className="space-y-3">
@@ -431,27 +473,57 @@ const PopularProducts = () => {
                       )}
 
                       {/* Tailles */}
-                      <div className="space-y-3">
-                        <h4 className="text-sm uppercase tracking-wider text-champagne">
-                          Tailles disponibles
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
-                            <motion.button
-                              key={size}
-                              className="px-4 py-2 border border-gold/30 text-champagne hover:bg-gold hover:text-bordeaux-dark transition-all duration-300 text-sm"
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                            >
-                              {size}
-                            </motion.button>
-                          ))}
+                      {selectedProduct.sizes && (
+                        <div className="space-y-3">
+                          <h4 className="text-sm uppercase tracking-wider text-champagne">
+                            Tailles disponibles
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedProduct.sizes.map((size) => (
+                              <motion.button
+                                key={size}
+                                className="px-4 py-2 border border-gold/30 text-champagne hover:bg-gold hover:text-bordeaux-dark transition-all duration-300 text-sm"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                              >
+                                {size}
+                              </motion.button>
+                            ))}
+                          </div>
                         </div>
-                      </div>
+                      )}
+
+                      {/* Détails */}
+                      {selectedProduct.details && (
+                        <div className="space-y-3">
+                          <h4 className="text-sm uppercase tracking-wider text-champagne">Détails</h4>
+                          <ul className="list-disc list-inside text-champagne/70 space-y-1">
+                            {selectedProduct.details.map((detail, i) => (
+                              <li key={i}>{detail}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Entretien */}
+                      {selectedProduct.care && (
+                        <div className="space-y-3">
+                          <h4 className="text-sm uppercase tracking-wider text-champagne">Entretien</h4>
+                          <ul className="list-disc list-inside text-champagne/70 space-y-1">
+                            {selectedProduct.care.map((item, i) => (
+                              <li key={i}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
 
                       {/* Actions */}
                       <div className="flex space-x-4 pt-6">
                         <motion.button
+                          onClick={() => {
+                            handleAddToCart(selectedProduct);
+                            closeQuickView();
+                          }}
                           className="flex-1 bg-gold text-bordeaux-dark py-4 text-sm uppercase tracking-wider font-medium flex items-center justify-center space-x-3 hover:bg-gold-light transition-colors"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
@@ -460,7 +532,7 @@ const PopularProducts = () => {
                           <span>Ajouter au panier</span>
                         </motion.button>
                         <motion.button
-                          onClick={() => toggleFavorite(selectedProduct.id)}
+                          onClick={() => handleToggleFavorite(selectedProduct)}
                           className="w-14 h-14 flex items-center justify-center border border-gold/30 hover:border-gold transition-all duration-300"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
@@ -468,7 +540,7 @@ const PopularProducts = () => {
                           <Heart 
                             size={20} 
                             className={`transition-colors ${
-                              favorites.includes(selectedProduct.id) 
+                              isFavorite(selectedProduct.id) 
                                 ? 'fill-gold text-gold' 
                                 : 'text-champagne'
                             }`}

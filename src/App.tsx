@@ -1,52 +1,44 @@
-import Footer from './components/layout/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './context/CartContext';
+import { FavoritesProvider } from './context/FavoritesContext';
+import { SearchProvider } from './context/SearchContext';
 import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
+import Testimonials from './components/sections/Testimonials';
 import Categories from './components/sections/Categories';
 import PopularProducts from './components/sections/PopularProducts';
 import Benefits from './components/sections/Benefits';
-import Testimonials from './components/sections/Testimonials';
+import Category from './pages/Category';
 
-
-
-const App = () => {
-  const handleSearchClick = () => {
-    alert('Recherche - Fonctionnalité à venir !');
-  };
-
-  const handleCartClick = () => {
-    alert('Panier - Fonctionnalité à venir !');
-  };
-
-  const handleFavoritesClick = () => {
-    alert('Favoris - Fonctionnalité à venir !');
-  };
-
-
+function App() {
   return (
-    <div className="min-h-screen bg-bordeaux">
-      <Header
-        initialCartCount={3}
-        initialFavoritesCount={2}
-        onSearchClick={handleSearchClick}
-        onCartClick={handleCartClick}
-        onFavoritesClick={handleFavoritesClick}
-      />
-
-      <main>
-        <Hero />
-
-        <Categories />
-
-        <PopularProducts />
-
-        <Benefits />
-
-        <Testimonials />
-
-        <Footer />
-
-      </main>
-    </div>
+    <Router>
+      <CartProvider>
+        <FavoritesProvider>
+          <SearchProvider>
+            <div className="min-h-screen bg-bordeaux">
+              <Header />
+              <main>
+                <Routes>
+                  <Route path="/" element={
+                    <>
+                      <Hero />
+                      <Categories />
+                      <PopularProducts />
+                      <Benefits />
+                      <Testimonials />
+                    </>
+                  } />
+                  <Route path="/categorie/:slug" element={<Category />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          </SearchProvider>
+        </FavoritesProvider>
+      </CartProvider>
+    </Router>
   );
 }
 
