@@ -30,11 +30,11 @@ const Header = () => {
   }, []);
 
   const navigation = [
-    { nom: 'Nouveautés', href: '/nouveautes' },
-    { nom: 'Robes', href: '/robes' },
-    { nom: 'Accessoires', href: '/accessoires' },
-    { nom: 'Mariage', href: '/mariage' },
-    { nom: 'Soirée', href: '/soiree' },
+    { nom: 'Nouveautés', slug: 'nouveautes' },
+    { nom: 'Robes', slug: 'robes' },
+    { nom: 'Accessoires', slug: 'accessoires' },
+    { nom: 'Mariage', slug: 'mariage' },
+    { nom: 'Soirée', slug: 'soiree' },
   ];
 
   const handleSearchClick = () => {
@@ -95,7 +95,7 @@ const Header = () => {
               {navigation.map((item) => (
                 <Link
                   key={item.nom}
-                  to={item.href}
+                  to={`/categorie/${item.slug}`}
                   className="relative px-4 py-2 text-champagne/90 hover:text-gold text-sm uppercase tracking-wider font-medium transition-colors duration-300 group"
                 >
                   {item.nom}

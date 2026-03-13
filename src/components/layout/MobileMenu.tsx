@@ -6,7 +6,7 @@ import { useState } from 'react';
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  navigation: Array<{ nom: string; href: string }>;
+  navigation: Array<{ nom: string; slug: string }>; // Changé de href à slug
 }
 
 const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
@@ -58,7 +58,7 @@ const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
                   {navigation.map((item) => (
                     <li key={item.nom}>
                       <Link
-                        to={item.href}
+                        to={`/categorie/${item.slug}`} // Utilisation de slug pour construire l'URL
                         onClick={onClose}
                         className="text-2xl font-serif text-champagne hover:text-gold transition-colors block border-l-2 border-transparent hover:border-gold pl-4"
                       >
@@ -106,19 +106,6 @@ const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
                     <ShoppingBag size={24} className="text-champagne group-hover:text-gold transition-colors" />
                     <span className="text-xs mt-2 text-champagne/70 group-hover:text-gold">
                       Panier
-                    </span>
-                  </Link>
-
-                  <Link 
-                    to="/compte" 
-                    onClick={onClose}
-                    className="flex flex-col items-center group"
-                  >
-                    <div className="w-6 h-6 rounded-full border border-gold/30 group-hover:border-gold transition-colors flex items-center justify-center">
-                      <span className="text-sm text-champagne group-hover:text-gold">👤</span>
-                    </div>
-                    <span className="text-xs mt-2 text-champagne/70 group-hover:text-gold">
-                      Compte
                     </span>
                   </Link>
                 </div>
