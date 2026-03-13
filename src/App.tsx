@@ -11,6 +11,7 @@ import PopularProducts from './components/sections/PopularProducts';
 import Benefits from './components/sections/Benefits';
 import Category from './pages/Category';
 import Favorites from './pages/Favorites';
+import Cart from './pages/Cart'; // Ajout de l'import
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                   } />
                   <Route path="/categorie/:slug" element={<Category />} />
                   <Route path="/favoris" element={<Favorites />} />
+                  <Route path="/panier" element={<Cart />} /> {/* Nouvelle route */}
                 </Routes>
               </main>
               <Footer />
