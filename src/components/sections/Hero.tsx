@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'; // ← Ajout des icônes Pause/Play
+import { Link } from 'react-router-dom';
 import { heroSlides } from '../../data/heroData';
 
 const Hero = () => {
@@ -20,6 +21,10 @@ const Hero = () => {
     setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
   }, [slides.length]);
 
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(prev => !prev);
+  };
+
   // Auto-play
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -31,18 +36,10 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [isAutoPlaying, handleNext]);
 
-  // Pause auto-play on hover
-  const handleMouseEnter = () => setIsAutoPlaying(false);
-  const handleMouseLeave = () => setIsAutoPlaying(true);
-
   const currentSlide = slides[currentIndex];
 
   return (
-    <div 
-      className="relative h-screen w-full overflow-hidden bg-bordeaux"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="relative h-screen w-full overflow-hidden bg-bordeaux">
       {/* Slides avec animation */}
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
@@ -157,20 +154,14 @@ const Hero = () => {
                   transition: { delay: 1.0, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }
                 }}
               >
-                <motion.a
-                  href={currentSlide.buttonLink}
+                <Link
+                  to={currentSlide.buttonLink}
                   className="group relative inline-flex items-center px-8 py-4 bg-gold text-bordeaux-dark text-sm uppercase tracking-wider font-medium overflow-hidden"
-                  whileHover="hover"
-                  initial="initial"
                 >
                   {/* Effet de background animé */}
                   <motion.span
                     className="absolute inset-0 bg-gold-light"
                     initial={{ x: '-100%' }}
-                    animate={{ 
-                      x: '-100%',
-                      transition: { duration: 0.4, ease: "easeOut" }
-                    }}
                     whileHover={{ 
                       x: '0%',
                       transition: { duration: 0.4, ease: "easeOut" }
@@ -182,7 +173,6 @@ const Hero = () => {
                     {currentSlide.buttonText}
                     <motion.span
                       className="ml-2"
-                      animate={{ x: 0 }}
                       whileHover={{ 
                         x: 5,
                         transition: { duration: 0.2 }
@@ -191,7 +181,7 @@ const Hero = () => {
                       →
                     </motion.span>
                   </span>
-                </motion.a>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
@@ -227,6 +217,22 @@ const Hero = () => {
             </motion.button>
           ))}
         </div>
+
+        {/* Bouton pause/play */}
+        <motion.button
+          onClick={toggleAutoPlay}
+          className="group relative w-14 h-14 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold transition-all duration-500 bg-bordeaux-dark/20 backdrop-blur-sm"
+          whileHover={{ scale: 1.1, borderColor: '#D4AF37' }}
+          whileTap={{ scale: 0.95 }}
+          aria-label={isAutoPlaying ? "Pause" : "Lecture"}
+        >
+          {isAutoPlaying ? (
+            <Pause size={20} className="text-champagne group-hover:text-gold transition-colors" />
+          ) : (
+            <Play size={20} className="text-champagne group-hover:text-gold transition-colors" />
+          )}
+          <span className="absolute inset-0 rounded-full bg-gold/0 group-hover:bg-gold/10 transition-all duration-500" />
+        </motion.button>
 
         {/* Bouton précédent */}
         <motion.button
