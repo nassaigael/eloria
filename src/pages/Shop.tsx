@@ -14,7 +14,8 @@ import { useFavorites } from '../context/FavoritesContext';
 
 const Shop = () => {
     const [sortBy, setSortBy] = useState('popular');
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+    // CORRECTION: Augmenter la plage de prix pour correspondre aux produits (0 - 700 000 Ar)
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 700000]);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
@@ -36,7 +37,7 @@ const Shop = () => {
             result = result.filter(p => selectedCategories.includes(p.category));
         }
 
-        // Filtre par prix
+        // Filtre par prix - CORRIGÉ
         result = result.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1]);
 
         // Tri
@@ -180,8 +181,8 @@ const Shop = () => {
                                             className="sr-only"
                                         />
                                         <div className={`w-4 h-4 border transition-colors ${selectedCategories.includes(category)
-                                                ? 'border-gold bg-gold'
-                                                : 'border-gold/30 group-hover:border-gold/60'
+                                            ? 'border-gold bg-gold'
+                                            : 'border-gold/30 group-hover:border-gold/60'
                                             }`}>
                                             {selectedCategories.includes(category) && (
                                                 <svg className="w-4 h-4 text-bordeaux-dark" viewBox="0 0 24 24">
@@ -200,7 +201,7 @@ const Shop = () => {
                             </div>
                         </div>
 
-                        {/* Filtre prix */}
+                        {/* Filtre prix - CORRIGÉ */}
                         <div className="border border-gold/10 p-6">
                             <h3 className="text-lg font-serif text-gold mb-4 relative">
                                 Prix
@@ -210,14 +211,15 @@ const Shop = () => {
                                 <input
                                     type="range"
                                     min="0"
-                                    max="1000"
+                                    max="700000"
+                                    step="10000"
                                     value={priceRange[1]}
                                     onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
                                     className="w-full accent-gold"
                                 />
                                 <div className="flex justify-between text-sm text-champagne/60">
-                                    <span>{priceRange[0]} Ar</span>
-                                    <span>{priceRange[1]} Ar</span>
+                                    <span>{priceRange[0].toLocaleString()} Ar</span>
+                                    <span>{priceRange[1].toLocaleString()} Ar</span>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +228,7 @@ const Shop = () => {
                         <button
                             onClick={() => {
                                 setSelectedCategories([]);
-                                setPriceRange([0, 1000]);
+                                setPriceRange([0, 700000]);
                                 setSortBy('popular');
                             }}
                             className="w-full px-4 py-2 border border-gold/30 text-champagne/70 hover:border-gold hover:text-gold transition-colors text-sm uppercase tracking-wider"
@@ -270,8 +272,8 @@ const Shop = () => {
                                                         key={category}
                                                         onClick={() => handleCategoryToggle(category)}
                                                         className={`w-full text-left px-3 py-2 text-sm transition-colors ${selectedCategories.includes(category)
-                                                                ? 'bg-gold/10 text-gold border-l-2 border-gold'
-                                                                : 'text-champagne/70 hover:text-champagne hover:bg-gold/5'
+                                                            ? 'bg-gold/10 text-gold border-l-2 border-gold'
+                                                            : 'text-champagne/70 hover:text-champagne hover:bg-gold/5'
                                                             }`}
                                                     >
                                                         {category} ({productsData.filter(p => p.category === category).length})
@@ -280,27 +282,28 @@ const Shop = () => {
                                             </div>
                                         </div>
 
-                                        {/* Prix mobile */}
+                                        {/* Prix mobile - CORRIGÉ */}
                                         <div className="mb-6">
                                             <h4 className="text-sm uppercase tracking-wider text-champagne/70 mb-3">Prix maximum</h4>
                                             <input
                                                 type="range"
                                                 min="0"
-                                                max="1000"
+                                                max="700000"
+                                                step="10000"
                                                 value={priceRange[1]}
                                                 onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
                                                 className="w-full accent-gold"
                                             />
                                             <div className="flex justify-between text-sm text-champagne/60 mt-2">
-                                                <span>{priceRange[0]} Ar</span>
-                                                <span>{priceRange[1]} Ar</span>
+                                                <span>{priceRange[0].toLocaleString()} Ar</span>
+                                                <span>{priceRange[1].toLocaleString()} Ar</span>
                                             </div>
                                         </div>
 
                                         <button
                                             onClick={() => {
                                                 setSelectedCategories([]);
-                                                setPriceRange([0, 1000]);
+                                                setPriceRange([0, 700000]);
                                             }}
                                             className="w-full px-4 py-2 border border-gold/30 text-gold hover:bg-gold/10 transition-colors text-sm uppercase tracking-wider"
                                         >
@@ -383,11 +386,11 @@ const Shop = () => {
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex items-center space-x-2">
                                                         <span className="text-xl font-serif text-gold">
-                                                            {product.price} Ar
+                                                            {product.price.toLocaleString()} Ar
                                                         </span>
                                                         {product.originalPrice && (
                                                             <span className="text-sm text-champagne/50 line-through">
-                                                                {product.originalPrice} Ar
+                                                                {product.originalPrice.toLocaleString()} Ar
                                                             </span>
                                                         )}
                                                     </div>
