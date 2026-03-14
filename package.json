@@ -1,8 +1,33 @@
 {
   "name": "eloria",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
+  "description": "# ✨ Eloria - Premium E-Commerce Experience",
+  "keywords": [
+    "Of",
+    "wearing",
+    "quality",
+    "that",
+    "lasts",
+    "beyond",
+    "seasons.",
+    "Of",
+    "expressing",
+    "your",
+    "elegance",
+    "without",
+    "saying",
+    "a",
+    "word.\""
+  ],
+  "repository": {
+    "type": "git",
+    "url": " prestige"
+  },
+  "license": "ISC",
+  "author": "rs and beauty)",
   "type": "module",
+  "main": "Values",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

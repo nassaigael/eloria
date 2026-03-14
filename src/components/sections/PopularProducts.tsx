@@ -158,16 +158,16 @@ const PopularProducts = () => {
                         transition={{ duration: 0.8 }}
                       />
 
-                      {/* Overlay au hover */}
+                      {/* Overlay au hover (seulement sur desktop) */}
                       <motion.div
-                        className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent"
+                        className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent hidden md:block"
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 0.7 }}
                         transition={{ duration: 0.4 }}
                       />
 
-                      {/* Boutons d'action */}
-                      <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                      {/* Boutons d'action - TOUJOURS VISIBLES SUR MOBILE/TABLETTE */}
+                      <div className="absolute inset-x-0 bottom-0 p-4 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-500">
                         <div className="flex space-x-2">
                           <motion.button
                             onClick={(e) => {
