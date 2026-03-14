@@ -1,17 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Footer from './components/layout/Footer';
+import Header from './components/layout/Header';
+import Benefits from './components/sections/Benefits';
+import Categories from './components/sections/Categories';
+import Hero from './components/sections/Hero';
+import PopularProducts from './components/sections/PopularProducts';
+import Testimonials from './components/sections/Testimonials';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { SearchProvider } from './context/SearchContext';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
-import Hero from './components/sections/Hero';
-import Testimonials from './components/sections/Testimonials';
-import Categories from './components/sections/Categories';
-import PopularProducts from './components/sections/PopularProducts';
-import Benefits from './components/sections/Benefits';
+import Cart from './pages/Cart';
 import Category from './pages/Category';
 import Favorites from './pages/Favorites';
-import Cart from './pages/Cart'; // Ajout de l'import
 import Reviews from './pages/Reviews';
 import Shop from './pages/Shop';
 
