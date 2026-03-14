@@ -6,7 +6,7 @@ import { productsData, type Product } from '../../data/productsData';
 import { useCart } from '../../context/CartContext';
 import { useFavorites } from '../../context/FavoritesContext';
 
-const PopularProducts = () => {
+const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -66,7 +66,7 @@ const PopularProducts = () => {
   };
 
   // Produits populaires (les mieux notés)
-  const popularProducts = productsData
+  const Products = productsData
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
 
@@ -95,9 +95,6 @@ const PopularProducts = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="text-gold text-sm uppercase tracking-[0.3em] mb-4 block">
-              Les Plus Prisés
-            </span>
             <h2 className="text-4xl md:text-5xl font-serif text-champagne mb-4">
               Nos <span className="text-gold">Incontournables</span>
             </h2>
@@ -106,7 +103,7 @@ const PopularProducts = () => {
 
           {/* Grille des produits */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {popularProducts.map((product, index) => (
+            {Products.map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -573,4 +570,4 @@ const PopularProducts = () => {
   );
 };
 
-export default PopularProducts;
+export default Products;

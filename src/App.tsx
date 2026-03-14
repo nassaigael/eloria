@@ -4,7 +4,7 @@ import Header from './components/layout/Header';
 import Benefits from './components/sections/Benefits';
 import Categories from './components/sections/Categories';
 import Hero from './components/sections/Hero';
-import PopularProducts from './components/sections/PopularProducts';
+import PopularProducts from './components/sections/Products';
 import Testimonials from './components/sections/Testimonials';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
