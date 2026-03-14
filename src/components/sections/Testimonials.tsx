@@ -118,9 +118,6 @@ const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-gold text-sm uppercase tracking-[0.3em] mb-4 block">
-            Avis Clients
-          </span>
           <h2 className="text-4xl md:text-5xl font-serif text-champagne mb-4">
             Ce qu'elles <span className="text-gold">disent</span>
           </h2>
