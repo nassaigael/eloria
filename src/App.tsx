@@ -12,6 +12,7 @@ import Benefits from './components/sections/Benefits';
 import Category from './pages/Category';
 import Favorites from './pages/Favorites';
 import Cart from './pages/Cart'; // Ajout de l'import
+import Reviews from './pages/Reviews';
 
 function App() {
   return (
@@ -32,9 +33,10 @@ function App() {
                       <Testimonials />
                     </>
                   } />
+                  <Route path="/avis" element={<Reviews />} />
                   <Route path="/categorie/:slug" element={<Category />} />
                   <Route path="/favoris" element={<Favorites />} />
-                  <Route path="/panier" element={<Cart />} /> {/* Nouvelle route */}
+                  <Route path="/panier" element={<Cart />} />
                 </Routes>
               </main>
               <Footer />
