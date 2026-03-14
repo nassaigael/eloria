@@ -1,16 +1,19 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, ShoppingBag, X, Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Heart, ShoppingBag, X, Search, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  navigation: Array<{ nom: string; slug: string }>; // Changé de href à slug
+  mainNav: Array<{ nom: string; path: string }>;
+  categories: Array<{ nom: string; path: string }>;
+  priorityLinks: Array<{ nom: string; path: string }>;
 }
 
-const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
+const MobileMenu = ({ isOpen, onClose, mainNav, categories, priorityLinks }: MobileMenuProps) => {
   const [searchFocused, setSearchFocused] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
 
   return (
     <AnimatePresence>
@@ -30,7 +33,7 @@ const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: '-100%', opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 left-0 bottom-0 w-full max-w-sm bg-linear-to-b from-bordeaux to-bordeaux-dark z-50 lg:hidden shadow-2xl"
+            className="fixed top-0 left-0 bottom-0 w-full max-w-sm bg-linear-to-b from-bordeaux to-bordeaux-dark z-50 lg:hidden shadow-2xl overflow-y-auto"
           >
             <motion.div
               initial={{ opacity: 0 }}
@@ -39,6 +42,7 @@ const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
               transition={{ delay: 0.2, duration: 0.3 }}
               className="h-full flex flex-col"
             >
+              {/* En-tête */}
               <div className="flex items-center justify-between p-6 border-b border-gold/20">
                 <Link to="/" onClick={onClose} className="inline-block">
                   <span className="text-2xl font-serif text-gold">Eloria</span>
@@ -53,14 +57,66 @@ const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
                 </motion.button>
               </div>
 
+              {/* Navigation */}
               <nav className="flex-1 py-8 px-6 overflow-y-auto">
-                <ul className="space-y-6">
-                  {navigation.map((item) => (
+                <ul className="space-y-4">
+                  {/* Liens principaux */}
+                  {mainNav.map((item) => (
                     <li key={item.nom}>
                       <Link
-                        to={`/categorie/${item.slug}`} // Utilisation de slug pour construire l'URL
+                        to={item.path}
                         onClick={onClose}
-                        className="text-2xl font-serif text-champagne hover:text-gold transition-colors block border-l-2 border-transparent hover:border-gold pl-4"
+                        className="text-xl font-serif text-champagne hover:text-gold transition-colors block border-l-2 border-transparent hover:border-gold pl-4"
+                      >
+                        {item.nom}
+                      </Link>
+                    </li>
+                  ))}
+
+                  {/* Catégories avec dropdown */}
+                  <li>
+                    <button
+                      onClick={() => setCategoriesOpen(!categoriesOpen)}
+                      className="w-full flex items-center justify-between text-xl font-serif text-champagne hover:text-gold transition-colors border-l-2 border-transparent hover:border-gold pl-4"
+                    >
+                      <span>CATEGORIES</span>
+                      <ChevronDown 
+                        size={18} 
+                        className={`transition-transform duration-300 ${categoriesOpen ? 'rotate-180' : ''}`} 
+                      />
+                    </button>
+                    
+                    <AnimatePresence>
+                      {categoriesOpen && (
+                        <motion.ul
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="ml-6 mt-2 space-y-2 overflow-hidden"
+                        >
+                          {categories.map((category) => (
+                            <li key={category.nom}>
+                              <Link
+                                to={category.path}
+                                onClick={onClose}
+                                className="block py-1 text-champagne/70 hover:text-gold transition-colors text-sm"
+                              >
+                                {category.nom}
+                              </Link>
+                            </li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </li>
+
+                  {/* Liens prioritaires */}
+                  {priorityLinks.map((item) => (
+                    <li key={item.nom}>
+                      <Link
+                        to={item.path}
+                        onClick={onClose}
+                        className="text-xl font-serif text-champagne hover:text-gold transition-colors block border-l-2 border-transparent hover:border-gold pl-4"
                       >
                         {item.nom}
                       </Link>
@@ -69,7 +125,9 @@ const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
                 </ul>
               </nav>
 
+              {/* Footer */}
               <div className="p-6 border-t border-gold/20">
+                {/* Recherche */}
                 <div className="relative mb-6">
                   <input
                     type="text"
@@ -86,6 +144,7 @@ const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
                   />
                 </div>
 
+                {/* Liens rapides */}
                 <div className="flex justify-around">
                   <Link 
                     to="/favoris" 
@@ -106,6 +165,19 @@ const MobileMenu = ({ isOpen, onClose, navigation }: MobileMenuProps) => {
                     <ShoppingBag size={24} className="text-champagne group-hover:text-gold transition-colors" />
                     <span className="text-xs mt-2 text-champagne/70 group-hover:text-gold">
                       Panier
+                    </span>
+                  </Link>
+
+                  <Link 
+                    to="/contact" 
+                    onClick={onClose}
+                    className="flex flex-col items-center group"
+                  >
+                    <div className="w-6 h-6 rounded-full border border-gold/30 group-hover:border-gold transition-colors flex items-center justify-center">
+                      <span className="text-sm text-champagne group-hover:text-gold">✉</span>
+                    </div>
+                    <span className="text-xs mt-2 text-champagne/70 group-hover:text-gold">
+                      Contact
                     </span>
                   </Link>
                 </div>

@@ -17,7 +17,7 @@ const Category = () => {
     );
 
     const [sortBy, setSortBy] = useState('popular');
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 700000]);
     const [showFilters, setShowFilters] = useState(false);
 
     const { addToCart } = useCart();
@@ -151,7 +151,8 @@ const Category = () => {
                                 <input
                                     type="range"
                                     min="0"
-                                    max="1000"
+                                    max="700000"
+                                    step="10000"
                                     value={priceRange[1]}
                                     onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
                                     className="w-full accent-gold"
@@ -184,7 +185,8 @@ const Category = () => {
                                     <input
                                         type="range"
                                         min="0"
-                                        max="1000"
+                                    max="700000"
+                                    step="10000"
                                         value={priceRange[1]}
                                         onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
                                         className="w-full accent-gold"

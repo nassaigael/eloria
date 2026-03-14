@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ShoppingBag, Heart, Menu } from 'lucide-react';
+import { Search, ShoppingBag, Heart, Menu, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import MobileMenu from './MobileMenu';
 import SearchModal from './SearchModal';
@@ -13,6 +13,7 @@ import logo from '../../assets/images/logo.jpg';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   
   const { cartCount } = useCart();
   const { favoritesCount } = useFavorites();
@@ -29,12 +30,31 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navigation = [
-    { nom: 'Nouveautés', slug: 'nouveautes' },
-    { nom: 'Robes', slug: 'robes' },
-    { nom: 'Accessoires', slug: 'accessoires' },
-    { nom: 'Mariage', slug: 'mariage' },
-    { nom: 'Soirée', slug: 'soiree' },
+  // Navigation principale
+  const mainNav = [
+    { nom: 'Accueil', slug: '', path: '/' },
+    { nom: 'Boutique', slug: 'boutique', path: '/boutique' },
+  ];
+
+  // Catégories pour le dropdown
+  const categories = [
+    { nom: 'Robes', slug: 'robes', path: '/categorie/robes' },
+    { nom: 'Ensembles', slug: 'ensembles', path: '/categorie/ensembles' },
+    { nom: 'Hauts', slug: 'hauts', path: '/categorie/hauts' },
+    { nom: 'Jupes', slug: 'jupes', path: '/categorie/jupes' },
+    { nom: 'Pantalons', slug: 'pantalons', path: '/categorie/pantalons' },
+    // { nom: 'Vestes', slug: 'vestes', path: '/categorie/vestes' },
+    { nom: 'Accessoires', slug: 'accessoires', path: '/categorie/accessoires' },
+    { nom: 'Chaussures', slug: 'chaussures', path: '/categorie/chaussures' },
+    { nom: 'Mariage', slug: 'mariage', path: '/categorie/mariage' },
+    { nom: 'Soirée', slug: 'soiree', path: '/categorie/soiree' },
+  ];
+
+  // Liens prioritaires
+  const priorityLinks = [
+    { nom: 'Contact', path: '/contact' },
+    { nom: 'FAQ', path: '/faq' },
+    { nom: 'Livraison', path: '/livraison' },
   ];
 
   const handleSearchClick = () => {
@@ -62,6 +82,7 @@ const Header = () => {
 
         <div className="container-custom">
           <div className="flex items-center justify-between">
+            {/* Menu mobile button */}
             <motion.button 
               onClick={() => setIsMenuOpen(true)}
               className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold transition-all duration-300 bg-bordeaux-dark/20 backdrop-blur-sm"
@@ -72,6 +93,7 @@ const Header = () => {
               <Menu size={20} className="text-champagne" />
             </motion.button>
 
+            {/* Logo */}
             <motion.div 
               className="flex-1 lg:flex-none text-center lg:text-left"
               whileHover={{ scale: 1.05 }}
@@ -91,11 +113,13 @@ const Header = () => {
               </Link>
             </motion.div>
 
+            {/* Navigation desktop */}
             <nav className="hidden lg:flex items-center space-x-1">
-              {navigation.map((item) => (
+              {/* Liens principaux */}
+              {mainNav.map((item) => (
                 <Link
                   key={item.nom}
-                  to={`/categorie/${item.slug}`}
+                  to={item.path}
                   className="relative px-4 py-2 text-champagne/90 hover:text-gold text-sm uppercase tracking-wider font-medium transition-colors duration-300 group"
                 >
                   {item.nom}
@@ -113,9 +137,76 @@ const Header = () => {
                   />
                 </Link>
               ))}
+
+              {/* Dropdown Catégories */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setIsCategoriesOpen(true)}
+                onMouseLeave={() => setIsCategoriesOpen(false)}
+              >
+                <button
+                  className="relative px-4 py-2 text-champagne/90 hover:text-gold text-sm uppercase tracking-wider font-medium transition-colors duration-300 group flex items-center space-x-1"
+                >
+                  <span>Catégories</span>
+                  <ChevronDown 
+                    size={14} 
+                    className={`transition-transform duration-300 ${isCategoriesOpen ? 'rotate-180' : ''}`} 
+                  />
+                  <motion.span 
+                    className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold to-transparent"
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    whileHover={{ scaleX: 1, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isCategoriesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 w-64 bg-linear-to-b from-bordeaux to-bordeaux-dark border border-gold/20 shadow-2xl z-50"
+                    >
+                      <div className="py-2">
+                        {categories.map((category) => (
+                          <Link
+                            key={category.nom}
+                            to={category.path}
+                            className="block px-4 py-2 text-sm text-champagne/70 hover:text-gold hover:bg-gold/5 transition-colors"
+                            onClick={() => setIsCategoriesOpen(false)}
+                          >
+                            {category.nom}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Liens prioritaires */}
+              {priorityLinks.map((item) => (
+                <Link
+                  key={item.nom}
+                  to={item.path}
+                  className="relative px-4 py-2 text-champagne/90 hover:text-gold text-sm uppercase tracking-wider font-medium transition-colors duration-300 group"
+                >
+                  {item.nom}
+                  <motion.span 
+                    className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold to-transparent"
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    whileHover={{ scaleX: 1, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Link>
+              ))}
             </nav>
 
+            {/* Icônes d'action */}
             <div className="flex items-center space-x-2 md:space-x-3">
+              {/* Recherche */}
               <div className="relative group">
                 <motion.button 
                   onClick={handleSearchClick}
@@ -132,6 +223,7 @@ const Header = () => {
                 </span>
               </div>
 
+              {/* Favoris */}
               <div className="relative group">
                 <Link 
                   to="/favoris"
@@ -160,6 +252,7 @@ const Header = () => {
                 </span>
               </div>
 
+              {/* Panier */}
               <div className="relative group">
                 <Link 
                   to="/panier"
@@ -188,6 +281,7 @@ const Header = () => {
                 </span>
               </div>
 
+              {/* Séparateur */}
               <motion.div 
                 className="hidden md:block w-px h-6 bg-linear-to-b from-transparent via-gold/30 to-transparent"
                 initial={{ scaleY: 0, opacity: 0 }}
@@ -197,6 +291,7 @@ const Header = () => {
             </div>
           </div>
 
+          {/* Barre de recherche mobile */}
           <AnimatePresence>
             {isScrolled && (
               <motion.div 
@@ -221,6 +316,7 @@ const Header = () => {
           </AnimatePresence>
         </div>
 
+        {/* Ligne dorée inférieure */}
         <AnimatePresence>
           {isScrolled && (
             <motion.div 
@@ -234,7 +330,15 @@ const Header = () => {
         </AnimatePresence>
       </motion.header>
 
-      <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} navigation={navigation} />
+      {/* Menu mobile (mis à jour) */}
+      <MobileMenu 
+        isOpen={isMenuOpen} 
+        onClose={() => setIsMenuOpen(false)} 
+        mainNav={mainNav}
+        categories={categories}
+        priorityLinks={priorityLinks}
+      />
+      
       <SearchModal />
       <div className={`transition-all duration-700 ${isScrolled ? 'h-16' : 'h-20'}`} />
     </>

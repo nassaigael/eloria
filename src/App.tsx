@@ -13,6 +13,7 @@ import Cart from './pages/Cart';
 import Category from './pages/Category';
 import Favorites from './pages/Favorites';
 import Shop from './pages/Shop';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                   <Route path="/favoris" element={<Favorites />} />
                   <Route path="/panier" element={<Cart />} />
                   <Route path="/boutique" element={<Shop />} />
+                  <Route path="/contact" element={<Contact />} />
                 </Routes>
               </main>
               <Footer />
