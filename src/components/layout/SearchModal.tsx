@@ -127,7 +127,7 @@ const SearchModal = () => {
                           </Link>
                           <div className="flex items-center space-x-4 mt-2">
                             <span className="text-xl font-serif text-gold">
-                              {product.price} €
+                              {product.price} Ar
                             </span>
                             <div className="flex items-center space-x-1">
                               <Star size={14} className="fill-gold text-gold" />

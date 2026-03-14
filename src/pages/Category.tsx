@@ -157,8 +157,8 @@ const Category = () => {
                                     className="w-full accent-gold"
                                 />
                                 <div className="flex justify-between text-sm text-champagne/60">
-                                    <span>{priceRange[0]} €</span>
-                                    <span>{priceRange[1]} €</span>
+                                    <span>{priceRange[0]} Ar</span>
+                                    <span>{priceRange[1]} Ar</span>
                                 </div>
                             </div>
                         </div>
@@ -190,8 +190,8 @@ const Category = () => {
                                         className="w-full accent-gold"
                                     />
                                     <div className="flex justify-between text-sm text-champagne/60">
-                                        <span>{priceRange[0]} €</span>
-                                        <span>{priceRange[1]} €</span>
+                                        <span>{priceRange[0]} Ar</span>
+                                        <span>{priceRange[1]} Ar</span>
                                     </div>
                                 </div>
                             </motion.div>
@@ -273,11 +273,11 @@ const Category = () => {
                                                 <div className="flex items-center justify-between mt-2">
                                                     <div className="flex items-center space-x-2">
                                                         <span className="text-xl font-serif text-gold">
-                                                            {product.price} €
+                                                            {product.price} Ar
                                                         </span>
                                                         {product.originalPrice && (
                                                             <span className="text-sm text-champagne/50 line-through">
-                                                                {product.originalPrice} €
+                                                                {product.originalPrice} Ar
                                                             </span>
                                                         )}
                                                     </div>

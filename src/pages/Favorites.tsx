@@ -194,11 +194,10 @@ const Favorites = () => {
                     onChange={() => handleSelectItem(item.id)}
                     className="sr-only"
                   />
-                  <div className={`w-5 h-5 border transition-colors ${
-                    selectedItems.includes(item.id)
+                  <div className={`w-5 h-5 border transition-colors ${selectedItems.includes(item.id)
                       ? 'border-gold bg-gold'
                       : 'border-gold/30 hover:border-gold/60'
-                  }`}>
+                    }`}>
                     {selectedItems.includes(item.id) && (
                       <svg className="w-5 h-5 text-bordeaux-dark" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
@@ -250,9 +249,9 @@ const Favorites = () => {
                   {/* Prix */}
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xl font-serif text-gold">
-                      {item.price} €
+                      {item.price} Ar
                     </span>
-                    
+
                     {/* Note simulée */}
                     <div className="flex items-center space-x-1">
                       <Star size={14} className="fill-gold text-gold" />

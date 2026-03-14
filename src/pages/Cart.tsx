@@ -1,15 +1,15 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ShoppingBag, 
-  Trash2, 
-  ArrowLeft, 
-  Plus, 
-  Minus, 
-  Heart, 
-  Shield, 
-  Truck, 
+import {
+  ShoppingBag,
+  Trash2,
+  ArrowLeft,
+  Plus,
+  Minus,
+  Heart,
+  Shield,
+  Truck,
   RotateCcw,
   CreditCard,
   Lock,
@@ -55,7 +55,7 @@ const Cart = () => {
   const handleAddToFavorites = (item: CartItemWithSlug) => {
     // Utiliser l'id comme slug si non disponible
     const slug = String(item.id);
-    
+
     addToFavorites({
       id: item.id,
       name: item.name,
@@ -70,8 +70,8 @@ const Cart = () => {
     return (
       <div className="min-h-screen bg-linear-to-b from-bordeaux to-bordeaux-dark pt-32 pb-16">
         <div className="container-custom">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center text-gold/70 hover:text-gold transition-all duration-300 mb-8 group relative overflow-hidden"
           >
             <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -85,13 +85,13 @@ const Cart = () => {
             className="max-w-2xl mx-auto text-center py-16"
           >
             {/* Icône décorative avec animation */}
-            <motion.div 
+            <motion.div
               className="relative inline-block mb-8"
-              animate={{ 
+              animate={{
                 scale: [1, 1.1, 1],
                 rotate: [0, 5, -5, 0]
               }}
-              transition={{ 
+              transition={{
                 duration: 3,
                 repeat: Infinity,
                 repeatType: "reverse"
@@ -106,7 +106,7 @@ const Cart = () => {
             <h1 className="text-5xl md:text-6xl font-serif text-champagne mb-4">
               Votre panier est <span className="text-gold">vide</span>
             </h1>
-            
+
             {/* Ligne décorative */}
             <div className="flex justify-center items-center space-x-2 mb-6">
               <div className="w-12 h-px bg-gold/40" />
@@ -224,7 +224,7 @@ const Cart = () => {
                   </span>
                 </div>
               </div>
-              
+
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -244,8 +244,8 @@ const Cart = () => {
                   key={item.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ 
-                    delay: index * 0.1, 
+                  transition={{
+                    delay: index * 0.1,
                     duration: 0.5,
                     ease: "easeOut"
                   }}
@@ -287,7 +287,7 @@ const Cart = () => {
                               {item.name}
                             </h3>
                           </Link>
-                          
+
                           {/* Options avec badges stylisés */}
                           <div className="flex flex-wrap gap-3 mb-3">
                             {item.size && (
@@ -297,7 +297,7 @@ const Cart = () => {
                             )}
                             {item.color && (
                               <span className="inline-flex items-center px-3 py-1 bg-gold/10 border border-gold/30 text-xs text-gold">
-                                <span 
+                                <span
                                   className="w-3 h-3 rounded-full mr-2"
                                   style={{ backgroundColor: item.color }}
                                 />
@@ -312,7 +312,7 @@ const Cart = () => {
                             className="inline-block"
                           >
                             <span className="text-2xl font-serif text-gold">
-                              {item.price.toFixed(2)} €
+                              {item.price.toFixed(2)} Ar
                             </span>
                             <span className="ml-2 text-xs text-champagne/40">/ unité</span>
                           </motion.div>
@@ -348,7 +348,7 @@ const Cart = () => {
                             className="text-right"
                           >
                             <span className="text-xl font-serif text-gold">
-                              {(item.price * item.quantity).toFixed(2)} €
+                              {(item.price * item.quantity).toFixed(2)} Ar
                             </span>
                           </motion.div>
 
@@ -361,15 +361,15 @@ const Cart = () => {
                               className="relative group/action w-10 h-10 flex items-center justify-center border border-gold/30 hover:border-gold transition-all duration-300"
                               title="Ajouter aux favoris"
                             >
-                              <Heart 
-                                size={16} 
-                                className={isFavorite(item.id) ? 'fill-gold text-gold' : 'text-champagne'} 
+                              <Heart
+                                size={16}
+                                className={isFavorite(item.id) ? 'fill-gold text-gold' : 'text-champagne'}
                               />
                               <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-champagne/40 opacity-0 group-hover/action:opacity-100 transition-opacity whitespace-nowrap">
                                 Favoris
                               </span>
                             </motion.button>
-                            
+
                             <motion.button
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.95 }}
@@ -483,11 +483,10 @@ const Cart = () => {
                       onChange={(e) => setGiftWrap(e.target.checked)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 border transition-colors ${
-                      giftWrap 
-                        ? 'border-gold bg-gold' 
+                    <div className={`w-5 h-5 border transition-colors ${giftWrap
+                        ? 'border-gold bg-gold'
                         : 'border-gold/30 group-hover:border-gold/60'
-                    }`}>
+                      }`}>
                       {giftWrap && (
                         <motion.div
                           initial={{ scale: 0 }}
@@ -499,28 +498,28 @@ const Cart = () => {
                       )}
                     </div>
                     <span className="flex-1 text-sm text-champagne/70 group-hover:text-champagne transition-colors">
-                      Emballage cadeau (+4.90€)
+                      Emballage cadeau (+4.90Ar)
                     </span>
                   </label>
                 </div>
 
                 {/* Détails des prix avec animations */}
                 <div className="space-y-4 mb-8">
-                  <motion.div 
+                  <motion.div
                     className="flex justify-between text-champagne/70"
                     whileHover={{ x: 5 }}
                   >
                     <span>Sous-total</span>
-                    <span className="font-serif">{cartTotal.toFixed(2)} €</span>
+                    <span className="font-serif">{cartTotal.toFixed(2)} Ar</span>
                   </motion.div>
-                  
-                  <motion.div 
+
+                  <motion.div
                     className="flex justify-between text-champagne/70"
                     whileHover={{ x: 5 }}
                   >
                     <span>Livraison</span>
                     {shippingCost === 0 ? (
-                      <motion.span 
+                      <motion.span
                         className="text-gold"
                         animate={{ scale: [1, 1.1, 1] }}
                         transition={{ duration: 1, repeat: Infinity }}
@@ -528,50 +527,50 @@ const Cart = () => {
                         OFFERTE
                       </motion.span>
                     ) : (
-                      <span>{shippingCost.toFixed(2)} €</span>
+                      <span>{shippingCost.toFixed(2)} Ar</span>
                     )}
                   </motion.div>
 
                   {giftWrap && (
-                    <motion.div 
+                    <motion.div
                       className="flex justify-between text-champagne/70"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                     >
                       <span>Emballage cadeau</span>
-                      <span>{giftWrapCost.toFixed(2)} €</span>
+                      <span>{giftWrapCost.toFixed(2)} Ar</span>
                     </motion.div>
                   )}
 
-                  <motion.div 
+                  <motion.div
                     className="flex justify-between text-champagne/70"
                     whileHover={{ x: 5 }}
                   >
                     <span>TVA (20%)</span>
-                    <span>{tax.toFixed(2)} €</span>
+                    <span>{tax.toFixed(2)} Ar</span>
                   </motion.div>
 
                   {promoApplied && (
-                    <motion.div 
+                    <motion.div
                       className="flex justify-between text-gold"
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                     >
                       <span>Réduction (ELORIA10)</span>
-                      <span>-{(orderTotal * 0.1).toFixed(2)} €</span>
+                      <span>-{(orderTotal * 0.1).toFixed(2)} Ar</span>
                     </motion.div>
                   )}
 
-                  <motion.div 
+                  <motion.div
                     className="border-t border-gold/20 my-4 pt-4"
                     whileHover={{ scale: 1.02 }}
                   >
                     <div className="flex justify-between text-xl font-serif">
                       <span className="text-champagne">Total</span>
                       <span className="text-gold text-2xl">
-                        {promoApplied 
+                        {promoApplied
                           ? (orderTotal * 0.9).toFixed(2)
-                          : orderTotal.toFixed(2)} €
+                          : orderTotal.toFixed(2)} Ar
                       </span>
                     </div>
                   </motion.div>
@@ -583,11 +582,11 @@ const Cart = () => {
                     <div className="flex items-center justify-between mb-2">
                       <Truck size={16} className="text-gold/60" />
                       <span className="text-xs text-champagne/60">
-                        Plus que <span className="text-gold font-serif">{(150 - cartTotal).toFixed(2)} €</span>
+                        Plus que <span className="text-gold font-serif">{(150 - cartTotal).toFixed(2)} Ar</span>
                       </span>
                     </div>
                     <div className="w-full h-1 bg-gold/20">
-                      <motion.div 
+                      <motion.div
                         className="h-full bg-linear-to-r from-gold to-gold-light"
                         initial={{ width: 0 }}
                         animate={{ width: `${Math.min((cartTotal / 150) * 100, 100)}%` }}
@@ -621,21 +620,21 @@ const Cart = () => {
 
                 {/* Garanties */}
                 <div className="space-y-3">
-                  <motion.div 
+                  <motion.div
                     className="flex items-center text-xs text-champagne/40 group cursor-pointer"
                     whileHover={{ x: 5 }}
                   >
                     <Truck size={14} className="mr-2 text-gold/40 group-hover:text-gold/60 transition-colors" />
-                    Livraison offerte dès 150€
+                    Livraison offerte dès 150Ar
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     className="flex items-center text-xs text-champagne/40 group cursor-pointer"
                     whileHover={{ x: 5 }}
                   >
                     <RotateCcw size={14} className="mr-2 text-gold/40 group-hover:text-gold/60 transition-colors" />
                     Retours gratuits 30 jours
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     className="flex items-center text-xs text-champagne/40 group cursor-pointer"
                     whileHover={{ x: 5 }}
                   >

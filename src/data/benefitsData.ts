@@ -1,13 +1,13 @@
-import { 
-  Truck, 
-  Shield, 
-  RotateCcw, 
-  Heart, 
-  Clock, 
-  Gift, 
-  CreditCard, 
+import {
+  Truck,
+  Shield,
+  RotateCcw,
+  Heart,
+  Clock,
+  Gift,
+  CreditCard,
   Sparkles,
-  type LucideIcon 
+  type LucideIcon
 } from 'lucide-react';
 
 export interface Benefit {
@@ -24,7 +24,7 @@ export const benefitsData: Benefit[] = [
     id: 1,
     icon: Truck,
     title: "Livraison Offerte",
-    description: "Dès 150€ d'achat en France métropolitaine",
+    description: "Dès 150Ar d'achat en France métropolitaine",
     color: "from-gold/20 to-transparent",
     highlight: "Express disponible"
   },
@@ -72,7 +72,7 @@ export const benefitsData: Benefit[] = [
     id: 7,
     icon: CreditCard,
     title: "Paiement en 3x",
-    description: "Sans frais avec Alma à partir de 100€",
+    description: "Sans frais avec Alma à partir de 100Ar",
     color: "from-gold/20 to-transparent",
     highlight: "Flexible"
   },

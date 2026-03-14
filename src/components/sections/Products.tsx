@@ -214,11 +214,11 @@ const Products = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <span className="text-xl font-serif text-gold">
-                          {product.price} €
+                          {product.price} Ar
                         </span>
                         {product.originalPrice && (
                           <span className="text-sm text-champagne/50 line-through">
-                            {product.originalPrice} €
+                            {product.originalPrice} Ar
                           </span>
                         )}
                       </div>
@@ -406,11 +406,11 @@ const Products = () => {
                       {/* Prix */}
                       <div className="flex items-center space-x-4">
                         <span className="text-3xl font-serif text-gold">
-                          {selectedProduct.price} €
+                          {selectedProduct.price} Ar
                         </span>
                         {selectedProduct.originalPrice && (
                           <span className="text-lg text-champagne/50 line-through">
-                            {selectedProduct.originalPrice} €
+                            {selectedProduct.originalPrice} Ar
                           </span>
                         )}
                       </div>
@@ -547,7 +547,7 @@ const Products = () => {
                       <div className="border-t border-gold/10 pt-6 space-y-3">
                         <div className="flex items-center text-sm text-champagne/60">
                           <Truck size={16} className="mr-3 text-gold/60" />
-                          Livraison offerte dès 150€ d'achat
+                          Livraison offerte dès 150Ar d'achat
                         </div>
                         <div className="flex items-center text-sm text-champagne/60">
                           <RotateCcw size={16} className="mr-3 text-gold/60" />
