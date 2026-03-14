@@ -1,21 +1,20 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Heart, ShoppingBag, Star, Eye, X, ChevronLeft, ChevronRight, RotateCcw, Shield, Truck } from 'lucide-react';
+import { Heart, ShoppingBag, Star, Eye} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { productsData, type Product } from '../../data/productsData';
 import { useCart } from '../../context/CartContext';
 import { useFavorites } from '../../context/FavoritesContext';
+import ProductQuickView from '../modals/ProductQuickView';
 
 const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const { addToCart } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const openQuickView = (product: Product) => {
     setSelectedProduct(product);
-    setSelectedImageIndex(0);
     document.body.style.overflow = 'hidden';
   };
 
@@ -24,21 +23,6 @@ const Products = () => {
     document.body.style.overflow = 'unset';
   };
 
-  const nextImage = () => {
-    if (selectedProduct) {
-      setSelectedImageIndex((prev) =>
-        (prev + 1) % 3
-      );
-    }
-  };
-
-  const prevImage = () => {
-    if (selectedProduct) {
-      setSelectedImageIndex((prev) =>
-        (prev - 1 + 3) % 3
-      );
-    }
-  };
 
   const handleAddToCart = (product: Product) => {
     addToCart({
@@ -291,281 +275,11 @@ const Products = () => {
       </section>
 
       {/* Modal Quick View */}
-      <AnimatePresence>
-        {selectedProduct && (
-          <>
-            {/* Overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-bordeaux-dark/95 backdrop-blur-xl z-50"
-              onClick={closeQuickView}
-            />
-
-            {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 50 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed inset-4 md:inset-10 lg:inset-x-20 lg:inset-y-10 z-50 overflow-auto"
-            >
-              <div className="min-h-full flex items-center justify-center">
-                <div className="relative bg-linear-to-b from-bordeaux to-bordeaux-dark w-full max-w-6xl border border-gold/30 shadow-2xl">
-                  {/* Bouton fermer */}
-                  <motion.button
-                    onClick={closeQuickView}
-                    className="absolute top-4 right-4 z-10 w-12 h-12 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold bg-bordeaux-dark/50 backdrop-blur-sm transition-all duration-300"
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <X size={20} className="text-champagne" />
-                  </motion.button>
-
-                  {/* Contenu du modal */}
-                  <div className="grid md:grid-cols-2 gap-8 p-8">
-                    {/* Galerie d'images */}
-                    <div className="space-y-4">
-                      <div className="relative aspect-3/4 overflow-hidden border border-gold/20">
-                        <motion.img
-                          key={selectedImageIndex}
-                          src={selectedProduct.image}
-                          alt={selectedProduct.name}
-                          className="w-full h-full object-cover"
-                          initial={{ opacity: 0, scale: 1.1 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.5 }}
-                        />
-
-                        {/* Badges */}
-                        <div className="absolute top-4 left-4 flex flex-col space-y-2">
-                          {selectedProduct.isNew && (
-                            <span className="bg-gold text-bordeaux-dark text-xs px-3 py-1 uppercase tracking-wider">
-                              Nouveau
-                            </span>
-                          )}
-                          {selectedProduct.originalPrice && (
-                            <span className="bg-champagne text-bordeaux-dark text-xs px-3 py-1 uppercase tracking-wider">
-                              -{Math.round((1 - selectedProduct.price / selectedProduct.originalPrice) * 100)}%
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Navigation des images */}
-                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4">
-                          <motion.button
-                            onClick={prevImage}
-                            className="w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold bg-bordeaux-dark/50 backdrop-blur-sm transition-all duration-300"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <ChevronLeft size={20} className="text-champagne" />
-                          </motion.button>
-                          <motion.button
-                            onClick={nextImage}
-                            className="w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold bg-bordeaux-dark/50 backdrop-blur-sm transition-all duration-300"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <ChevronRight size={20} className="text-champagne" />
-                          </motion.button>
-                        </div>
-
-                        {/* Indicateurs d'images */}
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                          {[0, 1, 2].map((i) => (
-                            <button
-                              key={i}
-                              onClick={() => setSelectedImageIndex(i)}
-                              className={`w-2 h-2 rounded-full transition-all duration-300 ${i === selectedImageIndex
-                                ? 'w-6 bg-gold'
-                                : 'bg-gold/30 hover:bg-gold/50'
-                                }`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Informations détaillées */}
-                    <div className="space-y-6">
-                      {/* Catégorie */}
-                      <Link to={`/categorie/${selectedProduct.category.toLowerCase()}`} onClick={closeQuickView}>
-                        <span className="text-gold text-sm uppercase tracking-[0.2em] hover:underline">
-                          {selectedProduct.category}
-                        </span>
-                      </Link>
-
-                      {/* Titre */}
-                      <h2 className="text-3xl md:text-4xl font-serif text-champagne">
-                        {selectedProduct.name}
-                      </h2>
-
-                      {/* Prix */}
-                      <div className="flex items-center space-x-4">
-                        <span className="text-3xl font-serif text-gold">
-                          {selectedProduct.price} Ar
-                        </span>
-                        {selectedProduct.originalPrice && (
-                          <span className="text-lg text-champagne/50 line-through">
-                            {selectedProduct.originalPrice} Ar
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Note et avis */}
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center space-x-1">
-                          <Star size={18} className="fill-gold text-gold" />
-                          <span className="text-lg text-champagne">
-                            {selectedProduct.rating}
-                          </span>
-                        </div>
-                        <span className="text-champagne/50">
-                          ({selectedProduct.reviewCount} avis)
-                        </span>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-champagne/70 leading-relaxed">
-                        {selectedProduct.description}
-                      </p>
-
-                      {/* Matière */}
-                      {selectedProduct.material && (
-                        <div className="space-y-2">
-                          <h4 className="text-sm uppercase tracking-wider text-champagne">Matière</h4>
-                          <p className="text-champagne/70">{selectedProduct.material}</p>
-                        </div>
-                      )}
-
-                      {/* Couleurs disponibles */}
-                      {selectedProduct.colors && (
-                        <div className="space-y-3">
-                          <h4 className="text-sm uppercase tracking-wider text-champagne">
-                            Couleurs disponibles
-                          </h4>
-                          <div className="flex space-x-3">
-                            {selectedProduct.colors.map((color, i) => (
-                              <motion.button
-                                key={i}
-                                className="group relative"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
-                                <div
-                                  className="w-8 h-8 rounded-full border-2 border-transparent group-hover:border-gold transition-all duration-300"
-                                  style={{ backgroundColor: color }}
-                                />
-                                <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-champagne/50 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                  Couleur {i + 1}
-                                </span>
-                              </motion.button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Tailles */}
-                      {selectedProduct.sizes && (
-                        <div className="space-y-3">
-                          <h4 className="text-sm uppercase tracking-wider text-champagne">
-                            Tailles disponibles
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedProduct.sizes.map((size) => (
-                              <motion.button
-                                key={size}
-                                className="px-4 py-2 border border-gold/30 text-champagne hover:bg-gold hover:text-bordeaux-dark transition-all duration-300 text-sm"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
-                                {size}
-                              </motion.button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Détails */}
-                      {selectedProduct.details && (
-                        <div className="space-y-3">
-                          <h4 className="text-sm uppercase tracking-wider text-champagne">Détails</h4>
-                          <ul className="list-disc list-inside text-champagne/70 space-y-1">
-                            {selectedProduct.details.map((detail, i) => (
-                              <li key={i}>{detail}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {/* Entretien */}
-                      {selectedProduct.care && (
-                        <div className="space-y-3">
-                          <h4 className="text-sm uppercase tracking-wider text-champagne">Entretien</h4>
-                          <ul className="list-disc list-inside text-champagne/70 space-y-1">
-                            {selectedProduct.care.map((item, i) => (
-                              <li key={i}>{item}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {/* Actions */}
-                      <div className="flex space-x-4 pt-6">
-                        <motion.button
-                          onClick={() => {
-                            handleAddToCart(selectedProduct);
-                            closeQuickView();
-                          }}
-                          className="flex-1 bg-gold text-bordeaux-dark py-4 text-sm uppercase tracking-wider font-medium flex items-center justify-center space-x-3 hover:bg-gold-light transition-colors"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <ShoppingBag size={18} />
-                          <span>Ajouter au panier</span>
-                        </motion.button>
-                        <motion.button
-                          onClick={() => handleToggleFavorite(selectedProduct)}
-                          className="w-14 h-14 flex items-center justify-center border border-gold/30 hover:border-gold transition-all duration-300"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Heart
-                            size={20}
-                            className={`transition-colors ${isFavorite(selectedProduct.id)
-                              ? 'fill-gold text-gold'
-                              : 'text-champagne'
-                              }`}
-                          />
-                        </motion.button>
-                      </div>
-
-                      {/* Informations supplémentaires */}
-                      <div className="border-t border-gold/10 pt-6 space-y-3">
-                        <div className="flex items-center text-sm text-champagne/60">
-                          <Truck size={16} className="mr-3 text-gold/60" />
-                          Livraison offerte dès 150Ar d'achat
-                        </div>
-                        <div className="flex items-center text-sm text-champagne/60">
-                          <RotateCcw size={16} className="mr-3 text-gold/60" />
-                          Retours gratuits sous 30 jours
-                        </div>
-                        <div className="flex items-center text-sm text-champagne/60">
-                          <Shield size={16} className="mr-3 text-gold/60" />
-                          Paiement 100% sécurisé
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <ProductQuickView
+        product={selectedProduct}
+        isOpen={!!selectedProduct}
+        onClose={closeQuickView}
+      />
     </>
   );
 };

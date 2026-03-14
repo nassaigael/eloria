@@ -402,40 +402,6 @@ const Testimonials = () => {
               ))}
             </div>
           </div>
-
-          {/* Bouton pour voir tous les avis */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-center mt-12"
-          >
-            <Link
-              to="/avis"
-              className="group relative inline-flex items-center px-8 py-3 border border-gold text-gold text-sm uppercase tracking-wider font-medium overflow-hidden"
-            >
-              <motion.span
-                className="absolute inset-0 bg-gold"
-                initial={{ scale: 0, opacity: 0 }}
-                whileHover={{ 
-                  scale: 1, 
-                  opacity: 1,
-                  transition: { duration: 0.4 }
-                }}
-              />
-              <span className="relative z-10 flex items-center group-hover:text-bordeaux-dark transition-colors duration-300">
-                Voir tous les avis
-                <motion.span
-                  className="ml-2"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  →
-                </motion.span>
-              </span>
-            </Link>
-          </motion.div>
         </div>
       </section>
 

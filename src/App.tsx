@@ -12,7 +12,6 @@ import { SearchProvider } from './context/SearchContext';
 import Cart from './pages/Cart';
 import Category from './pages/Category';
 import Favorites from './pages/Favorites';
-import Reviews from './pages/Reviews';
 import Shop from './pages/Shop';
 
 function App() {
@@ -34,7 +33,6 @@ function App() {
                       <Testimonials />
                     </>
                   } />
-                  <Route path="/avis" element={<Reviews />} />
                   <Route path="/categorie/:slug" element={<Category />} />
                   <Route path="/favoris" element={<Favorites />} />
                   <Route path="/panier" element={<Cart />} />
