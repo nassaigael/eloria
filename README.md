@@ -207,5 +207,5 @@ This project is licensed under the MIT License.
 ---
 
 <p align="center">
-  Made with ❤️ by Nasaina Gael
+  Made with ❤️ by Gaël RAMAHANDRISOA
 </p>

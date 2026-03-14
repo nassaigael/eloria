@@ -26,7 +26,6 @@ const Footer = () => {
       { nom: 'Presse', href: '/presse' },
     ],
     collections: [
-      { nom: 'Nouveautés', href: '/nouveautes' },
       { nom: 'Robes', href: '/robes' },
       { nom: 'Accessoires', href: '/accessoires' },
       { nom: 'Mariage', href: '/mariage' },
@@ -36,8 +35,6 @@ const Footer = () => {
       { nom: 'Contact', href: '/contact' },
       { nom: 'FAQ', href: '/faq' },
       { nom: 'Livraison', href: '/livraison' },
-      { nom: 'Retours', href: '/retours' },
-      { nom: 'Guide des tailles', href: '/guide-tailles' },
     ],
     legal: [
       { nom: 'Mentions légales', href: '/mentions-legales' },
