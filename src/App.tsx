@@ -15,6 +15,7 @@ import Favorites from './pages/Favorites';
 import Shop from './pages/Shop';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
+import Livraison from './pages/Livraison';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                   <Route path="/boutique" element={<Shop />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/faq" element={<FAQ />} />
+                  <Route path="/livraison" element={<Livraison />} />
                 </Routes>
               </main>
               <Footer />
