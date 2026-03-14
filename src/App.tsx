@@ -14,6 +14,7 @@ import Category from './pages/Category';
 import Favorites from './pages/Favorites';
 import Shop from './pages/Shop';
 import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
                   <Route path="/panier" element={<Cart />} />
                   <Route path="/boutique" element={<Shop />} />
                   <Route path="/contact" element={<Contact />} />
+                  <Route path="/faq" element={<FAQ />} />
                 </Routes>
               </main>
               <Footer />

@@ -43,7 +43,6 @@ const Header = () => {
     { nom: 'Hauts', slug: 'hauts', path: '/categorie/hauts' },
     { nom: 'Jupes', slug: 'jupes', path: '/categorie/jupes' },
     { nom: 'Pantalons', slug: 'pantalons', path: '/categorie/pantalons' },
-    // { nom: 'Vestes', slug: 'vestes', path: '/categorie/vestes' },
     { nom: 'Accessoires', slug: 'accessoires', path: '/categorie/accessoires' },
     { nom: 'Chaussures', slug: 'chaussures', path: '/categorie/chaussures' },
     { nom: 'Mariage', slug: 'mariage', path: '/categorie/mariage' },
