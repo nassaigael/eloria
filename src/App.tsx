@@ -13,6 +13,7 @@ import Category from './pages/Category';
 import Favorites from './pages/Favorites';
 import Cart from './pages/Cart'; // Ajout de l'import
 import Reviews from './pages/Reviews';
+import Shop from './pages/Shop';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                   <Route path="/categorie/:slug" element={<Category />} />
                   <Route path="/favoris" element={<Favorites />} />
                   <Route path="/panier" element={<Cart />} />
+                  <Route path="/boutique" element={<Shop />} />
                 </Routes>
               </main>
               <Footer />

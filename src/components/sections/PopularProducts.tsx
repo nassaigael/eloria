@@ -141,8 +141,8 @@ const PopularProducts = () => {
                     <Heart
                       size={18}
                       className={`transition-colors ${isFavorite(product.id)
-                          ? 'fill-gold text-gold'
-                          : 'text-champagne'
+                        ? 'fill-gold text-gold'
+                        : 'text-champagne'
                         }`}
                     />
                   </motion.button>
@@ -266,7 +266,7 @@ const PopularProducts = () => {
             className="text-center mt-16"
           >
             <Link
-              to="/boutique"
+              to="/boutique" // ← Lien vers la page boutique
               className="group relative inline-flex items-center px-10 py-4 border border-gold text-gold text-sm uppercase tracking-wider font-medium overflow-hidden"
             >
               <motion.span
@@ -383,8 +383,8 @@ const PopularProducts = () => {
                               key={i}
                               onClick={() => setSelectedImageIndex(i)}
                               className={`w-2 h-2 rounded-full transition-all duration-300 ${i === selectedImageIndex
-                                  ? 'w-6 bg-gold'
-                                  : 'bg-gold/30 hover:bg-gold/50'
+                                ? 'w-6 bg-gold'
+                                : 'bg-gold/30 hover:bg-gold/50'
                                 }`}
                             />
                           ))}
@@ -539,8 +539,8 @@ const PopularProducts = () => {
                           <Heart
                             size={20}
                             className={`transition-colors ${isFavorite(selectedProduct.id)
-                                ? 'fill-gold text-gold'
-                                : 'text-champagne'
+                              ? 'fill-gold text-gold'
+                              : 'text-champagne'
                               }`}
                           />
                         </motion.button>

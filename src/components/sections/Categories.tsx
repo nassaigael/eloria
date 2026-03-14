@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Link } from 'lucide-react';
 import { categoriesData } from '../../data/categoriesData';
 
 const Categories = () => {
@@ -25,10 +25,10 @@ const Categories = () => {
     }
   };
 
-    const newLocal = "relative py-24 md:py-32 overflow-hidden bg-linear-to-b from-bordeaux to-bordeaux-dark";
-    const newLocal_1 = "w-24 h-px bg-gold/40 mx-auto";
+  const newLocal = "relative py-24 md:py-32 overflow-hidden bg-linear-to-b from-bordeaux to-bordeaux-dark";
+  const newLocal_1 = "w-24 h-px bg-gold/40 mx-auto";
   return (
-    <section 
+    <section
       ref={sectionRef}
       className={newLocal}
     >
@@ -177,7 +177,7 @@ const Categories = () => {
           ))}
         </motion.div>
 
-        {/* Bouton "Voir toutes les collections" */}
+        {/* Bouton "Voir tout" */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -185,25 +185,21 @@ const Categories = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center mt-16"
         >
-          <motion.a
-            href="/collections"
+          <Link
+            to="/boutique" // ← Lien vers la page boutique
             className="group relative inline-flex items-center px-10 py-4 border border-gold text-gold text-sm uppercase tracking-wider font-medium overflow-hidden"
-            whileHover="hover"
           >
-            {/* Effet de fond au hover */}
             <motion.span
               className="absolute inset-0 bg-gold"
               initial={{ scale: 0, opacity: 0 }}
-              whileHover={{ 
-                scale: 1, 
+              whileHover={{
+                scale: 1,
                 opacity: 1,
                 transition: { duration: 0.4 }
               }}
             />
-            
-            {/* Texte du bouton */}
             <span className="relative z-10 flex items-center group-hover:text-bordeaux-dark transition-colors duration-300">
-              Explorer toutes nos collections
+              Découvrir toute la collection
               <motion.span
                 className="ml-3"
                 whileHover={{ x: 5 }}
@@ -212,7 +208,7 @@ const Categories = () => {
                 →
               </motion.span>
             </span>
-          </motion.a>
+          </Link>
         </motion.div>
       </div>
 
