@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { Heart, ShoppingBag, X, Search, ChevronDown } from 'lucide-react';
+import { Heart, ShoppingBag, X, Search, ChevronDown, Contact } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface MobileMenuProps {
@@ -47,7 +47,7 @@ const MobileMenu = ({ isOpen, onClose, mainNav, categories, priorityLinks }: Mob
                 <Link to="/" onClick={onClose} className="inline-block">
                   <span className="text-2xl font-serif text-gold">Eloria</span>
                 </Link>
-                <motion.button 
+                <motion.button
                   onClick={onClose}
                   className="w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold transition-colors"
                   whileHover={{ scale: 1.1 }}
@@ -80,12 +80,12 @@ const MobileMenu = ({ isOpen, onClose, mainNav, categories, priorityLinks }: Mob
                       className="w-full flex items-center justify-between text-xl font-serif text-champagne hover:text-gold transition-colors border-l-2 border-transparent hover:border-gold pl-4"
                     >
                       <span>CATEGORIES</span>
-                      <ChevronDown 
-                        size={18} 
-                        className={`transition-transform duration-300 ${categoriesOpen ? 'rotate-180' : ''}`} 
+                      <ChevronDown
+                        size={18}
+                        className={`transition-transform duration-300 ${categoriesOpen ? 'rotate-180' : ''}`}
                       />
                     </button>
-                    
+
                     <AnimatePresence>
                       {categoriesOpen && (
                         <motion.ul
@@ -136,18 +136,17 @@ const MobileMenu = ({ isOpen, onClose, mainNav, categories, priorityLinks }: Mob
                     onFocus={() => setSearchFocused(true)}
                     onBlur={() => setSearchFocused(false)}
                   />
-                  <Search 
-                    size={18} 
-                    className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
-                      searchFocused ? 'text-gold' : 'text-gold/60'
-                    }`}
+                  <Search
+                    size={18}
+                    className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${searchFocused ? 'text-gold' : 'text-gold/60'
+                      }`}
                   />
                 </div>
 
                 {/* Liens rapides */}
                 <div className="flex justify-around">
-                  <Link 
-                    to="/favoris" 
+                  <Link
+                    to="/favoris"
                     onClick={onClose}
                     className="flex flex-col items-center group"
                   >
@@ -157,8 +156,8 @@ const MobileMenu = ({ isOpen, onClose, mainNav, categories, priorityLinks }: Mob
                     </span>
                   </Link>
 
-                  <Link 
-                    to="/panier" 
+                  <Link
+                    to="/panier"
                     onClick={onClose}
                     className="flex flex-col items-center group"
                   >
@@ -168,14 +167,12 @@ const MobileMenu = ({ isOpen, onClose, mainNav, categories, priorityLinks }: Mob
                     </span>
                   </Link>
 
-                  <Link 
-                    to="/contact" 
+                  <Link
+                    to="/contact"
                     onClick={onClose}
                     className="flex flex-col items-center group"
                   >
-                    <div className="w-6 h-6 rounded-full border border-gold/30 group-hover:border-gold transition-colors flex items-center justify-center">
-                      <span className="text-sm text-champagne group-hover:text-gold">✉</span>
-                    </div>
+                    <Contact size={24} className="text-champagne group-hover:text-gold transition-colors" />
                     <span className="text-xs mt-2 text-champagne/70 group-hover:text-gold">
                       Contact
                     </span>
