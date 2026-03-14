@@ -1,7 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // ← Import Link
 import { Star, Quote, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 import { testimonialsData, globalStats } from '../../data/testimonialsData';
+import { productsData } from '../../data/productsData'; // ← Import pour trouver les slugs
 
 const Testimonials = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -21,7 +23,6 @@ const Testimonials = () => {
         current.scrollLeft += scrollAmount;
       }
 
-      // Mettre à jour la visibilité des flèches
       setTimeout(() => {
         if (current) {
           setShowLeftArrow(current.scrollLeft > 0);
@@ -39,7 +40,7 @@ const Testimonials = () => {
       if (scrollContainerRef.current) {
         const container = scrollContainerRef.current;
         const scrollPosition = container.scrollLeft;
-        const cardWidth = 450 + 24; // largeur carte + gap
+        const cardWidth = 450 + 24;
         const startIndex = Math.floor(scrollPosition / cardWidth);
         const endIndex = startIndex + Math.ceil(container.clientWidth / cardWidth);
         
@@ -53,7 +54,7 @@ const Testimonials = () => {
     const container = scrollContainerRef.current;
     if (container) {
       container.addEventListener('scroll', handleScroll);
-      handleScroll(); // Appel initial
+      handleScroll();
     }
 
     return () => {
@@ -62,6 +63,15 @@ const Testimonials = () => {
       }
     };
   }, []);
+
+  // Fonction pour trouver le slug du produit à partir du nom
+  const findProductSlug = (productName: string): string => {
+    const product = productsData.find(p => 
+      p.name.toLowerCase() === productName.toLowerCase() ||
+      p.name.includes(productName)
+    );
+    return product?.slug || productName.toLowerCase().replace(/\s+/g, '-');
+  };
 
   // Rendu des étoiles
   const renderStars = (rating: number) => {
@@ -85,16 +95,13 @@ const Testimonials = () => {
     >
       {/* Éléments décoratifs de fond */}
       <div className="absolute inset-0 opacity-10">
-        {/* Cercles concentriques */}
         <div className="absolute top-40 right-20 w-80 h-80 border border-gold/20 rounded-full" />
         <div className="absolute bottom-40 left-20 w-96 h-96 border border-gold/20 rounded-full" />
         
-        {/* Motif de guillemets */}
         <div className="absolute top-20 left-1/4 text-gold/5 text-[200px] font-serif">"</div>
         <div className="absolute bottom-20 right-1/4 text-gold/5 text-[200px] font-serif rotate-180">"</div>
       </div>
 
-      {/* Motif de points dorés */}
       <div className="absolute inset-0 opacity-5">
         {[...Array(30)].map((_, i) => (
           <div
@@ -229,7 +236,7 @@ const Testimonials = () => {
                         <div className="flex space-x-0.5">
                           {renderStars(testimonial.rating)}
                         </div>
-                        <span className="text-xs text-champagne/40">{testimonial.date}</span>
+                        <span className="text-xs text-champagne/40">{testimonial.dateRelative || testimonial.date}</span>
                       </div>
                     </div>
                   </div>
@@ -239,22 +246,29 @@ const Testimonials = () => {
                     "{testimonial.comment}"
                   </p>
 
-                  {/* Produit associé */}
+                  {/* Produit associé - AVEC LIEN */}
                   {testimonial.productName && (
-                    <div className="flex items-center space-x-3 pt-4 border-t border-gold/10">
+                    <Link
+                      to={`/produit/${testimonial.productSlug || findProductSlug(testimonial.productName)}`}
+                      className="flex items-center space-x-3 pt-4 border-t border-gold/10 group/link hover:bg-gold/5 transition-all duration-300"
+                    >
                       {testimonial.productImage && (
-                        <img
-                          src={testimonial.productImage}
-                          alt={testimonial.productName}
-                          className="w-10 h-10 object-cover rounded-none border border-gold/20"
-                        />
+                        <div className="relative overflow-hidden">
+                          <img
+                            src={testimonial.productImage}
+                            alt={testimonial.productName}
+                            className="w-10 h-10 object-cover border border-gold/20 group-hover/link:scale-110 transition-transform duration-300"
+                          />
+                        </div>
                       )}
                       <div className="flex-1">
-                        <p className="text-xs text-champagne/40">Produit</p>
-                        <p className="text-sm text-champagne">{testimonial.productName}</p>
+                        <p className="text-xs text-champagne/40">Produit associé</p>
+                        <p className="text-sm text-champagne group-hover/link:text-gold transition-colors">
+                          {testimonial.productName}
+                        </p>
                       </div>
-                      <ShoppingBag size={16} className="text-gold/40" />
-                    </div>
+                      <ShoppingBag size={16} className="text-gold/40 group-hover/link:text-gold transition-colors" />
+                    </Link>
                   )}
                 </div>
               </motion.div>
@@ -306,10 +320,9 @@ const Testimonials = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center mt-12"
         >
-          <motion.a
-            href="/avis"
+          <Link
+            to="/avis"
             className="group relative inline-flex items-center px-8 py-3 border border-gold text-gold text-sm uppercase tracking-wider font-medium overflow-hidden"
-            whileHover="hover"
           >
             <motion.span
               className="absolute inset-0 bg-gold"
@@ -330,7 +343,7 @@ const Testimonials = () => {
                 →
               </motion.span>
             </span>
-          </motion.a>
+          </Link>
         </motion.div>
       </div>
     </section>
