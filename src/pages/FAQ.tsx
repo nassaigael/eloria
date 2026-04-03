@@ -8,7 +8,6 @@ import {
     MessageCircle,
     Clock,
     ThumbsUp,
-    Award,
     X
 } from 'lucide-react';
 import { faqCategories, faqItems, faqStats } from '../data/faqData';
@@ -19,16 +18,13 @@ const FAQ = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [helpfulClicks, setHelpfulClicks] = useState<number[]>([]);
 
-    // Filtrer les questions par catégorie et recherche
     const filteredQuestions = useMemo(() => {
         let filtered = faqItems;
 
-        // Filtre par catégorie
         if (activeCategory !== 'all') {
             filtered = filtered.filter(item => item.category === activeCategory);
         }
 
-        // Filtre par recherche
         if (searchQuery.trim()) {
             const query = searchQuery.toLowerCase();
             filtered = filtered.filter(item =>
@@ -40,7 +36,6 @@ const FAQ = () => {
         return filtered;
     }, [activeCategory, searchQuery]);
 
-    // Questions populaires
     const popularQuestions = useMemo(() => {
         return faqItems.filter(item => item.isPopular).slice(0, 4);
     }, []);
@@ -61,30 +56,17 @@ const FAQ = () => {
 
     return (
         <div className="min-h-screen bg-linear-to-b from-bordeaux to-bordeaux-dark pt-32 pb-16">
-            {/* Éléments décoratifs */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-40 left-10 w-64 h-64 border border-gold/5 rounded-full" />
                 <div className="absolute bottom-40 right-10 w-96 h-96 border border-gold/5 rounded-full" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 border border-gold/5 rounded-full" />
 
-                {/* Motif décoratif */}
                 <div className="absolute top-20 right-20 text-gold/5 text-[200px] font-serif">?</div>
                 <div className="absolute bottom-20 left-20 text-gold/5 text-[200px] font-serif">?</div>
             </div>
 
             <div className="container-custom relative z-10">
-                {/* Fil d'Ariane */}
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center space-x-3 text-sm mb-8"
-                >
-                    <Link to="/" className="text-champagne/50 hover:text-gold transition-colors">Accueil</Link>
-                    <span className="text-champagne/30">/</span>
-                    <span className="text-gold">FAQ</span>
-                </motion.div>
 
-                {/* En-tête */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -94,13 +76,6 @@ const FAQ = () => {
                         Comment <span className="text-gold">pouvons-nous</span> vous aider ?
                     </h1>
 
-                    <div className="flex justify-center items-center space-x-2 mb-8">
-                        <div className="w-16 h-px bg-gold/40" />
-                        <Award size={20} className="text-gold/60" />
-                        <div className="w-16 h-px bg-gold/40" />
-                    </div>
-
-                    {/* Barre de recherche */}
                     <div className="max-w-2xl mx-auto relative">
                         <input
                             type="text"
@@ -121,7 +96,6 @@ const FAQ = () => {
                     </div>
                 </motion.div>
 
-                {/* Statistiques rapides */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -151,7 +125,6 @@ const FAQ = () => {
                     </div>
                 </motion.div>
 
-                {/* Questions populaires */}
                 {!searchQuery && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -187,7 +160,6 @@ const FAQ = () => {
                     </motion.div>
                 )}
 
-                {/* Catégories */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -218,7 +190,6 @@ const FAQ = () => {
                     ))}
                 </motion.div>
 
-                {/* Description de la catégorie */}
                 {activeCategory !== 'all' && (
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
@@ -231,7 +202,6 @@ const FAQ = () => {
                     </motion.div>
                 )}
 
-                {/* Liste des questions */}
                 <div className="max-w-3xl mx-auto space-y-4">
                     {filteredQuestions.length === 0 ? (
                         <motion.div
@@ -258,7 +228,6 @@ const FAQ = () => {
                                 transition={{ delay: index * 0.05 }}
                                 className="border border-gold/10 hover:border-gold/30 transition-all duration-300"
                             >
-                                {/* Question */}
                                 <button
                                     onClick={() => toggleItem(item.id)}
                                     className="w-full flex items-center justify-between p-6 text-left group"
@@ -291,7 +260,6 @@ const FAQ = () => {
                                                     {item.answer}
                                                 </p>
 
-                                                {/* Actions */}
                                                 <div className="flex items-center justify-between text-sm">
                                                     <span className="text-xs text-champagne/40">
                                                         Catégorie : {faqCategories.find(c => c.id === item.category)?.name}
@@ -316,7 +284,6 @@ const FAQ = () => {
                     )}
                 </div>
 
-                {/* Contact support */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -346,7 +313,6 @@ const FAQ = () => {
                     </Link>
                 </motion.div>
 
-                {/* Liens rapides */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -355,14 +321,6 @@ const FAQ = () => {
                 >
                     <Link to="/livraison" className="text-xs text-champagne/40 hover:text-gold transition-colors">
                         Livraison
-                    </Link>
-                    <span className="text-champagne/20">•</span>
-                    <Link to="/retours" className="text-xs text-champagne/40 hover:text-gold transition-colors">
-                        Retours
-                    </Link>
-                    <span className="text-champagne/20">•</span>
-                    <Link to="/guide-tailles" className="text-xs text-champagne/40 hover:text-gold transition-colors">
-                        Guide des tailles
                     </Link>
                     <span className="text-champagne/20">•</span>
                     <Link to="/cgv" className="text-xs text-champagne/40 hover:text-gold transition-colors">
