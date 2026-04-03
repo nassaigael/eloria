@@ -128,66 +128,67 @@ const Products = () => {
                     />
                   </motion.button>
 
-                  {/* Image */}
-                  <Link to={`/produit/${product.slug}`}>
-                    <div className="relative aspect-3/4 overflow-hidden">
-                      <motion.img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.8 }}
-                      />
+                  {/* Image - onClick ouvre le quick view */}
+                  <div 
+                    onClick={() => openQuickView(product)}
+                    className="relative aspect-3/4 overflow-hidden cursor-pointer"
+                  >
+                    <motion.img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.8 }}
+                    />
 
-                      {/* Overlay au hover (seulement sur desktop) */}
-                      <motion.div
-                        className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent hidden md:block"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 0.7 }}
-                        transition={{ duration: 0.4 }}
-                      />
+                    {/* Overlay au hover (seulement sur desktop) */}
+                    <motion.div
+                      className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent hidden md:block"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 0.7 }}
+                      transition={{ duration: 0.4 }}
+                    />
 
-                      {/* Boutons d'action - TOUJOURS VISIBLES SUR MOBILE/TABLETTE */}
-                      <div className="absolute inset-x-0 bottom-0 p-4 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-500">
-                        <div className="flex space-x-2">
-                          <motion.button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleAddToCart(product);
-                            }}
-                            className="flex-1 bg-gold text-bordeaux-dark py-3 text-sm uppercase tracking-wider font-medium flex items-center justify-center space-x-2 hover:bg-gold-light transition-colors"
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                          >
-                            <ShoppingBag size={16} />
-                            <span>Ajouter</span>
-                          </motion.button>
-                          <motion.button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              openQuickView(product);
-                            }}
-                            className="w-12 bg-champagne/20 backdrop-blur-sm border border-gold/30 text-champagne flex items-center justify-center hover:border-gold transition-colors"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <Eye size={16} />
-                          </motion.button>
-                        </div>
+                    {/* Boutons d'action - TOUJOURS VISIBLES SUR MOBILE/TABLETTE */}
+                    <div className="absolute inset-x-0 bottom-0 p-4 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-500">
+                      <div className="flex space-x-2">
+                        <motion.button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleAddToCart(product);
+                          }}
+                          className="flex-1 bg-gold text-bordeaux-dark py-3 text-sm uppercase tracking-wider font-medium flex items-center justify-center space-x-2 hover:bg-gold-light transition-colors"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <ShoppingBag size={16} />
+                          <span>Ajouter</span>
+                        </motion.button>
+                        <motion.button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openQuickView(product);
+                          }}
+                          className="w-12 bg-champagne/20 backdrop-blur-sm border border-gold/30 text-champagne flex items-center justify-center hover:border-gold transition-colors"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Eye size={16} />
+                        </motion.button>
                       </div>
                     </div>
-                  </Link>
+                  </div>
 
                   {/* Informations produit */}
                   <div className="p-4">
-                    {/* Catégorie */}
+                    {/* Catégorie - Lien vers la page catégorie */}
                     <Link to={`/categorie/${product.category.toLowerCase()}`}>
                       <span className="text-xs text-gold/70 uppercase tracking-wider hover:text-gold transition-colors">
                         {product.category}
                       </span>
                     </Link>
 
-                    {/* Nom */}
+                    {/* Nom - Lien vers la page produit détaillée */}
                     <Link to={`/produit/${product.slug}`}>
                       <h3 className="text-lg font-serif text-champagne hover:text-gold transition-colors mt-1 mb-2 line-clamp-1">
                         {product.name}
@@ -247,7 +248,7 @@ const Products = () => {
             className="text-center mt-16"
           >
             <Link
-              to="/boutique" // ← Lien vers la page boutique
+              to="/boutique"
               className="group relative inline-flex items-center px-10 py-4 border border-gold text-gold text-sm uppercase tracking-wider font-medium overflow-hidden"
             >
               <motion.span

@@ -1,18 +1,18 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Star, 
-  Quote, 
-  ChevronLeft, 
-  ChevronRight, 
-  ShoppingBag, 
-  Eye, 
-  X, 
-  Heart, 
-  Truck, 
-  RotateCcw, 
-  Shield 
+import {
+  Star,
+  Quote,
+  ChevronLeft,
+  ChevronRight,
+  ShoppingBag,
+  Eye,
+  X,
+  Heart,
+  Truck,
+  RotateCcw,
+  Shield
 } from 'lucide-react';
 import { testimonialsData, globalStats } from '../../data/testimonialsData';
 import { productsData, type Product } from '../../data/productsData';
@@ -48,7 +48,7 @@ const Testimonials = () => {
     if (scrollContainerRef.current) {
       const { current } = scrollContainerRef;
       const scrollAmount = 400;
-      
+
       if (direction === 'left') {
         current.scrollLeft -= scrollAmount;
       } else {
@@ -75,7 +75,7 @@ const Testimonials = () => {
         const cardWidth = 450 + 24; // largeur carte + gap
         const startIndex = Math.floor(scrollPosition / cardWidth);
         const endIndex = startIndex + Math.ceil(container.clientWidth / cardWidth);
-        
+
         setVisibleRange({
           start: startIndex,
           end: Math.min(endIndex, testimonialsData.length)
@@ -149,7 +149,7 @@ const Testimonials = () => {
 
   // Fonction pour trouver le produit à partir du nom
   const findProductByName = (productName: string): Product | undefined => {
-    return productsData.find(p => 
+    return productsData.find(p =>
       p.name.toLowerCase() === productName.toLowerCase() ||
       p.name.includes(productName)
     );
@@ -161,18 +161,17 @@ const Testimonials = () => {
       <Star
         key={i}
         size={16}
-        className={`${
-          i < rating 
-            ? 'fill-gold text-gold' 
+        className={`${i < rating
+            ? 'fill-gold text-gold'
             : 'text-gold/20'
-        } transition-colors`}
+          } transition-colors`}
       />
     ));
   };
 
   return (
     <>
-      <section 
+      <section
         ref={sectionRef}
         className="relative py-24 md:py-32 overflow-hidden bg-linear-to-b from-bordeaux-dark to-bordeaux"
       >
@@ -181,7 +180,7 @@ const Testimonials = () => {
           {/* Cercles concentriques */}
           <div className="absolute top-40 right-20 w-80 h-80 border border-gold/20 rounded-full" />
           <div className="absolute bottom-40 left-20 w-96 h-96 border border-gold/20 rounded-full" />
-          
+
           {/* Motif de guillemets */}
           <div className="absolute top-20 left-1/4 text-gold/5 text-[200px] font-serif">"</div>
           <div className="absolute bottom-20 right-1/4 text-gold/5 text-[200px] font-serif rotate-180">"</div>
@@ -288,7 +287,7 @@ const Testimonials = () => {
                   <motion.div
                     key={testimonial.id}
                     initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                    animate={index >= visibleRange.start && index <= visibleRange.end 
+                    animate={index >= visibleRange.start && index <= visibleRange.end
                       ? { opacity: 1, scale: 1, y: 0 }
                       : { opacity: 0, scale: 0.8, y: -50 }
                     }
@@ -302,7 +301,7 @@ const Testimonials = () => {
                   >
                     {/* Carte d'avis */}
                     <div className="relative h-full bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 hover:border-gold/30 transition-all duration-500 p-8">
-                      
+
                       {/* Guillemet décoratif */}
                       <Quote className="absolute top-6 right-6 text-gold/10" size={60} />
 
@@ -380,11 +379,10 @@ const Testimonials = () => {
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <span className={`block w-8 h-0.5 transition-colors duration-300 ${
-                    index >= visibleRange.start && index <= visibleRange.end 
-                      ? 'bg-gold' 
+                  <span className={`block w-8 h-0.5 transition-colors duration-300 ${index >= visibleRange.start && index <= visibleRange.end
+                      ? 'bg-gold'
                       : 'bg-gold/20 group-hover:bg-gold/40'
-                  }`} />
+                    }`} />
                   {index === visibleRange.start && (
                     <motion.span
                       className="absolute top-0 left-0 h-full bg-gold"
@@ -494,11 +492,10 @@ const Testimonials = () => {
                             <button
                               key={i}
                               onClick={() => setSelectedImageIndex(i)}
-                              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                i === selectedImageIndex 
-                                  ? 'w-6 bg-gold' 
+                              className={`w-2 h-2 rounded-full transition-all duration-300 ${i === selectedImageIndex
+                                  ? 'w-6 bg-gold'
                                   : 'bg-gold/30 hover:bg-gold/50'
-                              }`}
+                                }`}
                             />
                           ))}
                         </div>
@@ -522,11 +519,11 @@ const Testimonials = () => {
                       {/* Prix */}
                       <div className="flex items-center space-x-4">
                         <span className="text-3xl font-serif text-gold">
-                          {selectedProduct.price} €
+                          {selectedProduct.price} Ar
                         </span>
                         {selectedProduct.originalPrice && (
                           <span className="text-lg text-champagne/50 line-through">
-                            {selectedProduct.originalPrice} €
+                            {selectedProduct.originalPrice} Ar
                           </span>
                         )}
                       </div>
@@ -651,11 +648,10 @@ const Testimonials = () => {
                         >
                           <Heart
                             size={20}
-                            className={`transition-colors ${
-                              isFavorite(selectedProduct.id) 
-                                ? 'fill-gold text-gold' 
+                            className={`transition-colors ${isFavorite(selectedProduct.id)
+                                ? 'fill-gold text-gold'
                                 : 'text-champagne'
-                            }`}
+                              }`}
                           />
                         </motion.button>
                       </div>
@@ -664,7 +660,7 @@ const Testimonials = () => {
                       <div className="border-t border-gold/10 pt-6 space-y-3">
                         <div className="flex items-center text-sm text-champagne/60">
                           <Truck size={16} className="mr-3 text-gold/60" />
-                          Livraison offerte dès 150€ d'achat
+                          Livraison offerte dès 150Ar d'achat
                         </div>
                         <div className="flex items-center text-sm text-champagne/60">
                           <RotateCcw size={16} className="mr-3 text-gold/60" />
