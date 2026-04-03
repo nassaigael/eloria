@@ -15,17 +15,6 @@ const PrivacyPolicy = () => {
       </div>
 
       <div className="container-custom relative z-10">
-        {/* Fil d'Ariane */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-center space-x-2 text-sm mb-8"
-        >
-          <Link to="/" className="text-champagne/40 hover:text-gold transition-colors">Accueil</Link>
-          <span className="text-champagne/30">/</span>
-          <span className="text-gold">Politique de confidentialité</span>
-        </motion.div>
-
         {/* En-tête */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
