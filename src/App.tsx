@@ -28,7 +28,6 @@ function App() {
               <Header />
               <main>
                 <Routes>
-                  {/* Page d'accueil */}
                   <Route path="/" element={
                     <>
                       <Hero />
@@ -39,18 +38,18 @@ function App() {
                     </>
                   } />
 
-                  {/* Pages principales */}
                   <Route path="/boutique" element={<Shop />} />
                   <Route path="/categorie/:slug" element={<Category />} />
                   <Route path="/favoris" element={<Favorites />} />
                   <Route path="/panier" element={<Cart />} />
-
-                  {/* Pages prioritaires */}
+                  <Route path="/mentions-legales" element={<MentionsLegales />} />
+                  <Route path="/confidentialite" element={<Confidentialite />} />
+                  <Route path="/cgv" element={<CGV />} />
+                  <Route path="/cookies" element={<Cookies />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/livraison" element={<Livraison />} />
 
-                  {/* Page 404 - À garder en dernier */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>

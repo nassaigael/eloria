@@ -164,13 +164,13 @@ const Footer = () => {
               <Mail size={16} className="mr-3 text-gold/60 group-hover:text-gold" />
               <span className="text-sm">contact@eloria.com</span>
             </a>
-            <a href="tel:+33123456789" className="flex items-center justify-center lg:justify-start text-champagne/70 hover:text-gold transition-colors group">
+            <a href="tel:+261341234567" className="flex items-center justify-center lg:justify-start text-champagne/70 hover:text-gold transition-colors group">
               <Phone size={16} className="mr-3 text-gold/60 group-hover:text-gold" />
-              <span className="text-sm">+33 1 23 45 67 89</span>
+              <span className="text-sm">+261 34 12 345 67</span>
             </a>
             <div className="flex items-start justify-center lg:justify-start text-champagne/70">
               <MapPin size={16} className="mr-3 text-gold/60 mt-1 shrink-0" />
-              <span className="text-sm">123 Rue de la Paix, 75001 Paris</span>
+              <span className="text-sm">Antananarivo, Madagascar</span>
             </div>
           </div>
 
