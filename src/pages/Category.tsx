@@ -1,314 +1,399 @@
-import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useParams, Link } from 'react-router-dom';
-import { Filter, X, Heart, Star, ChevronDown } from 'lucide-react';
-import { categoriesData } from '../data/categoriesData';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Heart, ShoppingBag, Star, Eye, Filter, ChevronDown } from 'lucide-react';
 import { productsData, type Product } from '../data/productsData';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
+import ProductQuickView from '../components/modals/ProductQuickView';
 
 const Category = () => {
-    const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams<{ slug: string }>();
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [sortBy, setSortBy] = useState('default');
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 700000]);
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
-    // Utiliser useMemo pour les données qui ne changent pas
-    const category = useMemo(() =>
-        categoriesData.find(c => c.slug === slug),
-        [slug]
-    );
+  const { addToCart } = useCart();
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
-    const [sortBy, setSortBy] = useState('popular');
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 700000]);
-    const [showFilters, setShowFilters] = useState(false);
+  // Filtrer les produits par catégorie
+  const categoryProducts = productsData.filter(
+    product => product.category.toLowerCase() === slug?.toLowerCase()
+  );
 
-    const { addToCart } = useCart();
-    const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+  // Options de tri
+  const sortOptions = {
+    default: 'Par défaut',
+    priceAsc: 'Prix croissant',
+    priceDesc: 'Prix décroissant',
+    rating: 'Meilleures notes',
+    newest: 'Plus récents'
+  };
 
-    // Filtrer les produits par catégorie - useMemo
-    const categoryProducts = useMemo(() => {
-        if (!category) return [];
+  // Trier les produits
+  const getSortedProducts = () => {
+    let sorted = [...categoryProducts];
 
-        return productsData.filter(p =>
-            p.category.toLowerCase() === category.name.toLowerCase()
-        );
-    }, [category]);
-
-    // Filtrer et trier les produits - useMemo
-    const filteredProducts = useMemo(() => {
-        let result = [...categoryProducts];
-
-        // Filtre par prix
-        result = result.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1]);
-
-        // Tri
-        switch (sortBy) {
-            case 'price-asc':
-                result.sort((a, b) => a.price - b.price);
-                break;
-            case 'price-desc':
-                result.sort((a, b) => b.price - a.price);
-                break;
-            case 'rating':
-                result.sort((a, b) => b.rating - a.rating);
-                break;
-            case 'new':
-                result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
-                break;
-            default: // 'popular'
-                result.sort((a, b) => b.reviewCount - a.reviewCount);
-        }
-
-        return result;
-    }, [categoryProducts, sortBy, priceRange]);
-
-    const handleAddToCart = (product: Product) => {
-        addToCart({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            quantity: 1
-        });
-    };
-
-    if (!category) {
-        return (
-            <div className="min-h-screen bg-bordeaux text-champagne flex items-center justify-center">
-                <div className="text-center">
-                    <h1 className="text-4xl font-serif mb-4">Catégorie non trouvée</h1>
-                    <Link to="/" className="text-gold hover:underline">Retour à l'accueil</Link>
-                </div>
-            </div>
-        );
+    switch (sortBy) {
+      case 'priceAsc':
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+      case 'priceDesc':
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+      case 'rating':
+        sorted.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'newest':
+        sorted.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1));
+        break;
+      default:
+        break;
     }
 
-    return (
-        <div className="min-h-screen bg-linear-to-b from-bordeaux to-bordeaux-dark pt-32 pb-16">
-            <div className="container-custom">
-                {/* Fil d'Ariane */}
-                <div className="flex items-center space-x-2 text-sm text-champagne/60 mb-8">
-                    <Link to="/" className="hover:text-gold transition-colors">Accueil</Link>
-                    <span>/</span>
-                    <span className="text-gold">{category.name}</span>
-                </div>
+    // Filtrer par prix
+    sorted = sorted.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1]);
 
-                {/* En-tête de la catégorie */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mb-12"
-                >
-                    <h1 className="text-5xl md:text-6xl font-serif text-champagne mb-4">
-                        {category.name}
-                    </h1>
-                    <p className="text-xl text-champagne/70 max-w-2xl">
-                        {category.description}
-                    </p>
-                    <div className="w-24 h-px bg-gold/40 mt-6" />
-                </motion.div>
+    // Filtrer par tailles
+    if (selectedSizes.length > 0) {
+      sorted = sorted.filter(p => p.sizes?.some(size => selectedSizes.includes(size)));
+    }
 
-                {/* Barre d'outils */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-                    <div className="flex items-center space-x-4">
-                        <button
-                            onClick={() => setShowFilters(!showFilters)}
-                            className="flex items-center space-x-2 px-4 py-2 border border-gold/30 text-champagne hover:border-gold transition-colors md:hidden"
-                        >
-                            <Filter size={18} />
-                            <span>Filtres</span>
-                        </button>
-                        <p className="text-champagne/60">
-                            {filteredProducts.length} produits trouvés
-                        </p>
-                    </div>
+    // Filtrer par couleurs
+    if (selectedColors.length > 0) {
+      sorted = sorted.filter(p => p.colors?.some(color => selectedColors.includes(color)));
+    }
 
-                    {/* Tri */}
-                    <div className="relative group">
-                        <select
-                            value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value)}
-                            className="appearance-none bg-bordeaux-dark/50 border border-gold/30 text-champagne px-4 py-2 pr-10 focus:outline-none focus:border-gold cursor-pointer"
-                        >
-                            <option value="popular">Les plus populaires</option>
-                            <option value="new">Nouveautés</option>
-                            <option value="rating">Meilleures notes</option>
-                            <option value="price-asc">Prix croissant</option>
-                            <option value="price-desc">Prix décroissant</option>
-                        </select>
-                        <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gold/60 pointer-events-none" />
-                    </div>
-                </div>
+    return sorted;
+  };
 
-                <div className="flex flex-col md:flex-row gap-8">
-                    {/* Filtres (desktop) */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="hidden md:block w-64 space-y-6"
-                    >
-                        <div className="border border-gold/10 p-6">
-                            <h3 className="text-lg font-serif text-champagne mb-4">Prix</h3>
-                            <div className="space-y-4">
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="700000"
-                                    step="10000"
-                                    value={priceRange[1]}
-                                    onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                                    className="w-full accent-gold"
-                                />
-                                <div className="flex justify-between text-sm text-champagne/60">
-                                    <span>{priceRange[0]} Ar</span>
-                                    <span>{priceRange[1]} Ar</span>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
+  const sortedProducts = getSortedProducts();
 
-                    {/* Filtres (mobile) */}
-                    <AnimatePresence>
-                        {showFilters && (
-                            <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: 'auto' }}
-                                exit={{ opacity: 0, height: 0 }}
-                                className="md:hidden w-full border border-gold/10 p-6 mb-4"
-                            >
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="text-lg font-serif text-champagne">Filtres</h3>
-                                    <button onClick={() => setShowFilters(false)}>
-                                        <X size={20} className="text-champagne/60 hover:text-gold" />
-                                    </button>
-                                </div>
-                                <div className="space-y-4">
-                                    <h4 className="text-sm text-champagne/80">Prix maximum</h4>
-                                    <input
-                                        type="range"
-                                        min="0"
-                                    max="700000"
-                                    step="10000"
-                                        value={priceRange[1]}
-                                        onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                                        className="w-full accent-gold"
-                                    />
-                                    <div className="flex justify-between text-sm text-champagne/60">
-                                        <span>{priceRange[0]} Ar</span>
-                                        <span>{priceRange[1]} Ar</span>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+  const openQuickView = (product: Product) => {
+    setSelectedProduct(product);
+    document.body.style.overflow = 'hidden';
+  };
 
-                    {/* Grille des produits */}
-                    <div className="flex-1">
-                        {filteredProducts.length === 0 ? (
-                            <div className="text-center py-16">
-                                <p className="text-champagne/60">Aucun produit trouvé</p>
-                            </div>
-                        ) : (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {filteredProducts.map((product, index) => (
-                                    <motion.div
-                                        key={product.id}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: index * 0.05 }}
-                                        className="group relative"
-                                    >
-                                        <div className="relative bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 hover:border-gold/30 transition-all duration-500">
-                                            {/* Badges */}
-                                            <div className="absolute top-4 left-4 z-10 flex flex-col space-y-2">
-                                                {product.isNew && (
-                                                    <span className="bg-gold text-bordeaux-dark text-xs px-3 py-1 uppercase tracking-wider">
-                                                        Nouveau
-                                                    </span>
-                                                )}
-                                                {product.originalPrice && (
-                                                    <span className="bg-champagne text-bordeaux-dark text-xs px-3 py-1 uppercase tracking-wider">
-                                                        -{Math.round((1 - product.price / product.originalPrice) * 100)}%
-                                                    </span>
-                                                )}
-                                            </div>
+  const closeQuickView = () => {
+    setSelectedProduct(null);
+    document.body.style.overflow = 'unset';
+  };
 
-                                            {/* Bouton favoris */}
-                                            <button
-                                                onClick={() => isFavorite(product.id)
-                                                    ? removeFromFavorites(product.id)
-                                                    : addToFavorites({
-                                                        id: product.id,
-                                                        name: product.name,
-                                                        price: product.price,
-                                                        image: product.image,
-                                                        category: product.category,
-                                                        slug: product.slug
-                                                    })
-                                                }
-                                                className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold bg-bordeaux-dark/50 backdrop-blur-sm transition-all duration-300"
-                                            >
-                                                <Heart
-                                                    size={18}
-                                                    className={isFavorite(product.id) ? 'fill-gold text-gold' : 'text-champagne'}
-                                                />
-                                            </button>
+  const handleAddToCart = (product: Product) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1
+    });
+  };
 
-                                            {/* Image */}
-                                            <Link to={`/produit/${product.slug}`}>
-                                                <div className="relative aspect-3/4 overflow-hidden">
-                                                    <img
-                                                        src={product.image}
-                                                        alt={product.name}
-                                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                                    />
-                                                    <div className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
-                                                </div>
-                                            </Link>
+  const handleToggleFavorite = (product: Product) => {
+    if (isFavorite(product.id)) {
+      removeFromFavorites(product.id);
+    } else {
+      addToFavorites({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+        slug: product.slug
+      });
+    }
+  };
 
-                                            {/* Informations */}
-                                            <div className="p-4">
-                                                <Link to={`/produit/${product.slug}`}>
-                                                    <h3 className="text-lg font-serif text-champagne hover:text-gold transition-colors line-clamp-1">
-                                                        {product.name}
-                                                    </h3>
-                                                </Link>
+  // Toutes les tailles disponibles
+  const allSizes = ['XS', 'S', 'M', 'L', 'XL', '34', '36', '38', '40', '42', '44'];
+  
+  // Toutes les couleurs disponibles
+  const allColors = [
+    { name: 'Noir', value: '#000000' },
+    { name: 'Blanc', value: '#FFFFFF' },
+    { name: 'Rouge', value: '#C41E3A' },
+    { name: 'Bordeaux', value: '#800020' },
+    { name: 'Or', value: '#D4AF37' },
+    { name: 'Bleu', value: '#1E3A8A' },
+    { name: 'Vert', value: '#0B4F6C' },
+    { name: 'Beige', value: '#E8DCC6' },
+    { name: 'Marron', value: '#8B4513' },
+    { name: 'Rose', value: '#FFB6C1' }
+  ];
 
-                                                <div className="flex items-center justify-between mt-2">
-                                                    <div className="flex items-center space-x-2">
-                                                        <span className="text-xl font-serif text-gold">
-                                                            {product.price} Ar
-                                                        </span>
-                                                        {product.originalPrice && (
-                                                            <span className="text-sm text-champagne/50 line-through">
-                                                                {product.originalPrice} Ar
-                                                            </span>
-                                                        )}
-                                                    </div>
-
-                                                    <div className="flex items-center space-x-1">
-                                                        <Star size={14} className="fill-gold text-gold" />
-                                                        <span className="text-xs text-champagne/70">
-                                                            {product.rating}
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <button
-                                                    onClick={() => handleAddToCart(product)}
-                                                    className="w-full mt-4 bg-gold text-bordeaux-dark py-2 text-sm uppercase tracking-wider font-medium hover:bg-gold-light transition-colors"
-                                                >
-                                                    Ajouter au panier
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </div>
+  const toggleSize = (size: string) => {
+    setSelectedSizes(prev =>
+      prev.includes(size) ? prev.filter(s => s !== size) : [...prev, size]
     );
+  };
+
+  const toggleColor = (color: string) => {
+    setSelectedColors(prev =>
+      prev.includes(color) ? prev.filter(c => c !== color) : [...prev, color]
+    );
+  };
+
+  const resetFilters = () => {
+    setPriceRange([0, 700000]);
+    setSelectedSizes([]);
+    setSelectedColors([]);
+    setSortBy('default');
+  };
+
+  // Nom de la catégorie affiché
+  const categoryName = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : '';
+
+  return (
+    <>
+      <section className="relative py-24 md:py-32 overflow-hidden bg-linear-to-b from-bordeaux to-bordeaux-dark">
+        <div className="container-custom relative z-10">
+          {/* En-tête */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-4xl md:text-5xl font-serif text-champagne mb-4">
+              {categoryName}
+            </h1>
+            <div className="w-24 h-px bg-gold/40 mx-auto mb-4" />
+            <p className="text-champagne/60">
+              {sortedProducts.length} produits
+            </p>
+          </motion.div>
+
+          {/* Barre de filtres et tri */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8 pb-4 border-b border-gold/20">
+            {/* Bouton filtres mobile */}
+            <button
+              onClick={() => setFilterOpen(!filterOpen)}
+              className="lg:hidden flex items-center space-x-2 px-4 py-2 border border-gold/30 text-champagne"
+            >
+              <Filter size={18} />
+              <span>Filtres</span>
+              <ChevronDown size={16} className={`transition-transform ${filterOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Filtres - Desktop toujours visible, Mobile conditionnel */}
+            <div className={`${filterOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row gap-6 w-full lg:w-auto`}>
+              {/* Filtre prix */}
+              <div className="space-y-2">
+                <label className="text-xs text-champagne/60 uppercase tracking-wider">Prix</label>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs text-champagne">{priceRange[0].toLocaleString()} Ar</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="700000"
+                    step="10000"
+                    value={priceRange[1]}
+                    onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                    className="w-32 accent-gold"
+                  />
+                  <span className="text-xs text-champagne">{priceRange[1].toLocaleString()} Ar</span>
+                </div>
+              </div>
+
+              {/* Filtre tailles */}
+              <div className="space-y-2">
+                <label className="text-xs text-champagne/60 uppercase tracking-wider">Tailles</label>
+                <div className="flex flex-wrap gap-2">
+                  {allSizes.slice(0, 6).map(size => (
+                    <button
+                      key={size}
+                      onClick={() => toggleSize(size)}
+                      className={`px-3 py-1 text-xs border transition-all ${
+                        selectedSizes.includes(size)
+                          ? 'border-gold bg-gold/20 text-gold'
+                          : 'border-gold/30 text-champagne/70 hover:border-gold'
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Filtre couleurs */}
+              <div className="space-y-2">
+                <label className="text-xs text-champagne/60 uppercase tracking-wider">Couleurs</label>
+                <div className="flex flex-wrap gap-2">
+                  {allColors.slice(0, 6).map(color => (
+                    <button
+                      key={color.value}
+                      onClick={() => toggleColor(color.value)}
+                      className={`w-6 h-6 rounded-full border-2 transition-all ${
+                        selectedColors.includes(color.value)
+                          ? 'border-gold scale-110'
+                          : 'border-transparent hover:scale-110'
+                      }`}
+                      style={{ backgroundColor: color.value }}
+                      title={color.name}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Reset filtres */}
+              <button
+                onClick={resetFilters}
+                className="text-xs text-champagne/50 hover:text-gold transition-colors"
+              >
+                Réinitialiser
+              </button>
+            </div>
+
+            {/* Tri */}
+            <div className="flex items-center space-x-2">
+              <label className="text-xs text-champagne/60 uppercase tracking-wider">Trier par</label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="bg-transparent border border-gold/30 px-3 py-1 text-champagne text-sm focus:outline-none focus:border-gold"
+              >
+                {Object.entries(sortOptions).map(([value, label]) => (
+                  <option key={value} value={value} className="bg-bordeaux">
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Grille des produits */}
+          {sortedProducts.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-champagne/60">Aucun produit trouvé</p>
+              <button
+                onClick={resetFilters}
+                className="mt-4 text-gold hover:underline"
+              >
+                Réinitialiser les filtres
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+              {sortedProducts.map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="group relative"
+                >
+                  <div className="relative bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 hover:border-gold/30 transition-all duration-500">
+                    {/* Badges */}
+                    <div className="absolute top-4 left-4 z-10 flex flex-col space-y-2">
+                      {product.isNew && (
+                        <span className="bg-gold text-bordeaux-dark text-xs px-3 py-1 uppercase tracking-wider">
+                          Nouveau
+                        </span>
+                      )}
+                      {product.originalPrice && (
+                        <span className="bg-champagne text-bordeaux-dark text-xs px-3 py-1 uppercase tracking-wider">
+                          -{Math.round((1 - product.price / product.originalPrice) * 100)}%
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Bouton favoris */}
+                    <motion.button
+                      onClick={() => handleToggleFavorite(product)}
+                      className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold bg-bordeaux-dark/50 backdrop-blur-sm transition-all duration-300"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Heart
+                        size={18}
+                        className={`transition-colors ${isFavorite(product.id) ? 'fill-gold text-gold' : 'text-champagne'}`}
+                      />
+                    </motion.button>
+
+                    {/* Image */}
+                    <div className="relative aspect-3/4 overflow-hidden cursor-pointer">
+                      <motion.img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.8 }}
+                        onClick={() => openQuickView(product)}
+                      />
+
+                      {/* Boutons d'action au hover */}
+                      <div className="absolute inset-x-0 bottom-0 p-4 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-500">
+                        <div className="flex space-x-2">
+                          <motion.button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleAddToCart(product);
+                            }}
+                            className="flex-1 bg-gold text-bordeaux-dark py-3 text-sm uppercase tracking-wider font-medium flex items-center justify-center space-x-2 hover:bg-gold-light transition-colors"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <ShoppingBag size={16} />
+                            <span>Ajouter</span>
+                          </motion.button>
+                          <motion.button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              openQuickView(product);
+                            }}
+                            className="w-12 bg-champagne/20 backdrop-blur-sm border border-gold/30 text-champagne flex items-center justify-center hover:border-gold transition-colors"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <Eye size={16} />
+                          </motion.button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Informations produit */}
+                    <div className="p-4">
+                      <span className="text-xs text-gold/70 uppercase tracking-wider">
+                        {product.category}
+                      </span>
+                      <h3 className="text-lg font-serif text-champagne hover:text-gold transition-colors mt-1 mb-2 line-clamp-1">
+                        {product.name}
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xl font-serif text-gold">
+                            {product.price.toLocaleString()} Ar
+                          </span>
+                          {product.originalPrice && (
+                            <span className="text-sm text-champagne/50 line-through">
+                              {product.originalPrice.toLocaleString()} Ar
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Star size={14} className="fill-gold text-gold" />
+                          <span className="text-xs text-champagne/70">{product.rating}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Modal Quick View */}
+      <ProductQuickView
+        product={selectedProduct}
+        isOpen={!!selectedProduct}
+        onClose={closeQuickView}
+      />
+    </>
+  );
 };
 
 export default Category;
