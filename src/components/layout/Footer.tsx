@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { 
-  Instagram, 
-  Facebook, 
-  Mail, 
-  Phone, 
+import {
+  Instagram,
+  Facebook,
+  Mail,
+  Phone,
   MapPin,
   ChevronRight,
   CreditCard,
@@ -19,12 +19,6 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const navigation = {
-    marque: [
-      { nom: 'Notre histoire', href: '/histoire' },
-      { nom: 'Nos boutiques', href: '/boutiques' },
-      { nom: 'Carrières', href: '/carrieres' },
-      { nom: 'Presse', href: '/presse' },
-    ],
     collections: [
       { nom: 'Robes', href: '/robes' },
       { nom: 'Accessoires', href: '/accessoires' },
@@ -58,19 +52,15 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-linear-to-b from-bordeaux to-bordeaux-dark pt-16 pb-8 overflow-hidden">
-      {/* Ligne dorée décorative en haut */}
       <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold/40 to-transparent" />
 
-      {/* Motif de fond subtil */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-64 h-64 bg-gold rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold rounded-full blur-3xl" />
       </div>
 
       <div className="container-custom relative z-10">
-        {/* Navigation principale */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Logo et description - centré sur mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +72,7 @@ const Footer = () => {
               <img src={logo} alt="Eloria" className="h-12 w-auto mx-auto md:mx-0" />
             </motion.div>
             <p className="text-champagne/60 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
-              Depuis 2020, Eloria habille les femmes avec élégance et raffinement. 
+              Depuis 2020, Eloria habille les femmes avec élégance et raffinement.
               Des pièces uniques pour des moments exceptionnels.
             </p>
             <div className="flex space-x-4 pt-4 justify-center md:justify-start">
@@ -106,39 +96,11 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Navigation - Marque - centré sur mobile */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-center md:text-left"
-          >
-            <h6 className="text-gold text-sm uppercase tracking-[0.2em] mb-6 relative inline-block">
-              La Marque
-              <span className="absolute -bottom-2 left-0 right-0 md:left-0 md:right-auto w-8 h-px bg-gold/60 mx-auto md:mx-0" />
-            </h6>
-            <ul className="space-y-3">
-              {navigation.marque.map((item) => (
-                <li key={item.nom}>
-                  <a
-                    href={item.href}
-                    className="text-champagne/70 hover:text-gold text-sm transition-colors duration-300 flex items-center justify-center md:justify-start group"
-                  >
-                    <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 mr-2 text-gold transition-all -translate-x-2 group-hover:translate-x-0 hidden md:block" />
-                    {item.nom}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Navigation - Collections - centré sur mobile */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center md:text-left"
           >
             <h6 className="text-gold text-sm uppercase tracking-[0.2em] mb-6 relative inline-block">
@@ -160,12 +122,11 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Navigation - Service Client - centré sur mobile */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center md:text-left"
           >
             <h6 className="text-gold text-sm uppercase tracking-[0.2em] mb-6 relative inline-block">
@@ -235,7 +196,6 @@ const Footer = () => {
           </div>
         </motion.div>
 
-        {/* Bottom bar - centré sur mobile */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
