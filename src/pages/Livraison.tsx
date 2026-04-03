@@ -4,25 +4,122 @@ import { Link } from 'react-router-dom';
 import {
     MapPin,
     Clock,
-    Package,
-    Truck,
     CheckCircle,
-    Award,
     ChevronDown,
     X,
     Search
 } from 'lucide-react';
-import {
-    deliveryMethods,
-    deliveryCountries,
-    deliveryFAQ,
-    deliveryStats
-} from '../data/livraisonData';
 
 const Livraison = () => {
-    const [selectedCountry, setSelectedCountry] = useState('france');
     const [openFAQ, setOpenFAQ] = useState<number[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
+
+    const deliveryMethods = [
+        {
+            id: 1,
+            name: "Livraison Standard",
+            icon: "🚚",
+            description: "Livraison à domicile ou en point relais",
+            delay: "3-5 jours ouvrés",
+            price: 9900,
+            freeFrom: 150000,
+            isRecommended: true,
+            isExpress: false,
+            features: [
+                "Suivi de colis en temps réel",
+                "Livraison du lundi au samedi",
+                "SMS et email de confirmation"
+            ]
+        },
+        {
+            id: 2,
+            name: "Livraison Express",
+            icon: "⚡",
+            description: "Livraison prioritaire à domicile",
+            delay: "24-48h",
+            price: 19900,
+            freeFrom: null,
+            isRecommended: false,
+            isExpress: true,
+            features: [
+                "Livraison le jour même possible",
+                "Créneau horaire au choix",
+                "Appel du livreur 30min avant"
+            ]
+        },
+        {
+            id: 3,
+            name: "Point Relais",
+            icon: "📦",
+            description: "Retrait en point relais",
+            delay: "3-5 jours ouvrés",
+            price: 5900,
+            freeFrom: 100000,
+            isRecommended: false,
+            isExpress: false,
+            features: [
+                "Plus de 500 points relais à Madagascar",
+                "Retrait 7j/7",
+                "Gratuit dès 100 000 Ar"
+            ]
+        },
+        {
+            id: 4,
+            name: "Retrait en Boutique",
+            icon: "🏪",
+            description: "Retrait gratuit en boutique",
+            delay: "24h",
+            price: 0,
+            freeFrom: null,
+            isRecommended: true,
+            isExpress: false,
+            features: [
+                "Retrait à Antananarivo",
+                "Essayage sur place",
+                "Paiement sur place possible"
+            ]
+        }
+    ];
+
+    const deliveryFAQ = [
+        {
+            id: 1,
+            question: "Quels sont les délais de livraison à Madagascar ?",
+            answer: "Les délais de livraison varient selon le mode choisi : Livraison Standard : 3-5 jours ouvrés, Livraison Express : 24-48h, Point Relais : 3-5 jours ouvrés. Les commandes sont préparées sous 24h."
+        },
+        {
+            id: 2,
+            question: "La livraison est-elle offerte à Madagascar ?",
+            answer: "Oui, la livraison standard est offerte dès 150 000 Ar d'achat. La livraison en point relais est offerte dès 100 000 Ar d'achat."
+        },
+        {
+            id: 3,
+            question: "Quels sont les modes de livraison disponibles ?",
+            answer: "Nous proposons 4 modes de livraison à Madagascar : Livraison Standard à domicile, Livraison Express, Retrait en Point Relais et Retrait en boutique à Antananarivo."
+        },
+        {
+            id: 4,
+            question: "Puis-je suivre ma commande ?",
+            answer: "Oui, vous recevrez un email avec un numéro de suivi dès l'expédition de votre commande. Vous pouvez suivre votre colis en temps réel sur notre site ou sur le site du transporteur."
+        },
+        {
+            id: 5,
+            question: "Que faire si je ne suis pas présent lors de la livraison ?",
+            answer: "Si vous n'êtes pas présent, le livreur déposera un avis de passage. Vous pourrez alors récupérer votre colis dans le point relais indiqué ou reprogrammer une livraison."
+        },
+        {
+            id: 6,
+            question: "Livrez-vous dans toutes les régions de Madagascar ?",
+            answer: "Oui, nous livrons dans toutes les régions de Madagascar : Antananarivo, Toamasina, Mahajanga, Fianarantsoa, Antsiranana, Toliara et toutes les autres villes."
+        }
+    ];
+
+    const deliveryStats = {
+        satisfiedCustomers: 98,
+        onTimeDelivery: 95,
+        citiesServed: 25,
+        pointsRelais: 500
+    };
 
     const toggleFAQ = (id: number) => {
         setOpenFAQ(prev =>
@@ -37,76 +134,49 @@ const Livraison = () => {
         item.answer.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const selectedCountryData = deliveryCountries.find(c => c.id === selectedCountry);
-
-    const newLocal = "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-[800px] border border-gold/5 rounded-full";
-    const newLocal_1 = "bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 p-6 text-center";
-    const newLocal_2 = "bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 p-6 text-center";
-    const newLocal_3 = "bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 p-6 text-center";
     return (
         <div className="min-h-screen bg-linear-to-b from-bordeaux to-bordeaux-dark pt-32 pb-16">
-            {/* Éléments décoratifs */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-40 left-10 w-64 h-64 border border-gold/5 rounded-full" />
                 <div className="absolute bottom-40 right-10 w-96 h-96 border border-gold/5 rounded-full" />
-                <div className={newLocal} />
-
-                {/* Motif décoratif */}
-                <div className="absolute top-20 right-20 text-gold/5 text-[200px] font-serif">🚚</div>
-                <div className="absolute bottom-20 left-20 text-gold/5 text-[200px] font-serif">📦</div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 border border-gold/5 rounded-full" />
             </div>
 
             <div className="container-custom relative z-10">
-                {/* Fil d'Ariane */}
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center space-x-3 text-sm mb-8"
-                >
-                    <Link to="/" className="text-champagne/50 hover:text-gold transition-colors">Accueil</Link>
-                    <span className="text-champagne/30">/</span>
-                    <span className="text-gold">Livraison</span>
-                </motion.div>
-
-                {/* En-tête */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-12"
                 >
                     <h1 className="text-5xl md:text-6xl font-serif text-champagne mb-4">
-                        Livraison <span className="text-gold">premium</span>
+                        Livraison <span className="text-gold">Madagascar</span>
                     </h1>
-
-                    <div className="flex justify-center items-center space-x-2 mb-8">
-                        <div className="w-16 h-px bg-gold/40" />
-                        <Award size={20} className="text-gold/60" />
-                        <div className="w-16 h-px bg-gold/40" />
+                    <div className="flex items-center justify-center space-x-2 mb-4">
+                        <MapPin size={20} className="text-gold" />
+                        <span className="text-champagne/70">Livraison dans toute l'île</span>
                     </div>
-
                     <p className="text-lg text-champagne/70 max-w-2xl mx-auto">
-                        Une livraison à la hauteur de vos attentes. Rapide, soignée et sécurisée, partout dans le monde.
+                        Une livraison rapide et fiable, adaptée à vos besoins, partout à Madagascar.
                     </p>
                 </motion.div>
 
-                {/* Statistiques */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
                     className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
                 >
-                    <div className={newLocal_1}>
+                    <div className="bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 p-6 text-center">
                         <div className="text-3xl font-serif text-gold mb-2">{deliveryStats.satisfiedCustomers}%</div>
                         <p className="text-xs text-champagne/60">Clients satisfaits</p>
                     </div>
-                    <div className={newLocal_2}>
+                    <div className="bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 p-6 text-center">
                         <div className="text-3xl font-serif text-gold mb-2">{deliveryStats.onTimeDelivery}%</div>
                         <p className="text-xs text-champagne/60">Livraisons à l'heure</p>
                     </div>
-                    <div className={newLocal_3}>
-                        <div className="text-3xl font-serif text-gold mb-2">{deliveryStats.countriesServed}</div>
-                        <p className="text-xs text-champagne/60">Pays desservis</p>
+                    <div className="bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 p-6 text-center">
+                        <div className="text-3xl font-serif text-gold mb-2">{deliveryStats.citiesServed}</div>
+                        <p className="text-xs text-champagne/60">Villes desservies</p>
                     </div>
                     <div className="bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 p-6 text-center">
                         <div className="text-3xl font-serif text-gold mb-2">{deliveryStats.pointsRelais}+</div>
@@ -114,7 +184,6 @@ const Livraison = () => {
                     </div>
                 </motion.div>
 
-                {/* Modes de livraison */}
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -134,24 +203,21 @@ const Livraison = () => {
                             className="group relative"
                         >
                             <div className={`relative bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border transition-all duration-500 p-6 h-full ${method.isRecommended
-                                    ? 'border-gold shadow-lg shadow-gold/10'
-                                    : 'border-gold/10 hover:border-gold/30'
+                                ? 'border-gold shadow-lg shadow-gold/10'
+                                : 'border-gold/10 hover:border-gold/30'
                                 }`}>
-                                {/* Badge recommandé */}
                                 {method.isRecommended && (
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-bordeaux-dark text-xs px-3 py-1 uppercase tracking-wider whitespace-nowrap">
                                         Recommandé
                                     </div>
                                 )}
 
-                                {/* Badge express */}
                                 {method.isExpress && (
                                     <div className="absolute top-4 right-4 bg-gold/20 border border-gold/30 text-gold text-[10px] px-2 py-1 uppercase tracking-wider">
                                         Express
                                     </div>
                                 )}
 
-                                {/* Icône */}
                                 <div className="text-4xl mb-4 text-center">{method.icon}</div>
 
                                 <h3 className="text-xl font-serif text-champagne mb-2 group-hover:text-gold transition-colors">
@@ -169,7 +235,7 @@ const Livraison = () => {
                                     </div>
                                     <div className="text-right">
                                         <span className="text-xl font-serif text-gold">
-                                            {method.price.toLocaleString()} Ar
+                                            {method.price === 0 ? 'Gratuit' : `${method.price.toLocaleString()} Ar`}
                                         </span>
                                     </div>
                                 </div>
@@ -180,7 +246,6 @@ const Livraison = () => {
                                     </p>
                                 )}
 
-                                {/* Caractéristiques */}
                                 <ul className="space-y-2 mb-4">
                                     {method.features.map((feature, i) => (
                                         <li key={i} className="flex items-start space-x-2 text-xs">
@@ -194,110 +259,6 @@ const Livraison = () => {
                     ))}
                 </div>
 
-                {/* Livraison internationale */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="mb-16"
-                >
-                    <h2 className="text-3xl md:text-4xl font-serif text-champagne text-center mb-8">
-                        Livraison <span className="text-gold">internationale</span>
-                    </h2>
-
-                    {/* Sélecteur de pays */}
-                    <div className="flex flex-wrap justify-center gap-3 mb-8">
-                        {deliveryCountries.map((country) => (
-                            <button
-                                key={country.id}
-                                onClick={() => setSelectedCountry(country.id)}
-                                className={`px-6 py-3 text-sm uppercase tracking-wider transition-all duration-300 flex items-center space-x-2 ${selectedCountry === country.id
-                                        ? 'bg-gold text-bordeaux-dark'
-                                        : 'border border-gold/30 text-champagne/70 hover:border-gold hover:text-gold'
-                                    }`}
-                            >
-                                <span>{country.flag}</span>
-                                <span>{country.name}</span>
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Tableau des tarifs */}
-                    {selectedCountryData && (
-                        <motion.div
-                            key={selectedCountry}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="bg-linear-to-b from-gold/5 to-transparent backdrop-blur-sm border border-gold/10 p-6 md:p-8"
-                        >
-                            <div className="flex items-center space-x-3 mb-6">
-                                <span className="text-3xl">{selectedCountryData.flag}</span>
-                                <h3 className="text-xl font-serif text-champagne">{selectedCountryData.name}</h3>
-                            </div>
-
-                            <div className="grid md:grid-cols-2 gap-6">
-                                {/* Standard */}
-                                <div className="border border-gold/20 p-6">
-                                    <div className="flex items-center space-x-2 mb-3">
-                                        <Package size={18} className="text-gold/60" />
-                                        <h4 className="text-sm uppercase tracking-wider text-champagne">Standard</h4>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-champagne/60">Délai</span>
-                                            <span className="text-champagne">{selectedCountryData.standardDelay}</span>
-                                        </div>
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-champagne/60">Tarif</span>
-                                            <span className="text-xl font-serif text-gold">
-                                                {selectedCountryData.standardPrice.toLocaleString()} Ar
-                                            </span>
-                                        </div>
-                                        {selectedCountryData.freeFrom && (
-                                            <p className="text-xs text-champagne/40 mt-2">
-                                                Offerte dès {selectedCountryData.freeFrom.toLocaleString()} Ar
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* Express */}
-                                <div className="border border-gold/20 p-6">
-                                    <div className="flex items-center space-x-2 mb-3">
-                                        <Truck size={18} className="text-gold/60" />
-                                        <h4 className="text-sm uppercase tracking-wider text-champagne">Express</h4>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-champagne/60">Délai</span>
-                                            <span className="text-champagne">{selectedCountryData.expressDelay}</span>
-                                        </div>
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-champagne/60">Tarif</span>
-                                            <span className="text-xl font-serif text-gold">
-                                                {selectedCountryData.expressPrice.toLocaleString()} Ar
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Zones desservies */}
-                            <div className="mt-6 pt-6 border-t border-gold/10">
-                                <h4 className="text-sm uppercase tracking-wider text-champagne mb-3">Zones desservies</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {selectedCountryData.zones.map((zone, i) => (
-                                        <span key={i} className="text-xs bg-gold/10 border border-gold/20 px-3 py-1 text-champagne/70">
-                                            {zone}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </motion.div>
-
-                {/* FAQ Livraison */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -305,10 +266,9 @@ const Livraison = () => {
                     className="mb-16"
                 >
                     <h2 className="text-3xl md:text-4xl font-serif text-champagne text-center mb-8">
-                        Questions fréquentes sur la <span className="text-gold">livraison</span>
+                        Questions fréquentes sur la <span className="text-gold">livraison à Madagascar</span>
                     </h2>
 
-                    {/* Barre de recherche FAQ */}
                     <div className="max-w-md mx-auto relative mb-8">
                         <input
                             type="text"
@@ -376,7 +336,6 @@ const Livraison = () => {
                     </div>
                 </motion.div>
 
-                {/* Points relais */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -384,9 +343,9 @@ const Livraison = () => {
                     className="bg-linear-to-b from-gold/5 to-transparent border border-gold/20 p-8 text-center"
                 >
                     <MapPin size={32} className="mx-auto text-gold/60 mb-4" />
-                    <h3 className="text-xl font-serif text-champagne mb-2">Plus de 5000 points relais</h3>
+                    <h3 className="text-xl font-serif text-champagne mb-2">Plus de 500 points relais à Madagascar</h3>
                     <p className="text-champagne/70 mb-6">
-                        Retirez votre commande où et quand vous voulez
+                        Retirez votre commande où et quand vous voulez dans toute l'île
                     </p>
                     <Link
                         to="/contact"
@@ -397,7 +356,6 @@ const Livraison = () => {
                     </Link>
                 </motion.div>
 
-                {/* Liens utiles */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
