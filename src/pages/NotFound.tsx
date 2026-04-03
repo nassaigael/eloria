@@ -1,8 +1,4 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import {
-    Home,
-} from 'lucide-react';
 import {
     notFoundMessages,
 } from '../data/notFoundData';
@@ -39,19 +35,7 @@ const NotFound = () => {
 
             <div className="container-custom relative z-10">
                 <div className="max-w-4xl mx-auto">
-                    {/* Fil d'Ariane */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center space-x-3 text-sm mb-8"
-                    >
-                        <Link to="/" className="text-champagne/50 hover:text-gold transition-colors flex items-center space-x-1">
-                            <Home size={14} />
-                            <span>Accueil</span>
-                        </Link>
-                        <span className="text-champagne/30">/</span>
-                        <span className="text-gold">404</span>
-                    </motion.div>
+                    
 
                     {/* Contenu principal */}
                     <div className="text-center mb-12">
