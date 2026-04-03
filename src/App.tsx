@@ -20,6 +20,7 @@ import NotFound from './pages/NotFound';
 import MentionsLegales from './pages/MentionsLegales';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
+import CookiesPolicy from './pages/CookiesPolicy';
 
 function App() {
   return (
@@ -47,7 +48,8 @@ function App() {
                   <Route path="/panier" element={<Cart />} />
                   <Route path="/mentions-legales" element={<MentionsLegales />} />
                   <Route path="/confidentialite" element={<PrivacyPolicy />} />
-                  <Route path="/cgv" element={<TermsAndConditions />} />                  {/* <Route path="/cookies" element={<Cookies />} /> */}
+                  <Route path="/cgv" element={<TermsAndConditions />} />
+                  <Route path="/cookies" element={<CookiesPolicy />} />                 {/* <Route path="/cookies" element={<Cookies />} /> */}
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/livraison" element={<Livraison />} />
