@@ -117,16 +117,6 @@ const Shop = () => {
                 </div>
 
                 <div className="container-custom relative z-10">
-                    {/* Fil d'Ariane */}
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center space-x-3 text-sm mb-8"
-                    >
-                        <Link to="/" className="text-champagne/50 hover:text-gold transition-colors">Accueil</Link>
-                        <span className="text-champagne/30">/</span>
-                        <span className="text-gold">Boutique</span>
-                    </motion.div>
 
                     {/* En-tête */}
                     <motion.div
@@ -134,10 +124,9 @@ const Shop = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="mb-12"
                     >
-                        <h1 className="text-5xl md:text-6xl font-serif text-champagne mb-4">
+                        <h1 className="text-5xl md:text-6xl font-serif text-champagne text-center mb-4">
                             Toute la <span className="text-gold">collection</span>
                         </h1>
-                        <div className="w-24 h-px bg-gold/40" />
                     </motion.div>
 
                     {/* Barre d'outils */}
