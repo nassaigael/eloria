@@ -260,7 +260,7 @@ const Products = () => {
                   transition: { duration: 0.4 }
                 }}
               />
-              <span className="relative z-10 flex items-center group-hover:text-bordeaux-dark transition-colors duration-300">
+              <span className="relative z-10 flex items-center group-hover:text-white transition-colors duration-300">
                 Découvrir toute la collection
                 <motion.span
                   className="ml-3"

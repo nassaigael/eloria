@@ -198,7 +198,7 @@ const Categories = () => {
                 transition: { duration: 0.4 }
               }}
             />
-            <span className="relative z-10 flex items-center group-hover:text-bordeaux-dark transition-colors duration-300">
+            <span className="relative z-10 flex items-center group-hover:text-white transition-colors duration-300">
               Explorer toutes nos collections
               <motion.span
                 className="ml-3"
