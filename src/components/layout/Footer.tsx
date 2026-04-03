@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   Instagram,
   Facebook,
@@ -12,7 +13,6 @@ import {
   Shield
 } from 'lucide-react';
 
-// Import du logo
 import logo from '../../assets/images/logo.jpg';
 
 const Footer = () => {
@@ -20,10 +20,10 @@ const Footer = () => {
 
   const navigation = {
     collections: [
-      { nom: 'Robes', href: '/robes' },
-      { nom: 'Accessoires', href: '/accessoires' },
-      { nom: 'Mariage', href: '/mariage' },
-      { nom: 'Soirée', href: '/soiree' },
+      { nom: 'Robes', href: '/categorie/robes' },
+      { nom: 'Accessoires', href: '/categorie/accessoires' },
+      { nom: 'Mariage', href: '/categorie/mariage' },
+      { nom: 'Soirée', href: '/categorie/soiree' },
     ],
     service: [
       { nom: 'Contact', href: '/contact' },
@@ -69,7 +69,9 @@ const Footer = () => {
             className="space-y-4 text-center md:text-left"
           >
             <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
-              <img src={logo} alt="Eloria" className="h-12 w-auto mx-auto md:mx-0" />
+              <Link to="/">
+                <img src={logo} alt="Eloria" className="h-12 w-auto mx-auto md:mx-0" />
+              </Link>
             </motion.div>
             <p className="text-champagne/60 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
               Depuis 2020, Eloria habille les femmes avec élégance et raffinement.
@@ -110,13 +112,13 @@ const Footer = () => {
             <ul className="space-y-3">
               {navigation.collections.map((item) => (
                 <li key={item.nom}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className="text-champagne/70 hover:text-gold text-sm transition-colors duration-300 flex items-center justify-center md:justify-start group"
                   >
                     <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 mr-2 text-gold transition-all -translate-x-2 group-hover:translate-x-0 hidden md:block" />
                     {item.nom}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -136,20 +138,19 @@ const Footer = () => {
             <ul className="space-y-3">
               {navigation.service.map((item) => (
                 <li key={item.nom}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className="text-champagne/70 hover:text-gold text-sm transition-colors duration-300 flex items-center justify-center md:justify-start group"
                   >
                     <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 mr-2 text-gold transition-all -translate-x-2 group-hover:translate-x-0 hidden md:block" />
                     {item.nom}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </motion.div>
         </div>
 
-        {/* Contact et informations - centré sur mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -157,7 +158,6 @@ const Footer = () => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 border-y border-gold/10"
         >
-          {/* Contact - centré */}
           <div className="space-y-3 text-center lg:text-left">
             <h6 className="text-champagne text-sm uppercase tracking-wider mb-4">Contactez-nous</h6>
             <a href="mailto:contact@eloria.com" className="flex items-center justify-center lg:justify-start text-champagne/70 hover:text-gold transition-colors group">
@@ -174,7 +174,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Horaires - centré */}
           <div className="space-y-3 text-center lg:text-left">
             <h6 className="text-champagne text-sm uppercase tracking-wider mb-4">Horaires d'ouverture</h6>
             <p className="text-sm text-champagne/70">Lundi - Vendredi : 9h - 19h</p>
@@ -182,7 +181,6 @@ const Footer = () => {
             <p className="text-sm text-champagne/70">Dimanche : Fermé</p>
           </div>
 
-          {/* Paiements sécurisés - centré */}
           <div className="space-y-4 text-center lg:text-left">
             <h6 className="text-champagne text-sm uppercase tracking-wider mb-4">Paiements sécurisés</h6>
             <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto lg:mx-0">
@@ -206,13 +204,13 @@ const Footer = () => {
           <p className="text-center md:text-left">© {currentYear} Eloria. Tous droits réservés.</p>
           <div className="flex flex-wrap justify-center space-x-6 mt-4 md:mt-0">
             {navigation.legal.map((item) => (
-              <a
+              <Link
                 key={item.nom}
-                href={item.href}
+                to={item.href}
                 className="hover:text-gold transition-colors"
               >
                 {item.nom}
-              </a>
+              </Link>
             ))}
           </div>
         </motion.div>
