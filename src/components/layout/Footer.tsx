@@ -170,7 +170,7 @@ const Footer = () => {
             </a>
             <div className="flex items-start justify-center lg:justify-start text-champagne/70">
               <MapPin size={16} className="mr-3 text-gold/60 mt-1 shrink-0" />
-              <span className="text-sm">Antananarivo, Madagascar</span>
+              <span className="text-sm">Eloria, Lot II M 75 Bis, Antanimena, Antananarivo 101</span>
             </div>
           </div>
 

@@ -18,6 +18,7 @@ import FAQ from './pages/FAQ';
 import Livraison from './pages/Livraison';
 import NotFound from './pages/NotFound';
 import MentionsLegales from './pages/MentionsLegales';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -44,9 +45,9 @@ function App() {
                   <Route path="/favoris" element={<Favorites />} />
                   <Route path="/panier" element={<Cart />} />
                   <Route path="/mentions-legales" element={<MentionsLegales />} />
-                  {/* <Route path="/confidentialite" element={<Confidentialite />} />
-                  <Route path="/cgv" element={<CGV />} />
-                  <Route path="/cookies" element={<Cookies />} /> */}
+                  <Route path="/confidentialite" element={<PrivacyPolicy />} />
+                  {/* <Route path="/cgv" element={<CGV />} /> */}
+                  {/* <Route path="/cookies" element={<Cookies />} /> */}
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/livraison" element={<Livraison />} />

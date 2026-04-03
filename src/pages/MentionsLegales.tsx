@@ -236,30 +236,6 @@ const LegalMentions = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Liens utiles */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-          className="flex flex-wrap justify-center gap-4 mt-12 pt-8 border-t border-gold/10"
-        >
-          <Link to="/" className="text-xs text-champagne/40 hover:text-gold transition-colors">
-            Accueil
-          </Link>
-          <span className="text-champagne/20">•</span>
-          <Link to="/confidentialite" className="text-xs text-champagne/40 hover:text-gold transition-colors">
-            Politique de confidentialité
-          </Link>
-          <span className="text-champagne/20">•</span>
-          <Link to="/cgv" className="text-xs text-champagne/40 hover:text-gold transition-colors">
-            CGV
-          </Link>
-          <span className="text-champagne/20">•</span>
-          <Link to="/cookies" className="text-xs text-champagne/40 hover:text-gold transition-colors">
-            Cookies
-          </Link>
-        </motion.div>
       </div>
     </div>
   );
