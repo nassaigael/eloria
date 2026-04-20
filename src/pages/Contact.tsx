@@ -33,7 +33,6 @@ const Contact = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Simuler l'envoi du formulaire
         setFormStatus('success');
         setTimeout(() => setFormStatus('idle'), 5000);
     };
@@ -50,7 +49,7 @@ const Contact = () => {
         {
             icon: Phone,
             title: "Téléphone",
-            details: "+33 1 23 45 67 89",
+            details: "+261 34 12 345 67",
             subdetails: "Lun-Ven, 9h-19h",
             action: "tel:+33123456789",
             color: "from-gold/20 to-transparent"
@@ -58,8 +57,8 @@ const Contact = () => {
         {
             icon: MapPin,
             title: "Boutique",
-            details: "123 Rue de la Paix",
-            subdetails: "75001 Paris, France",
+            details: "Eloria, Lot II M 75 Bis",
+            subdetails: "Antanimena, Antananarivo 101",
             action: "https://maps.google.com",
             color: "from-gold/20 to-transparent"
         },
@@ -83,19 +82,16 @@ const Contact = () => {
     const newLocal_1 = "relative bg-gradient-to-b from-gold/10 via-gold/5 to-transparent backdrop-blur-md border border-gold/20 p-8";
     return (
         <div className="min-h-screen bg-linear-to-b from-bordeaux to-bordeaux-dark pt-32 pb-16">
-            {/* Éléments décoratifs */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-40 -left-20 w-80 h-80 border border-gold/10 rounded-full" />
                 <div className="absolute bottom-40 -right-20 w-96 h-96 border border-gold/10 rounded-full" />
                 <div className={newLocal} />
-                
-                {/* Motif décoratif */}
+
                 <div className="absolute top-20 right-20 text-gold/5 text-[200px] font-serif">✧</div>
                 <div className="absolute bottom-20 left-20 text-gold/5 text-[200px] font-serif">✧</div>
             </div>
 
             <div className="container-custom relative z-10">
-                {/* Fil d'Ariane */}
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -106,7 +102,6 @@ const Contact = () => {
                     <span className="text-gold">Contact</span>
                 </motion.div>
 
-                {/* En-tête */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -127,7 +122,6 @@ const Contact = () => {
                     </p>
                 </motion.div>
 
-                {/* Grille d'informations de contact */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                     {contactInfo.map((info, index) => (
                         <motion.a
@@ -312,11 +306,13 @@ const Contact = () => {
                                 />
                             </div>
                             <div className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent" />
-                            
+
                             <div className="relative z-10 h-full flex flex-col justify-end">
                                 <h3 className="text-xl font-serif text-champagne mb-2">Notre boutique</h3>
                                 <p className="text-sm text-champagne/70 mb-1">123 Rue de la Paix</p>
-                                <p className="text-sm text-champagne/70 mb-3">75001 Paris, France</p>
+                                <p className="text-sm text-champagne/70 mb-3">
+                                    Eloria, Lot II M 75 Bis, Antanimena, Antananarivo 101
+                                </p>
                                 <motion.a
                                     href="https://maps.google.com"
                                     target="_blank"
@@ -382,7 +378,7 @@ const Contact = () => {
                     className="text-center"
                 >
                     <p className="text-champagne/70">
-                        Vous préférez consulter notre FAQ ? 
+                        Vous préférez consulter notre FAQ ?
                         <Link to="/faq" className="text-gold hover:underline ml-2">
                             Cliquez ici
                         </Link>
