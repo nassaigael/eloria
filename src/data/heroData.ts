@@ -17,6 +17,16 @@ export interface HeroSlide {
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
+    title: "Service de Confection Sur-Mesure",
+    subtitle: "Unique & Personnalisé",
+    description: "Nous nous adaptons à toutes les morphologies. Que vous ayez une taille S et des hanches XL ou toute autre combinaison, nos créations sont ajustées parfaitement à vos mesures pour un rendu unique et élégant.",
+    image: cr4,
+    buttonText: "Prendre RDV",
+    buttonLink: "/contact",
+    collection: "Service Personnalisé"
+  },
+  {
+    id: 2,
     title: "Collection Robes",
     subtitle: "Élégance & Féminité",
     description: "Découvrez notre collection de robes aux coupes raffinées et aux tissus nobles. Des pièces uniques pour toutes vos occasions, du bureau aux soirées.",
@@ -26,7 +36,7 @@ export const heroSlides: HeroSlide[] = [
     collection: "Nouvelle Collection Robes"
   },
   {
-    id: 2,
+    id: 3,
     title: "Collection Blazers",
     subtitle: "Chic & Sophistiqué",
     description: "Des blazers élégants pour un look professionnel et tendance. La pièce maîtresse qui transforme votre tenue avec une touche de caractère.",
@@ -36,7 +46,7 @@ export const heroSlides: HeroSlide[] = [
     collection: "Collection Blazers"
   },
   {
-    id: 3,
+    id: 4,
     title: "Collection Tailleurs",
     subtitle: "Élégance Professionnelle",
     description: "Des ensembles tailleurs parfaitement coordonnés pour un look chic et assuré. Qualité exceptionnelle et coupe impeccable.",
@@ -44,15 +54,5 @@ export const heroSlides: HeroSlide[] = [
     buttonText: "Voir la collection",
     buttonLink: "/categorie/tailleurs",
     collection: "Collection Tailleurs"
-  },
-  {
-    id: 4,
-    title: "Conseil Personnalisé",
-    subtitle: "Service Premium",
-    description: "Notre équipe est à votre disposition pour vous aider à trouver la tenue parfaite. Contactez-nous pour un accompagnement sur mesure.",
-    image: cr4,
-    buttonText: "Nous contacter",
-    buttonLink: "/contact",
-    collection: "Service Client"
   }
 ];
