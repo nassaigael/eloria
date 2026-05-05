@@ -15,6 +15,8 @@ import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import ProductQuickView from '../components/modals/ProductQuickView';
 
+const ALLOWED_CATEGORIES = ['Robes', 'Blazers', 'Tailleurs'];
+
 const Shop = () => {
     const [sortBy, setSortBy] = useState('popular');
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 700000]);
@@ -35,15 +37,20 @@ const Shop = () => {
         document.body.style.overflow = 'unset';
     };
 
-    // Obtenir toutes les catégories uniques
-    const categories = useMemo(() => {
-        const cats = productsData.map(p => p.category);
-        return [...new Set(cats)];
+    // Filtrer les produits pour n'inclure que les catégories autorisées
+    const filteredProductsData = useMemo(() => {
+        return productsData.filter(product => ALLOWED_CATEGORIES.includes(product.category));
     }, []);
+
+    // Obtenir toutes les catégories uniques parmi les produits filtrés
+    const categories = useMemo(() => {
+        const cats = filteredProductsData.map(p => p.category);
+        return [...new Set(cats)];
+    }, [filteredProductsData]);
 
     // Filtrer et trier les produits
     const filteredProducts = useMemo(() => {
-        let result = [...productsData];
+        let result = [...filteredProductsData];
 
         // Filtre par catégorie
         if (selectedCategories.length > 0) {
@@ -72,7 +79,7 @@ const Shop = () => {
         }
 
         return result;
-    }, [selectedCategories, priceRange, sortBy]);
+    }, [selectedCategories, priceRange, sortBy, filteredProductsData]);
 
     const handleCategoryToggle = (category: string) => {
         setSelectedCategories(prev =>
@@ -117,7 +124,6 @@ const Shop = () => {
                 </div>
 
                 <div className="container-custom relative z-10">
-
                     {/* En-tête */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -197,7 +203,7 @@ const Shop = () => {
                                                 {category}
                                             </span>
                                             <span className="text-xs text-gold/60">
-                                                ({productsData.filter(p => p.category === category).length})
+                                                ({filteredProductsData.filter(p => p.category === category).length})
                                             </span>
                                         </label>
                                     ))}
@@ -279,7 +285,7 @@ const Shop = () => {
                                                                 : 'text-champagne/70 hover:text-champagne hover:bg-gold/5'
                                                                 }`}
                                                         >
-                                                            {category} ({productsData.filter(p => p.category === category).length})
+                                                            {category} ({filteredProductsData.filter(p => p.category === category).length})
                                                         </button>
                                                     ))}
                                                 </div>
@@ -361,7 +367,7 @@ const Shop = () => {
                                                 </button>
 
                                                 {/* Image - onClick ouvre le quick view */}
-                                                <div 
+                                                <div
                                                     onClick={() => openQuickView(product)}
                                                     className="relative aspect-3/4 overflow-hidden cursor-pointer"
                                                 >

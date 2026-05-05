@@ -1,3 +1,30 @@
+
+import d1 from "../assets/images/dress/dress1.jpeg";
+import d2 from "../assets/images/dress/dress2.jpeg";
+import d3 from "../assets/images/dress/dress3.jpeg";
+import d4 from "../assets/images/dress/dress4.jpeg";
+import d5 from "../assets/images/dress/dress5.jpeg";
+import d6 from "../assets/images/dress/dress6.jpeg";
+import d7 from "../assets/images/dress/dress7.jpeg";
+import d8 from "../assets/images/dress/dress8.jpeg";
+
+import b1 from "../assets/images/blazers/blazer1.jpeg";
+import b2 from "../assets/images/blazers/blazer2.jpeg";
+import b3 from "../assets/images/blazers/blazer3.jpeg";
+import b4 from "../assets/images/blazers/blazer4.jpeg";
+import b5 from "../assets/images/blazers/blazer5.jpeg";
+import b6 from "../assets/images/blazers/blazer6.jpeg";
+import b7 from "../assets/images/blazers/blazer7.jpeg";
+import b8 from "../assets/images/blazers/blazer8.jpeg";
+
+import t1  from "../assets/images/tailired_suits/tailored1.jpeg";
+import t2 from "../assets/images/tailired_suits/tailored2.jpeg";
+import t3 from "../assets/images/tailired_suits/tailored3.jpeg";
+import t5 from "../assets/images/tailired_suits/tailored5.jpeg";
+import t6 from "../assets/images/tailired_suits/tailored6.jpeg";
+import t7 from "../assets/images/tailired_suits/tailored7.jpeg";
+
+
 export interface Product {
   id: number;
   name: string;
@@ -18,15 +45,15 @@ export interface Product {
   care?: string[];
 }
 
+
 export const productsData: Product[] = [
-  // Robes (12 produits)
   {
     id: 1,
     name: "Robe de Soirée Émeraude",
     slug: "robe-de-soiree-emeraude",
     price: 450000,
     originalPrice: 599000,
-    image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&auto=format",
+    image: d1,
     category: "Robes",
     rating: 4.8,
     reviewCount: 124,
@@ -44,7 +71,7 @@ export const productsData: Product[] = [
     slug: "robe-de-cocktail-noire",
     price: 389000,
     originalPrice: 495000,
-    image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=800&auto=format",
+    image: d2,
     category: "Robes",
     rating: 4.9,
     reviewCount: 145,
@@ -60,7 +87,7 @@ export const productsData: Product[] = [
     name: "Robe de Bal Rose",
     slug: "robe-de-bal-rose",
     price: 599000,
-    image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&auto=format",
+    image: d3,
     category: "Robes",
     rating: 5.0,
     reviewCount: 78,
@@ -77,7 +104,7 @@ export const productsData: Product[] = [
     name: "Robe Chemise",
     slug: "robe-chemise",
     price: 269000,
-    image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800&auto=format",
+    image: d4,
     category: "Robes",
     rating: 4.6,
     reviewCount: 52,
@@ -94,7 +121,7 @@ export const productsData: Product[] = [
     slug: "robe-portefeuille-rouge",
     price: 329000,
     originalPrice: 429000,
-    image: "https://images.unsplash.com/photo-1583846783214-7229a91b20ed?w=800&auto=format",
+    image: d5,
     category: "Robes",
     rating: 4.7,
     reviewCount: 63,
@@ -112,7 +139,7 @@ export const productsData: Product[] = [
     slug: "robe-de-ceremonie-bleue",
     price: 495000,
     originalPrice: 649000,
-    image: "https://images.unsplash.com/photo-1623609163859-ca93c959b5b8?w=800&auto=format",
+    image: d6,
     category: "Robes",
     rating: 4.9,
     reviewCount: 87,
@@ -128,7 +155,7 @@ export const productsData: Product[] = [
     name: "Robe Patineuse Florale",
     slug: "robe-patineuse-florale",
     price: 189000,
-    image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=800&auto=format",
+    image: d7,
     category: "Robes",
     rating: 4.5,
     reviewCount: 41,
@@ -146,7 +173,7 @@ export const productsData: Product[] = [
     slug: "robe-pull-en-maille",
     price: 239000,
     originalPrice: 299000,
-    image: "https://images.unsplash.com/photo-1577906099765-3d0192d8d498?w=800&auto=format",
+    image: d8,
     category: "Robes",
     rating: 4.6,
     reviewCount: 35,
@@ -158,14 +185,14 @@ export const productsData: Product[] = [
     details: ["Col roulé", "Manches longues", "Longueur genoux"]
   },
 
-  // Ensembles (5 produits)
+  // Blazers
   {
     id: 9,
     name: "Ensemble Chic Doré",
     slug: "ensemble-chic-dore",
     price: 674000,
-    image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format",
-    category: "Ensembles",
+    image: b1,
+    category: "Blazers",
     rating: 4.9,
     reviewCount: 89,
     description: "Ensemble deux pièces avec finitions dorées, un must-have pour votre garde-robe. Le haut cintré et la jupe évasée créent une silhouette harmonieuse.",
@@ -181,8 +208,8 @@ export const productsData: Product[] = [
     slug: "ensemble-tailleur-creme",
     price: 549000,
     originalPrice: 699000,
-    image: "https://images.unsplash.com/photo-1598550474573-9514903f7b04?w=800&auto=format",
-    category: "Ensembles",
+    image: b2,
+    category: "Blazers",
     rating: 4.8,
     reviewCount: 42,
     isNew: true,
@@ -198,8 +225,8 @@ export const productsData: Product[] = [
     name: "Ensemble Short et Blazer",
     slug: "ensemble-short-blazer",
     price: 439000,
-    image: "https://images.unsplash.com/photo-1598620617137-2ab990aadd37?w=800&auto=format",
-    category: "Ensembles",
+    image: b3,
+    category: "Blazers",
     rating: 4.7,
     reviewCount: 28,
     description: "Ensemble short et blazer en lin, chic et décontracté pour l'été.",
@@ -210,15 +237,14 @@ export const productsData: Product[] = [
     details: ["Blazer doublé", "Short taille haute", "Poches plaquées"]
   },
 
-  // Hauts (6 produits)
   {
     id: 12,
     name: "Blouse en Soie",
     slug: "blouse-en-soie",
     price: 284000,
     originalPrice: 374000,
-    image: "https://images.unsplash.com/photo-1551163943-3f6a855d1153?w=800&auto=format",
-    category: "Hauts",
+    image: b4,
+    category: "Blazers",
     rating: 4.7,
     reviewCount: 56,
     isNew: true,
@@ -235,8 +261,8 @@ export const productsData: Product[] = [
     slug: "chemisier-blanc",
     price: 159000,
     originalPrice: 199000,
-    image: "https://images.unsplash.com/photo-1598550874175-4d0b436be877?w=800&auto=format",
-    category: "Hauts",
+    image: b5,
+    category: "Blazers",
     rating: 4.8,
     reviewCount: 73,
     description: "Chemisier blanc intemporel en coton de qualité, un indispensable de la garde-robe.",
@@ -251,8 +277,8 @@ export const productsData: Product[] = [
     name: "Top en Dentelle",
     slug: "top-en-dentelle",
     price: 129000,
-    image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=800&auto=format",
-    category: "Hauts",
+    image: b6,
+    category: "Blazers",
     rating: 4.6,
     reviewCount: 31,
     isNew: true,
@@ -263,15 +289,13 @@ export const productsData: Product[] = [
     care: ["Lavage à la main", "Séchage à l'air libre"],
     details: ["Manches courtes", "Doublure intégrée", "Fermeture au dos"]
   },
-
-  // Jupes (4 produits)
   {
     id: 15,
     name: "Jupe Plissée Rubis",
     slug: "jupe-plissee-rubis",
     price: 239000,
-    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800&auto=format",
-    category: "Jupes",
+    image: b7,
+    category: "Blazers",
     rating: 4.6,
     reviewCount: 34,
     description: "Jupe plissée couleur rubis, élégante et facile à porter. La taille haute et les plis délicats créent un mouvement gracieux.",
@@ -287,8 +311,8 @@ export const productsData: Product[] = [
     slug: "jupe-crayon-noire",
     price: 169000,
     originalPrice: 219000,
-    image: "https://images.unsplash.com/photo-1584376536689-45d475a1c1a5?w=800&auto=format",
-    category: "Jupes",
+    image: b8,
+    category: "Blazers",
     rating: 4.7,
     reviewCount: 58,
     description: "Jupe crayon classique, coupe parfaite pour un look professionnel.",
@@ -298,32 +322,16 @@ export const productsData: Product[] = [
     care: ["Lavage en machine à 30°", "Repassage"],
     details: ["Fente au dos", "Taille haute", "Fermeture éclair"]
   },
-  {
-    id: 17,
-    name: "Jupe Longue Bohème",
-    slug: "jupe-longue-boheme",
-    price: 199000,
-    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800&auto=format",
-    category: "Jupes",
-    rating: 4.8,
-    reviewCount: 27,
-    isNew: true,
-    description: "Jupe longue fluide à imprimé bohème, idéale pour les journées d'été.",
-    colors: ["#8B4513", "#E8DCC6"],
-    sizes: ["S", "M", "L", "XL"],
-    material: "100% Viscose",
-    care: ["Lavage en machine à 30°", "Repassage doux"],
-    details: ["Élastique à la taille", "Longueur cheville"]
-  },
 
-  // Pantalons (5 produits)
+
+  // Tailleurs
   {
     id: 18,
     name: "Pantalon Tailleur",
     slug: "pantalon-tailleur",
     price: 299000,
-    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format",
-    category: "Pantalons",
+    image: t1,
+    category: "Tailleurs",
     rating: 4.7,
     reviewCount: 67,
     isNew: true,
@@ -340,8 +348,8 @@ export const productsData: Product[] = [
     slug: "pantalon-palazo",
     price: 239000,
     originalPrice: 299000,
-    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800&auto=format",
-    category: "Pantalons",
+    image: t2,
+    category: "Tailleurs",
     rating: 4.8,
     reviewCount: 43,
     description: "Pantalon palazzo fluide et élégant, parfait pour les soirées d'été.",
@@ -356,8 +364,8 @@ export const productsData: Product[] = [
     name: "Pantalon Cigarette",
     slug: "pantalon-cigarette",
     price: 189000,
-    image: "https://images.unsplash.com/photo-1551854791-12675da2cd7d?w=800&auto=format",
-    category: "Pantalons",
+    image: t3,
+    category: "Tailleurs",
     rating: 4.6,
     reviewCount: 39,
     description: "Pantalon cigarette coupe slim, idéal pour un look chic et moderne.",
@@ -375,8 +383,8 @@ export const productsData: Product[] = [
     slug: "blazer-ceremonie",
     price: 524000,
     originalPrice: 674000,
-    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format",
-    category: "Vestes",
+    image: t7,
+    category: "Tailleurs",
     rating: 4.8,
     reviewCount: 92,
     description: "Blazer structuré pour vos occasions spéciales. Sa coupe cintrée et ses finitions soignées en font une pièce d'exception.",
@@ -392,8 +400,8 @@ export const productsData: Product[] = [
     slug: "veste-en-jean",
     price: 199000,
     originalPrice: 249000,
-    image: "https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=800&auto=format",
-    category: "Vestes",
+    image: t5,
+    category: "Tailleurs",
     rating: 4.7,
     reviewCount: 56,
     isNew: true,
@@ -409,8 +417,8 @@ export const productsData: Product[] = [
     name: "Blazer Leger Beige",
     slug: "blazer-leger-beige",
     price: 349000,
-    image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&auto=format",
-    category: "Vestes",
+    image: t6,
+    category: "Tailleurs",
     rating: 4.8,
     reviewCount: 34,
     description: "Blazer léger en lin, idéal pour la mi-saison. Élégant et confortable.",
