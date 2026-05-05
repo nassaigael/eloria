@@ -21,9 +21,8 @@ const Footer = () => {
   const navigation = {
     collections: [
       { nom: 'Robes', href: '/categorie/robes' },
-      { nom: 'Accessoires', href: '/categorie/accessoires' },
-      { nom: 'Mariage', href: '/categorie/mariage' },
-      { nom: 'Soirée', href: '/categorie/soiree' },
+      { nom: 'Blazers', href: '/categorie/blazers' },
+      { nom: 'Tailleurs', href: '/categorie/tailleurs' },
     ],
     service: [
       { nom: 'Contact', href: '/contact' },

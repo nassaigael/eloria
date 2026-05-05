@@ -431,9 +431,6 @@ const Category = () => {
                             animate={{ opacity: 1 }}
                             className="text-center py-24"
                         >
-                            <div className="inline-block p-6 border border-gold/20 mb-6">
-                                <Sparkles size={48} className="text-gold/40" />
-                            </div>
                             <p className="text-champagne/60 text-lg">Aucun produit trouvé</p>
                             <button
                                 onClick={resetFilters}
