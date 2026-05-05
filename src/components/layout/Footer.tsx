@@ -26,7 +26,6 @@ const Footer = () => {
     ],
     service: [
       { nom: 'Contact', href: '/contact' },
-      { nom: 'FAQ', href: '/faq' },
       { nom: 'Livraison', href: '/livraison' },
     ],
     legal: [

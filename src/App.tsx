@@ -14,7 +14,6 @@ import Category from './pages/Category';
 import Favorites from './pages/Favorites';
 import Shop from './pages/Shop';
 import Contact from './pages/Contact';
-import FAQ from './pages/FAQ';
 import Livraison from './pages/Livraison';
 import NotFound from './pages/NotFound';
 import MentionsLegales from './pages/MentionsLegales';
@@ -51,7 +50,6 @@ function App() {
                   <Route path="/cgv" element={<TermsAndConditions />} />
                   <Route path="/cookies" element={<CookiesPolicy />} />                 {/* <Route path="/cookies" element={<Cookies />} /> */}
                   <Route path="/contact" element={<Contact />} />
-                  <Route path="/faq" element={<FAQ />} />
                   <Route path="/livraison" element={<Livraison />} />
 
                   <Route path="*" element={<NotFound />} />

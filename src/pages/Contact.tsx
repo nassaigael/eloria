@@ -369,21 +369,6 @@ const Contact = () => {
                         </div>
                     </motion.div>
                 </div>
-
-                {/* FAQ rapide */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="text-center"
-                >
-                    <p className="text-champagne/70">
-                        Vous préférez consulter notre FAQ ?
-                        <Link to="/faq" className="text-gold hover:underline ml-2">
-                            Cliquez ici
-                        </Link>
-                    </p>
-                </motion.div>
             </div>
         </div>
     );
