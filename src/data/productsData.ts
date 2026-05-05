@@ -1,4 +1,3 @@
-
 import d1 from "../assets/images/dress/dress1.jpeg";
 import d2 from "../assets/images/dress/dress2.jpeg";
 import d3 from "../assets/images/dress/dress3.jpeg";
@@ -17,13 +16,12 @@ import b6 from "../assets/images/blazers/blazer6.jpeg";
 import b7 from "../assets/images/blazers/blazer7.jpeg";
 import b8 from "../assets/images/blazers/blazer8.jpeg";
 
-import t1  from "../assets/images/tailired_suits/tailored1.jpeg";
+import t1 from "../assets/images/tailired_suits/tailored1.jpeg";
 import t2 from "../assets/images/tailired_suits/tailored2.jpeg";
 import t3 from "../assets/images/tailired_suits/tailored3.jpeg";
 import t5 from "../assets/images/tailired_suits/tailored5.jpeg";
 import t6 from "../assets/images/tailired_suits/tailored6.jpeg";
 import t7 from "../assets/images/tailired_suits/tailored7.jpeg";
-
 
 export interface Product {
   id: number;
@@ -45,12 +43,12 @@ export interface Product {
   care?: string[];
 }
 
-
 export const productsData: Product[] = [
+  // ==================== ROBES ====================
   {
     id: 1,
     name: "Robe Fourreau Bureau Taupe",
-    slug: "robe-de-soiree-emeraude",
+    slug: "robe-fourreau-bureau-taupe",
     price: 175000,
     originalPrice: 599000,
     image: d1,
@@ -58,67 +56,67 @@ export const productsData: Product[] = [
     rating: 4.8,
     reviewCount: 124,
     isNew: true,
-    description: "Une robe élégante en satin vert émeraude, parfaite pour vos soirées. La coupe cintrée met en valeur la silhouette tandis que le décolleté en V ajoute une touche de sophistication.",
+    description: "Robe fourreau taupe élégante, parfaite pour le bureau. Sa coupe cintrée et sa couleur neutre s'adaptent à toutes les morphologies. Idéale pour un look professionnel et sophistiqué.",
     colors: ["#C8AD7F"],
     sizes: ["XS", "S", "M", "L", "XL"],
-    material: "100% Soie",
-    care: ["Lavage à sec uniquement", "Ne pas repasser", "Stockage à l'abri de la lumière"],
-    details: ["Fermeture éclair dissimulée", "Doublure en soie", "Longueur cheville"]
+    material: "95% Polyester, 5% Élasthanne",
+    care: ["Lavage en machine à 30°", "Repassage doux", "Ne pas sécher en tambour"],
+    details: ["Fermeture éclair dissimulée au dos", "Longueur genou", "Manches courtes"]
   },
   {
     id: 2,
     name: "Robe Blazer Patineuse Marine",
-    slug: "robe-de-cocktail-noire",
+    slug: "robe-blazer-patineuse-marine",
     price: 175000,
     originalPrice: 495000,
     image: d2,
     category: "Robes",
     rating: 4.9,
     reviewCount: 145,
-    description: "La petite robe noire revisité, un indispensable. Avec ses lignes épurées et sa coupe parfaite, elle convient à toutes les occasions.",
+    description: "Robe style blazer en bleu marine, coupe patineuse élégante. Idéale pour les entretiens ou les journées de travail. Son col tailleur apporte une touche professionnelle unique.",
     colors: ["#03224C"],
     sizes: ["XS", "S", "M", "L", "XL"],
-    material: "95% Viscose, 5% Élasthanne",
-    care: ["Lavage en machine à 30°", "Séchage à l'air libre", "Repassage doux"],
-    details: ["Dos nu", "Fente latérale", "Longueur midi"]
+    material: "97% Polyester, 3% Élasthanne",
+    care: ["Lavage en machine à 30°", "Repassage moyen", "Séchage à l'air libre"],
+    details: ["Col tailleur", "Boutons dorés", "Poches latérales", "Longueur midi"]
   },
   {
     id: 3,
     name: "Robe Militaire Chic Beige",
-    slug: "robe-de-bal-rose",
+    slug: "robe-militaire-chic-beige",
     price: 182000,
     image: d3,
     category: "Robes",
     rating: 5.0,
     reviewCount: 78,
     isNew: true,
-    description: "Robe de bal romantique en tulle rose poudré. Une création féerique pour les grandes occasions.",
+    description: "Robe chic beige aux inspirations militaires, avec détails de boutons dorés et ceinture. Parfaite pour un look tendance et élégant au quotidien.",
     colors: ["#C8AD7F"],
     sizes: ["XS", "S", "M", "L"],
-    material: "Tulle et dentelle",
-    care: ["Nettoyage à sec professionnel", "Rangement sur cintre rembourré"],
-    details: ["Jupe volumineuse", "Corpsage en dentelle", "Fermeture au dos"]
+    material: "100% Coton",
+    care: ["Lavage en machine à 30°", "Repassage moyen"],
+    details: ["Ceinture assortie", "Boutons dorés", "Poches poitrine", "Longueur genou"]
   },
   {
     id: 4,
     name: "Robe Sirène Sequins Champagne",
-    slug: "robe-chemise",
+    slug: "robe-sirene-sequins-champagne",
     price: 485000,
     image: d4,
     category: "Robes",
     rating: 4.6,
     reviewCount: 52,
-    description: "Robe chemise chic et décontractée, parfaite pour un look de jour élégant.",
-    colors: ["#E8DCC6", "#2C3E50", "#800020"],
+    description: "Robe sirène spectaculaire avec sequins couleur champagne. Idéale pour les soirées de gala, les mariages ou les événements prestigieux. Un véritable effet tapis rouge.",
+    colors: ["#E8DCC6"],
     sizes: ["XS", "S", "M", "L", "XL"],
-    material: "100% Coton",
-    care: ["Lavage en machine à 30°", "Repassage moyen"],
-    details: ["Ceinture nouée", "Poches plaquées", "Col chemisier"]
+    material: "Sequins sur tulle, Doublure 100% Polyester",
+    care: ["Nettoyage à sec uniquement", "Ne pas repasser", "Stockage à l'abri de la lumière"],
+    details: ["Fermeture éclair invisible", "Décolleté plongeant", "Longueur cheville", "Jupe effet sirène"]
   },
   {
     id: 5,
     name: "Robe Gala Asymétrique Rouge",
-    slug: "robe-portefeuille-rouge",
+    slug: "robe-gala-asymetrique-rouge",
     price: 395000,
     originalPrice: 429000,
     image: d5,
@@ -126,86 +124,86 @@ export const productsData: Product[] = [
     rating: 4.7,
     reviewCount: 63,
     isNew: true,
-    description: "Robe portefeuille en tissu léger, idéale pour les journées ensoleillées. Sa coupe flatteuse met en valeur toutes les silhouettes.",
-    colors: ["#C41E3A", "#000000", "#1E3A8A"],
+    description: "Robe de gala rouge passion à coupe asymétrique. Osez le rouge pour vos soirées chic et distinguées. Une épaule dénudée pour un effet glamour assuré.",
+    colors: ["#C41E3A"],
     sizes: ["XS", "S", "M", "L", "XL"],
-    material: "100% Viscose",
-    care: ["Lavage en machine à 30°", "Repassage doux"],
-    details: ["Fermeture par lien", "Manches courtes", "Longueur genoux"]
+    material: "100% Crêpe de Chine",
+    care: ["Lavage à sec", "Repassage vapeur"],
+    details: ["Une épaule dénudée", "Fente latérale", "Longueur cheville", "Drapé élégant"]
   },
   {
     id: 6,
     name: "Robe Cocktail Volants Rouge",
-    slug: "robe-de-ceremonie-bleue",
+    slug: "robe-cocktail-volants-rouge",
     price: 98000,
     originalPrice: 649000,
     image: d6,
     category: "Robes",
     rating: 4.9,
     reviewCount: 87,
-    description: "Robe longue en mousseline bleu nuit, parfaite pour les cérémonies et événements spéciaux.",
+    description: "Robe cocktail rouge avec volants féminins. Parfaite pour vos soirées entre amis, anniversaires ou sorties. Légère et aérienne, elle apporte une touche pétillante.",
     colors: ["#CE0337"],
     sizes: ["S", "M", "L", "XL"],
     material: "100% Polyester",
-    care: ["Lavage à sec", "Repassage vapeur"],
-    details: ["Dos nu", "Fente latérale", "Longueur cheville"]
+    care: ["Lavage en machine à 30°", "Repassage doux", "Séchage à plat"],
+    details: ["Volants asymétriques", "Manches bouffantes", "Longueur genou", "Taille élastiquée"]
   },
   {
     id: 7,
     name: "Robe Cocktail Nœud Rouge",
-    slug: "robe-patineuse-florale",
+    slug: "robe-cocktail-noeud-rouge",
     price: 178000,
     image: d7,
     category: "Robes",
     rating: 4.5,
     reviewCount: 41,
     isNew: true,
-    description: "Robe patineuse à imprimé floral, légère et féminine pour un look printanier.",
+    description: "Robe cocktail rouge élégante avec nœud décoratif à la taille. Idéale pour les cocktails, les soirées ou les rendez-vous romantiques. Féminine et raffinée.",
     colors: ["#CE0337"],
     sizes: ["XS", "S", "M", "L", "XL"],
-    material: "100% Coton",
-    care: ["Lavage en machine à 30°", "Repassage moyen"],
-    details: ["Ceinture assortie", "Manches courtes", "Longueur genoux"]
+    material: "95% Polyester, 5% Élasthanne",
+    care: ["Lavage en machine à 30°", "Repassage doux"],
+    details: ["Nœud à la taille", "Décolleté rond", "Manches courtes", "Longueur genou", "Fermeture éclair au dos"]
   },
   {
     id: 8,
     name: "Robe Mariée Civil Satin Nœuds",
-    slug: "robe-pull-en-maille",
+    slug: "robe-mariee-civil-satin-noeuds",
     price: 320000,
     originalPrice: 299000,
     image: d8,
     category: "Robes",
     rating: 4.6,
     reviewCount: 35,
-    description: "Robe pull confortable en maille douce, idéale pour l'automne et l'hiver.",
+    description: "Robe de mariée civil en satin blanc avec nœuds décoratifs. Parfaite pour une cérémonie de mariage civile ou un événement élégant. Chic et intemporelle.",
     colors: ["#FFFFFF"],
     sizes: ["S", "M", "L", "XL"],
-    material: "80% Laine, 20% Polyamide",
-    care: ["Lavage à la main", "Séchage à plat"],
-    details: ["Col roulé", "Manches longues", "Longueur genoux"]
+    material: "100% Satin",
+    care: ["Nettoyage à sec", "Repassage vapeur"],
+    details: ["Nœuds décoratifs", "Décolleté cœur", "Manches bouffantes", "Longueur cheville", "Train léger"]
   },
 
-  // Blazers
+  // ==================== BLAZERS ====================
   {
     id: 9,
     name: "Blazer Blanc Col Volanté",
-    slug: "ensemble-chic-dore",
+    slug: "blazer-blanc-col-volante",
     price: 110000,
     image: b1,
     category: "Blazers",
     rating: 4.9,
     reviewCount: 89,
-    description: "Ensemble deux pièces avec finitions dorées, un must-have pour votre garde-robe. Le haut cintré et la jupe évasée créent une silhouette harmonieuse.",
+    description: "Blazer blanc chic avec col volanté. Idéal pour compléter vos tenues de bureau ou pour un look casual chic. Rafraîchissant et élégant pour la belle saison.",
     colors: ["#FFFFFF"],
     sizes: ["S", "M", "L"],
-    material: "95% Polyester, 5% Élasthanne",
-    care: ["Lavage en machine à 30°", "Séchage à l'air libre", "Repassage à basse température"],
-    details: ["Ceinture assortie", "Poches latérales", "Fermeture à glissière"]
+    material: "70% Polyester, 30% Coton",
+    care: ["Lavage en machine à 30°", "Repassage moyen"],
+    details: ["Col volanté amovible", "Manches longues", "Poches latérales", "Boutons blancs"]
   },
   {
     id: 10,
     name: "Blazer Long Bordeaux Col Châle",
-    slug: "ensemble-tailleur-creme",
+    slug: "blazer-long-bordeaux-col-chale",
     price: 125000,
     originalPrice: 699000,
     image: b2,
@@ -213,34 +211,33 @@ export const productsData: Product[] = [
     rating: 4.8,
     reviewCount: 42,
     isNew: true,
-    description: "Ensemble tailleur élégant en tissu crème, parfait pour le bureau ou les occasions formelles.",
+    description: "Blazer longue coupe col châle en bordeaux. Élégant et raffiné, il se porte aussi bien au bureau qu'en soirée. Une couleur profonde qui apporte du caractère.",
     colors: ["#450e1f"],
     sizes: ["34", "36", "38", "40", "42"],
     material: "100% Laine",
-    care: ["Nettoyage à sec uniquement"],
-    details: ["Veste cintrée", "Pantalon droit", "Poches italiennes"]
+    care: ["Nettoyage à sec", "Repassage vapeur"],
+    details: ["Col châle", "Longueur mi-cuisse", "Manches longues", "Poches à rabat", "Coupe cintrée"]
   },
   {
     id: 11,
     name: "Blazer Bordeaux Cache-Cœur Péplum",
-    slug: "ensemble-short-blazer",
+    slug: "blazer-bordeaux-cache-coeur-peplum",
     price: 115000,
     image: b3,
     category: "Blazers",
     rating: 4.7,
     reviewCount: 28,
-    description: "Ensemble short et blazer en lin, chic et décontracté pour l'été.",
+    description: "Blazer bordeaux au style cache-cœur avec basque péplum. Très féminin, il met en valeur la silhouette. Parfait pour un look professionnel avec une touche de fantaisie.",
     colors: ["#450e1f"],
     sizes: ["S", "M", "L"],
     material: "100% Lin",
     care: ["Lavage à la main", "Repassage vapeur"],
-    details: ["Blazer doublé", "Short taille haute", "Poches plaquées"]
+    details: ["Fermeture cache-cœur", "Basque péplum", "Manches 3/4", "Poches plaquées"]
   },
-
   {
     id: 12,
     name: "Blazer Croisé Beige Classique",
-    slug: "blouse-en-soie",
+    slug: "blazer-croise-beige-classique",
     price: 118000,
     originalPrice: 374000,
     image: b4,
@@ -248,156 +245,153 @@ export const productsData: Product[] = [
     rating: 4.7,
     reviewCount: 56,
     isNew: true,
-    description: "Blouse en soie naturelle, coupe fluide et intemporelle. Parfaite pour un look élégant au bureau ou pour une soirée.",
-    colors: ["#E8DCC6", "#C0C0C0", "#800020"],
+    description: "Blazer croisé beige intemporel. Une pièce essentielle pour toute garde-robe professionnelle. Sa coupe classique et sa couleur neutre s'associent à tout.",
+    colors: ["#E8DCC6"],
     sizes: ["XS", "S", "M", "L", "XL"],
     material: "100% Soie sauvage",
     care: ["Lavage à la main", "Séchage à plat", "Repassage à basse température"],
-    details: ["Manches longues", "Col chemisier", "Boutons nacre"]
+    details: ["Fermeture croisée", "Manches longues", "Poches italiennes", "Boutons dorés"]
   },
   {
     id: 13,
     name: "Blazer Long Cintré Gris Sauge",
-    slug: "chemisier-blanc",
+    slug: "blazer-long-cintre-gris-sauge",
     price: 125000,
     originalPrice: 199000,
     image: b5,
     category: "Blazers",
     rating: 4.8,
     reviewCount: 73,
-    description: "Chemisier blanc intemporel en coton de qualité, un indispensable de la garde-robe.",
+    description: "Blazer longue coupe cintrée gris sauge. Moderne et élégant, il apporte une touche de douceur à vos tenues. Idéal pour le printemps et l'automne.",
     colors: ["#83877A"],
     sizes: ["XS", "S", "M", "L", "XL"],
     material: "100% Coton",
-    care: ["Lavage en machine à 30°", "Repassage"],
-    details: ["Col classique", "Manches longues", "Boutons blancs"]
+    care: ["Lavage en machine à 30°", "Repassage classique"],
+    details: ["Coupe cintrée", "Manches longues", "Poches plaquées", "Longueur mi-cuisse", "Col tailleur"]
   },
   {
     id: 14,
     name: "Blazer Bleu Marine Classique Tailleur",
-    slug: "top-en-dentelle",
+    slug: "blazer-bleu-marine-classique-tailleur",
     price: 98000,
     image: b6,
     category: "Blazers",
     rating: 4.6,
     reviewCount: 31,
     isNew: true,
-    description: "Top délicat en dentelle, parfait pour ajouter une touche romantique à vos tenues.",
+    description: "Blazer bleu marine classique, indispensable d'un tailleur. Un basique chic qui traverse les saisons. Parfait pour le travail ou les occasions formelles.",
     colors: ["#03224C"],
     sizes: ["XS", "S", "M", "L"],
     material: "90% Polyamide, 10% Élasthanne",
-    care: ["Lavage à la main", "Séchage à l'air libre"],
-    details: ["Manches courtes", "Doublure intégrée", "Fermeture au dos"]
+    care: ["Lavage à la main", "Séchage à l'air libre", "Repassage doux"],
+    details: ["Boutons argentés", "Manches longues", "Poches italiennes", "Doublure intégrée"]
   },
   {
     id: 15,
     name: "Blazer Oversize Beige Taupe",
-    slug: "jupe-plissee-rubis",
+    slug: "blazer-oversize-beige-taupe",
     price: 105000,
     image: b7,
     category: "Blazers",
     rating: 4.6,
     reviewCount: 34,
-    description: "Jupe plissée couleur rubis, élégante et facile à porter. La taille haute et les plis délicats créent un mouvement gracieux.",
+    description: "Blazer oversize beige taupe, tendance et confortable. À porter sur un jean ou une robe pour un look décontracté chic. Sa coupe généreuse apporte du style.",
     colors: ["#927C66"],
     sizes: ["XS", "S", "M", "L"],
     material: "100% Polyester",
     care: ["Lavage en machine à 30°", "Repassage doux", "Ne pas sécher en tambour"],
-    details: ["Fermeture éclair au dos", "Doublure intégrée", "Longueur genoux"]
+    details: ["Coupe oversize", "Manches retroussables", "Poches à rabat", "Boutons ton sur ton"]
   },
   {
     id: 16,
     name: "Blazer Oversize Rayures Tennis",
-    slug: "jupe-crayon-noire",
+    slug: "blazer-oversize-rayures-tennis",
     price: 169000,
     originalPrice: 219000,
     image: b8,
     category: "Blazers",
     rating: 4.7,
     reviewCount: 58,
-    description: "Jupe crayon classique, coupe parfaite pour un look professionnel.",
+    description: "Blazer oversize à rayures style tennis. Original et sport-chic, il apporte du caractère à votre tenue. Parfait pour un look décontracté tendance.",
     colors: ["#d5d7d6"],
     sizes: ["XS", "S", "M", "L", "XL"],
     material: "95% Coton, 5% Élasthanne",
-    care: ["Lavage en machine à 30°", "Repassage"],
-    details: ["Fente au dos", "Taille haute", "Fermeture éclair"]
+    care: ["Lavage en machine à 30°", "Repassage classique"],
+    details: ["Rayures contrastées", "Coupe oversize", "Manches longues", "Poches latérales", "Col tailleur"]
   },
 
-
-  // Tailleurs
+  // ==================== TAILLEURS ====================
   {
     id: 18,
     name: "Ensemble Tailleur Cache-Cœur Bleu Ciel",
-    slug: "pantalon-tailleur",
-    price:  265000,
+    slug: "ensemble-tailleur-cache-coeur-bleu-ciel",
+    price: 265000,
     image: t1,
     category: "Tailleurs",
     rating: 4.7,
     reviewCount: 67,
     isNew: true,
-    description: "Pantalon tailleur coupe droite, parfait pour le bureau. Le tissu de qualité et la coupe impeccable assurent confort et élégance.",
+    description: "Ensemble tailleur bleu ciel, veste cache-cœur et pantalon assorti. Frais et élégant, parfait pour le printemps ou les journées ensoleillées. Idéal pour le bureau ou les rendez-vous.",
     colors: ["#aec0cc"],
     sizes: ["34", "36", "38", "40", "42", "44"],
     material: "100% Laine vierge",
     care: ["Nettoyage à sec", "Repassage vapeur", "Rangement sur cintre"],
-    details: ["Pinces devant", "Poches italiennes", "Ourlet ajustable"]
+    details: ["Veste cache-cœur", "Pantalon droit taille haute", "Poches italiennes"]
   },
   {
     id: 19,
     name: "Ensemble Tailleur Veste et Jupe Patineuse Bordeaux",
-    slug: "pantalon-palazo",
+    slug: "ensemble-tailleur-veste-jupe-patineuse-bordeaux",
     price: 235000,
     originalPrice: 299000,
     image: t2,
     category: "Tailleurs",
     rating: 4.8,
     reviewCount: 43,
-    description: "Pantalon palazzo fluide et élégant, parfait pour les soirées d'été.",
-    colors: ["#E8DCC6", "#000000", "#800020"],
+    description: "Ensemble tailleur bordeaux composé d'une veste cintrée et d'une jupe patineuse. Féminin et raffiné pour vos journées de travail ou vos événements professionnels. Un style chic intemporel.",
+    colors: ["#800020"],
     sizes: ["S", "M", "L", "XL"],
     material: "100% Viscose",
     care: ["Lavage en machine à 30°", "Repassage doux"],
-    details: ["Taille élastiquée", "Jambes larges", "Poches latérales"]
+    details: ["Veste cintrée", "Jupe patineuse taille haute", "Fermeture éclair au dos", "Poches latérales"]
   },
   {
     id: 20,
     name: "Ensemble Tailleur Tweed Blanc",
-    slug: "pantalon-cigarette",
+    slug: "ensemble-tailleur-tweed-blanc",
     price: 295000,
     image: t3,
     category: "Tailleurs",
     rating: 4.6,
     reviewCount: 39,
-    description: "Pantalon cigarette coupe slim, idéal pour un look chic et moderne.",
+    description: "Ensemble tailleur tweed blanc, veste et jupe. Une pièce luxueuse pour vos occasions spéciales ou votre garde-robe professionnelle. Chic et distinguée.",
     colors: ["#FFFFFF"],
     sizes: ["34", "36", "38", "40", "42"],
     material: "98% Coton, 2% Élasthanne",
-    care: ["Lavage en machine à 30°", "Repassage"],
-    details: ["Fermeture éclair", "Poches italiennes", "Ourlet fin"]
+    care: ["Lavage en machine à 30°", "Repassage classique"],
+    details: ["Veste tweed", "Boutons dorés", "Poches plaquées", "Jupe droite longueur genou"]
   },
-
-  // Vestes (4 produits)
   {
     id: 21,
-    name: "Blazer Cérémonie",
-    slug: "blazer-ceremonie",
+    name: "Veste Tailleur Chic Beige",
+    slug: "veste-tailleur-chic-beige",
     price: 240000,
     originalPrice: 674000,
     image: t7,
     category: "Tailleurs",
     rating: 4.8,
     reviewCount: 92,
-    description: "Blazer structuré pour vos occasions spéciales. Sa coupe cintrée et ses finitions soignées en font une pièce d'exception.",
-    colors: ["#af9c8e",],
+    description: "Veste de tailleur beige chic, coupe structurée. Parfaite avec un pantalon assorti ou un jean. Élégante et intemporelle, elle traverse les tendances.",
+    colors: ["#af9c8e"],
     sizes: ["34", "36", "38", "40", "42"],
     material: "70% Laine, 30% Soie",
     care: ["Nettoyage à sec uniquement", "Repassage vapeur", "Protection anti-mites"],
-    details: ["Doublure en soie", "Poches à rabat", "Boutons dorés"]
+    details: ["Doublure en soie", "Poches à rabat", "Boutons dorés", "Coupe cintrée"]
   },
   {
     id: 22,
     name: "Ensemble Tailleur Bordeaux Plissé",
-    slug: "veste-en-jean",
+    slug: "ensemble-tailleur-bordeaux-plisse",
     price: 190000,
     originalPrice: 249000,
     image: t5,
@@ -405,27 +399,27 @@ export const productsData: Product[] = [
     rating: 4.7,
     reviewCount: 56,
     isNew: true,
-    description: "Veste en jean intemporelle, parfaite pour un look décontracté.",
+    description: "Ensemble tailleur bordeaux avec jupe plissée et veste assortie. Moderne et dynamique, parfait pour un look professionnel avec une touche d'originalité. Le plissé apporte du mouvement.",
     colors: ["#450e1f"],
     sizes: ["XS", "S", "M", "L", "XL"],
     material: "100% Coton",
-    care: ["Lavage en machine à 30°", "Repassage"],
-    details: ["Boutons métal", "Poches poitrine", "Réglage taille"]
+    care: ["Lavage en machine à 30°", "Repassage classique"],
+    details: ["Veste courte", "Jupe plissée mi-longue", "Fermeture éclair", "Poches latérales"]
   },
   {
     id: 23,
     name: "Ensemble Tailleur Blanc Péplum",
-    slug: "blazer-leger-beige",
+    slug: "ensemble-tailleur-blanc-peplum",
     price: 180000,
     image: t6,
     category: "Tailleurs",
     rating: 4.8,
     reviewCount: 34,
-    description: "Blazer léger en lin, idéal pour la mi-saison. Élégant et confortable.",
-    colors: ["#E8DCC6", "#D2B48C"],
+    description: "Ensemble tailleur blanc style péplum. Très élégant et distingué, idéal pour les mariages ou les cérémonies. Le détail péplum apporte une touche romantique.",
+    colors: ["#E8DCC6"],
     sizes: ["S", "M", "L", "XL"],
     material: "70% Lin, 30% Coton",
     care: ["Nettoyage à sec", "Repassage vapeur"],
-    details: ["Doublure partielle", "Poches rabat", "Manches retroussables"]
+    details: ["Veste péplum", "Pantalon taille haute", "Manches courtes", "Poches rabat", "Fermeture croisée"]
   }
 ]

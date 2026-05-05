@@ -366,10 +366,6 @@ const Livraison = () => {
                         Retours
                     </Link>
                     <span className="text-champagne/20">•</span>
-                    <Link to="/faq" className="text-xs text-champagne/40 hover:text-gold transition-colors">
-                        FAQ
-                    </Link>
-                    <span className="text-champagne/20">•</span>
                     <Link to="/contact" className="text-xs text-champagne/40 hover:text-gold transition-colors">
                         Contact
                     </Link>

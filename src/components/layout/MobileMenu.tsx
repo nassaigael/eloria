@@ -18,7 +18,7 @@ const MobileMenu = ({ isOpen, onClose, mainNav, categories, priorityLinks }: Mob
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
+          <>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

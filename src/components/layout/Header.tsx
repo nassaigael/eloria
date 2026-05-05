@@ -30,7 +30,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Navigation principale
   const mainNav = [
     { nom: 'Accueil', slug: '', path: '/' },
     { nom: 'Boutique', slug: 'boutique', path: '/boutique' },
@@ -44,7 +43,6 @@ const Header = () => {
 
   const priorityLinks = [
     { nom: 'Contact', path: '/contact' },
-    { nom: 'FAQ', path: '/faq' },
     { nom: 'Livraison', path: '/livraison' },
   ];
 
