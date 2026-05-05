@@ -8,9 +8,7 @@ import {
     Eye,
     Filter,
     ChevronDown,
-    ArrowUpDown,
-    Sparkles
-} from 'lucide-react';
+    ArrowUpDown} from 'lucide-react';
 import { productsData, type Product } from '../data/productsData';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';

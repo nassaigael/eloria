@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { categoriesData, type Category } from '../../data/categoriesData';
+import { productsData } from '../../data/productsData';
 
 const Categories = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -25,25 +26,34 @@ const Categories = () => {
     }
   };
 
+  const categoriesWithCount = useMemo(() => {
+    return categoriesData.map((category: Omit<Category, 'productCount'>) => {
+      const productCount = productsData.filter(
+        product => product.category.toLowerCase() === category.slug.toLowerCase()
+      ).length;
+      return {
+        ...category,
+        productCount
+      };
+    });
+  }, []);
+
   return (
     <section
       ref={sectionRef}
       className="relative py-24 md:py-32 overflow-hidden bg-linear-to-b from-bordeaux to-bordeaux-dark"
     >
-      {/* Éléments décoratifs de fond */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-64 h-64 border border-gold/10 rounded-full" />
         <div className="absolute bottom-20 right-10 w-96 h-96 border border-gold/10 rounded-full" />
       </div>
 
-      {/* Ligne dorée animée en arrière-plan */}
       <motion.div
         className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold/20 to-transparent"
         style={{ scaleX: scrollYProgress }}
       />
 
       <div className="container-custom relative z-10">
-        {/* En-tête de section */}
         <motion.div
           style={{ opacity, y }}
           className="text-center mb-16 md:mb-20"
@@ -67,7 +77,6 @@ const Categories = () => {
           />
         </motion.div>
 
-        {/* Grille des catégories */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -75,7 +84,7 @@ const Categories = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
-          {categoriesData.map((category: Category, index: number) => (
+          {categoriesWithCount.map((category, index: number) => (
             <Link
               key={category.id}
               to={`/categorie/${category.slug}`}
@@ -87,7 +96,6 @@ const Categories = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
               >
-                {/* Conteneur de l'image avec effet de zoom */}
                 <div className="relative aspect-4/5 overflow-hidden">
                   <motion.img
                     src={category.image}
@@ -97,7 +105,6 @@ const Categories = () => {
                     transition={{ duration: 0.8 }}
                   />
 
-                  {/* Overlay gradient */}
                   <motion.div
                     className="absolute inset-0 bg-linear-to-t from-bordeaux via-bordeaux/50 to-transparent"
                     initial={{ opacity: 0.8 }}
@@ -105,7 +112,6 @@ const Categories = () => {
                     transition={{ duration: 0.4 }}
                   />
 
-                  {/* Badge nombre de produits */}
                   <motion.div
                     className="absolute top-4 right-4 bg-gold/90 backdrop-blur-sm text-bordeaux-dark text-xs px-3 py-1 rounded-full border border-gold/30"
                     initial={{ x: 20, opacity: 0 }}
@@ -135,7 +141,6 @@ const Categories = () => {
                       {category.description}
                     </motion.p>
 
-                    {/* Lien "Découvrir" avec animation */}
                     <motion.div
                       className="flex items-center text-gold text-sm uppercase tracking-wider group/link"
                       initial={{ opacity: 0, x: -20 }}
@@ -160,14 +165,12 @@ const Categories = () => {
                     </motion.div>
                   </div>
 
-                  {/* Bordure dorée animée au hover */}
                   <motion.div
                     className="absolute inset-0 border-2 border-gold/0 group-hover:border-gold/30 transition-all duration-500 pointer-events-none"
                     style={{ margin: '1px' }}
                   />
                 </div>
 
-                {/* Éléments décoratifs au hover */}
                 <motion.div
                   className="absolute -inset-2 border border-gold/0 group-hover:border-gold/10 rounded-none transition-all duration-500 pointer-events-none"
                   style={{ margin: '-1px' }}
@@ -177,7 +180,6 @@ const Categories = () => {
           ))}
         </motion.div>
 
-        {/* Bouton "Voir tout" */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -212,7 +214,6 @@ const Categories = () => {
         </motion.div>
       </div>
 
-      {/* Ligne dorée décorative en bas */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold/20 to-transparent"
         style={{ scaleX: scrollYProgress }}
