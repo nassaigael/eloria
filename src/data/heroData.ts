@@ -3,7 +3,6 @@ import cr2 from "../assets/images/carosel/pexels-alexandrecanteiro-33339932.jpg"
 import cr3 from "../assets/images/carosel/pexels-ivan-s-8498396.jpg";
 import cr4 from "../assets/images/carosel/pexels-mykhailo-petrenko-2152927294-32692072.jpg";
 
-
 export interface HeroSlide {
   id: number;
   title: string;
@@ -18,42 +17,42 @@ export interface HeroSlide {
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
-    title: "Collection Printemps-Été",
-    subtitle: "2024",
-    description: "Découvrez notre nouvelle collection aux lignes épurées et aux matières nobles. Une ode à la féminité et à l'élégance.",
+    title: "Collection Robes",
+    subtitle: "Élégance & Féminité",
+    description: "Découvrez notre collection de robes aux coupes raffinées et aux tissus nobles. Des pièces uniques pour toutes vos occasions, du bureau aux soirées.",
     image: cr1,
     buttonText: "Découvrir",
-    buttonLink: "/boutique",
-    collection: "Nouvelle Collection"
+    buttonLink: "/categorie/robes",
+    collection: "Nouvelle Collection Robes"
   },
   {
     id: 2,
-    title: "Robes de Soirée",
-    subtitle: "Exclusivité",
-    description: "Des pièces uniques pour vos soirées les plus prestigieuses. Couture française et savoir-faire exceptionnel.",
+    title: "Collection Blazers",
+    subtitle: "Chic & Sophistiqué",
+    description: "Des blazers élégants pour un look professionnel et tendance. La pièce maîtresse qui transforme votre tenue avec une touche de caractère.",
     image: cr2,
     buttonText: "Explorer",
-    buttonLink: "/categorie/robes",
-    collection: "Haute Couture"
+    buttonLink: "/categorie/blazers",
+    collection: "Collection Blazers"
   },
   {
     id: 3,
-    title: "Accessoires",
-    subtitle: "Signature",
-    description: "La touche finale qui fait la différence. Sacs, chaussures et bijoux pour compléter votre tenue avec élégance.",
+    title: "Collection Tailleurs",
+    subtitle: "Élégance Professionnelle",
+    description: "Des ensembles tailleurs parfaitement coordonnés pour un look chic et assuré. Qualité exceptionnelle et coupe impeccable.",
     image: cr3,
     buttonText: "Voir la collection",
-    buttonLink: "/categorie/accessoires",
-    collection: "Les Indispensables"
+    buttonLink: "/categorie/tailleurs",
+    collection: "Collection Tailleurs"
   },
   {
     id: 4,
-    title: "Mariage",
-    subtitle: "Collection Exclusive",
-    description: "Pour le plus beau jour de votre vie, des robes sur mesure et des accessoires d'exception.",
+    title: "Conseil Personnalisé",
+    subtitle: "Service Premium",
+    description: "Notre équipe est à votre disposition pour vous aider à trouver la tenue parfaite. Contactez-nous pour un accompagnement sur mesure.",
     image: cr4,
-    buttonText: "Prendre RDV",
+    buttonText: "Nous contacter",
     buttonLink: "/contact",
-    collection: "Moments Précieux"
+    collection: "Service Client"
   }
 ];

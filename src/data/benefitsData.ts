@@ -12,7 +12,7 @@ import {
 
 export interface Benefit {
   id: number;
-  icon: LucideIcon;
+    icon: LucideIcon;
   title: string;
   description: string;
   color: string;
