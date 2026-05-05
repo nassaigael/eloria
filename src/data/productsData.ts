@@ -188,9 +188,9 @@ export const productsData: Product[] = [
   // Blazers
   {
     id: 9,
-    name: "Ensemble Chic Doré",
+    name: "Blazer Blanc Col Volanté",
     slug: "ensemble-chic-dore",
-    price: 674000,
+    price: 110000,
     image: b1,
     category: "Blazers",
     rating: 4.9,
@@ -204,9 +204,9 @@ export const productsData: Product[] = [
   },
   {
     id: 10,
-    name: "Ensemble Tailleur Crème",
+    name: "Blazer Long Bordeaux Col Châle",
     slug: "ensemble-tailleur-creme",
-    price: 549000,
+    price: 125000,
     originalPrice: 699000,
     image: b2,
     category: "Blazers",
@@ -222,9 +222,9 @@ export const productsData: Product[] = [
   },
   {
     id: 11,
-    name: "Ensemble Short et Blazer",
+    name: "Blazer Bordeaux Cache-Cœur Péplum",
     slug: "ensemble-short-blazer",
-    price: 439000,
+    price: 115000,
     image: b3,
     category: "Blazers",
     rating: 4.7,
@@ -239,9 +239,9 @@ export const productsData: Product[] = [
 
   {
     id: 12,
-    name: "Blouse en Soie",
+    name: "Blazer Croisé Beige Classique",
     slug: "blouse-en-soie",
-    price: 284000,
+    price: 118000,
     originalPrice: 374000,
     image: b4,
     category: "Blazers",
@@ -257,9 +257,9 @@ export const productsData: Product[] = [
   },
   {
     id: 13,
-    name: "Chemisier Blanc",
+    name: "Blazer Long Cintré Gris Sauge",
     slug: "chemisier-blanc",
-    price: 159000,
+    price: 125000,
     originalPrice: 199000,
     image: b5,
     category: "Blazers",
@@ -274,9 +274,9 @@ export const productsData: Product[] = [
   },
   {
     id: 14,
-    name: "Top en Dentelle",
+    name: "Blazer Bleu Marine Classique Tailleur",
     slug: "top-en-dentelle",
-    price: 129000,
+    price: 98000,
     image: b6,
     category: "Blazers",
     rating: 4.6,
@@ -291,9 +291,9 @@ export const productsData: Product[] = [
   },
   {
     id: 15,
-    name: "Jupe Plissée Rubis",
+    name: "Blazer Oversize Beige Taupe",
     slug: "jupe-plissee-rubis",
-    price: 239000,
+    price: 105000,
     image: b7,
     category: "Blazers",
     rating: 4.6,
@@ -307,7 +307,7 @@ export const productsData: Product[] = [
   },
   {
     id: 16,
-    name: "Jupe Crayon Noire",
+    name: "Blazer Oversize Rayures Tennis",
     slug: "jupe-crayon-noire",
     price: 169000,
     originalPrice: 219000,
