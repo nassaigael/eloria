@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { categoriesData } from '../../data/categoriesData';
+import { categoriesData, type Category } from '../../data/categoriesData';
 
 const Categories = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -75,7 +75,7 @@ const Categories = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
-          {categoriesData.map((category, index) => (
+          {categoriesData.map((category: Category, index: number) => (
             <Link
               key={category.id}
               to={`/categorie/${category.slug}`}
@@ -127,7 +127,7 @@ const Categories = () => {
                     </motion.h3>
 
                     <motion.p
-                      className="text-sm text-champagne/70 mb-4 max-w-62.5"
+                      className="text-sm text-champagne/70 mb-4 max-w-62.5 line-clamp-2"
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
@@ -198,7 +198,7 @@ const Categories = () => {
                 transition: { duration: 0.4 }
               }}
             />
-            <span className="relative z-10 flex items-center group-hover:text-white transition-colors duration-300">
+            <span className="relative z-10 flex items-center group-hover:text-bordeaux-dark transition-colors duration-300">
               Explorer toutes nos collections
               <motion.span
                 className="ml-3"
