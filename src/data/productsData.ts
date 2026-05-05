@@ -422,4 +422,4 @@ export const productsData: Product[] = [
     care: ["Nettoyage à sec", "Repassage vapeur"],
     details: ["Veste péplum", "Pantalon taille haute", "Manches courtes", "Poches rabat", "Fermeture croisée"]
   }
-];
+]
