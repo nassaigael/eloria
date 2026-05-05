@@ -24,7 +24,7 @@ export const benefitsData: Benefit[] = [
     id: 1,
     icon: Truck,
     title: "Livraison Offerte",
-    description: "Dès 150Ar d'achat en France métropolitaine",
+    description: "Dès 150 000 Ar d'achat à Madagascar",
     color: "from-gold/20 to-transparent",
     highlight: "Express disponible"
   },
@@ -32,7 +32,7 @@ export const benefitsData: Benefit[] = [
     id: 2,
     icon: Shield,
     title: "Paiement Sécurisé",
-    description: "CB, PayPal, Apple Pay - 3D Secure",
+    description: "Mobile Money (MVola, Airtel Money), Carte bancaire, Virement",
     color: "from-gold/20 to-transparent",
     highlight: "100% sécurisé"
   },
@@ -40,7 +40,7 @@ export const benefitsData: Benefit[] = [
     id: 3,
     icon: RotateCcw,
     title: "Retours Gratuits",
-    description: "Sous 30 jours, en boutique ou par colissimo",
+    description: "Sous 14 jours, en boutique ou par transporteur",
     color: "from-gold/20 to-transparent",
     highlight: "Satisfait ou remboursé"
   },
@@ -48,7 +48,7 @@ export const benefitsData: Benefit[] = [
     id: 4,
     icon: Heart,
     title: "Service Premium",
-    description: "Conseillères disponibles 7j/7 de 9h à 20h",
+    description: "Conseillères disponibles du lundi au samedi de 9h à 18h",
     color: "from-gold/20 to-transparent",
     highlight: "À votre écoute"
   },
@@ -56,7 +56,7 @@ export const benefitsData: Benefit[] = [
     id: 5,
     icon: Clock,
     title: "Expédition Rapide",
-    description: "En 24/48h en point relais ou à domicile",
+    description: "Livraison sous 24h à Antananarivo, 3-5 jours en province",
     color: "from-gold/20 to-transparent",
     highlight: "Colis suivi"
   },
@@ -71,10 +71,10 @@ export const benefitsData: Benefit[] = [
   {
     id: 7,
     icon: CreditCard,
-    title: "Paiement en 3x",
-    description: "Sans frais avec Alma à partir de 100Ar",
+    title: "Paiement à la livraison",
+    description: "Payez à la réception de votre commande (10 000 Ar de frais)",
     color: "from-gold/20 to-transparent",
-    highlight: "Flexible"
+    highlight: "Disponible à Tana"
   },
   {
     id: 8,
