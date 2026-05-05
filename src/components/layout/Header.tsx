@@ -14,7 +14,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  
+
   const { cartCount } = useCart();
   const { favoritesCount } = useFavorites();
   const { setIsSearchOpen } = useSearch();
@@ -23,10 +23,10 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -36,20 +36,12 @@ const Header = () => {
     { nom: 'Boutique', slug: 'boutique', path: '/boutique' },
   ];
 
-  // Catégories pour le dropdown
   const categories = [
     { nom: 'Robes', slug: 'robes', path: '/categorie/robes' },
-    { nom: 'Ensembles', slug: 'ensembles', path: '/categorie/ensembles' },
-    { nom: 'Hauts', slug: 'hauts', path: '/categorie/hauts' },
-    { nom: 'Jupes', slug: 'jupes', path: '/categorie/jupes' },
-    { nom: 'Pantalons', slug: 'pantalons', path: '/categorie/pantalons' },
-    { nom: 'Accessoires', slug: 'accessoires', path: '/categorie/accessoires' },
-    { nom: 'Chaussures', slug: 'chaussures', path: '/categorie/chaussures' },
-    { nom: 'Mariage', slug: 'mariage', path: '/categorie/mariage' },
-    { nom: 'Soirée', slug: 'soiree', path: '/categorie/soiree' },
+    { nom: 'Blazers', slug: 'blazers', path: '/categorie/blazers' },
+    { nom: 'Tailleurs', slug: 'tailleurs', path: '/categorie/tailleurs' },
   ];
 
-  // Liens prioritaires
   const priorityLinks = [
     { nom: 'Contact', path: '/contact' },
     { nom: 'FAQ', path: '/faq' },
@@ -62,17 +54,16 @@ const Header = () => {
 
   return (
     <>
-      <motion.header 
+      <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-          isScrolled 
-            ? 'bg-bordeaux-dark/98 backdrop-blur-xl py-2 shadow-2xl' 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isScrolled
+            ? 'bg-bordeaux-dark/98 backdrop-blur-xl py-2 shadow-2xl'
             : 'bg-linear-to-b from-bordeaux-dark/90 via-bordeaux-dark/50 to-transparent py-3 md:py-4'
-        }`}
+          }`}
       >
-        <motion.div 
+        <motion.div
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -82,7 +73,7 @@ const Header = () => {
         <div className="container-custom">
           <div className="flex items-center justify-between">
             {/* Menu mobile button */}
-            <motion.button 
+            <motion.button
               onClick={() => setIsMenuOpen(true)}
               className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold transition-all duration-300 bg-bordeaux-dark/20 backdrop-blur-sm"
               aria-label="Menu"
@@ -93,20 +84,20 @@ const Header = () => {
             </motion.button>
 
             {/* Logo */}
-            <motion.div 
+            <motion.div
               className="flex-1 lg:flex-none text-center lg:text-left"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
               <Link to="/" className="inline-block relative group">
-                <motion.div 
+                <motion.div
                   className="absolute -inset-4 bg-gold/0 rounded-full blur-xl"
                   whileHover={{ backgroundColor: "rgba(212, 175, 55, 0.1)" }}
                   transition={{ duration: 0.5 }}
                 />
-                <img 
-                  src={logo} 
-                  alt="Eloria" 
+                <img
+                  src={logo}
+                  alt="Eloria"
                   className="relative h-12 md:h-12 lg:h-12 w-auto drop-shadow-2xl transition-all duration-700"
                 />
               </Link>
@@ -122,13 +113,13 @@ const Header = () => {
                   className="relative px-4 py-2 text-champagne/90 hover:text-gold text-sm uppercase tracking-wider font-medium transition-colors duration-300 group"
                 >
                   {item.nom}
-                  <motion.span 
+                  <motion.span
                     className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold to-transparent"
                     initial={{ scaleX: 0, opacity: 0 }}
                     whileHover={{ scaleX: 1, opacity: 1 }}
                     transition={{ duration: 0.3 }}
                   />
-                  <motion.span 
+                  <motion.span
                     className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-gold"
                     initial={{ scale: 0, opacity: 0 }}
                     whileHover={{ scale: 1, opacity: 1 }}
@@ -137,8 +128,8 @@ const Header = () => {
                 </Link>
               ))}
 
-              {/* Dropdown Catégories */}
-              <div 
+              {/* Dropdown Catégories - MIS À JOUR */}
+              <div
                 className="relative"
                 onMouseEnter={() => setIsCategoriesOpen(true)}
                 onMouseLeave={() => setIsCategoriesOpen(false)}
@@ -147,11 +138,11 @@ const Header = () => {
                   className="relative px-4 py-2 text-champagne/90 hover:text-gold text-sm uppercase tracking-wider font-medium transition-colors duration-300 group flex items-center space-x-1"
                 >
                   <span>Catégories</span>
-                  <ChevronDown 
-                    size={14} 
-                    className={`transition-transform duration-300 ${isCategoriesOpen ? 'rotate-180' : ''}`} 
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-300 ${isCategoriesOpen ? 'rotate-180' : ''}`}
                   />
-                  <motion.span 
+                  <motion.span
                     className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold to-transparent"
                     initial={{ scaleX: 0, opacity: 0 }}
                     whileHover={{ scaleX: 1, opacity: 1 }}
@@ -166,7 +157,7 @@ const Header = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-linear-to-b from-bordeaux to-bordeaux-dark border border-gold/20 shadow-2xl z-50"
+                      className="absolute top-full left-0 mt-2 w-56 bg-linear-to-b from-bordeaux to-bordeaux-dark border border-gold/20 shadow-2xl z-50"
                     >
                       <div className="py-2">
                         {categories.map((category) => (
@@ -193,7 +184,7 @@ const Header = () => {
                   className="relative px-4 py-2 text-champagne/90 hover:text-gold text-sm uppercase tracking-wider font-medium transition-colors duration-300 group"
                 >
                   {item.nom}
-                  <motion.span 
+                  <motion.span
                     className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold to-transparent"
                     initial={{ scaleX: 0, opacity: 0 }}
                     whileHover={{ scaleX: 1, opacity: 1 }}
@@ -207,7 +198,7 @@ const Header = () => {
             <div className="flex items-center space-x-2 md:space-x-3">
               {/* Recherche */}
               <div className="relative group">
-                <motion.button 
+                <motion.button
                   onClick={handleSearchClick}
                   className="relative w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold transition-all duration-300 bg-bordeaux-dark/20 backdrop-blur-sm"
                   aria-label="Rechercher"
@@ -224,17 +215,17 @@ const Header = () => {
 
               {/* Favoris */}
               <div className="relative group">
-                <Link 
+                <Link
                   to="/favoris"
                   className="relative w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold transition-all duration-300 bg-bordeaux-dark/20 backdrop-blur-sm"
                   aria-label="Favoris"
                 >
                   <Heart size={18} className="text-champagne" />
                 </Link>
-                
+
                 <AnimatePresence>
                   {favoritesCount > 0 && (
-                    <motion.span 
+                    <motion.span
                       className="absolute -top-1 -right-1 bg-gold text-bordeaux-dark text-xs font-bold min-w-5 h-5 px-1 rounded-full flex items-center justify-center border-2 border-bordeaux-dark shadow-lg"
                       initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
@@ -253,17 +244,17 @@ const Header = () => {
 
               {/* Panier */}
               <div className="relative group">
-                <Link 
+                <Link
                   to="/panier"
                   className="relative w-10 h-10 flex items-center justify-center rounded-full border border-gold/30 hover:border-gold transition-all duration-300 bg-bordeaux-dark/20 backdrop-blur-sm"
                   aria-label="Panier"
                 >
                   <ShoppingBag size={18} className="text-champagne" />
                 </Link>
-                
+
                 <AnimatePresence>
                   {cartCount > 0 && (
-                    <motion.span 
+                    <motion.span
                       className="absolute -top-1 -right-1 bg-gold text-bordeaux-dark text-xs font-bold min-w-5 h-5 px-1 rounded-full flex items-center justify-center border-2 border-bordeaux-dark shadow-lg"
                       initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
@@ -281,7 +272,7 @@ const Header = () => {
               </div>
 
               {/* Séparateur */}
-              <motion.div 
+              <motion.div
                 className="hidden md:block w-px h-6 bg-linear-to-b from-transparent via-gold/30 to-transparent"
                 initial={{ scaleY: 0, opacity: 0 }}
                 animate={{ scaleY: 1, opacity: 1 }}
@@ -293,7 +284,7 @@ const Header = () => {
           {/* Barre de recherche mobile */}
           <AnimatePresence>
             {isScrolled && (
-              <motion.div 
+              <motion.div
                 className="mt-3 lg:hidden"
                 initial={{ opacity: 0, y: -20, height: 0 }}
                 animate={{ opacity: 1, y: 0, height: "auto" }}
@@ -318,7 +309,7 @@ const Header = () => {
         {/* Ligne dorée inférieure */}
         <AnimatePresence>
           {isScrolled && (
-            <motion.div 
+            <motion.div
               className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gold/40 to-transparent"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
@@ -329,15 +320,14 @@ const Header = () => {
         </AnimatePresence>
       </motion.header>
 
-      {/* Menu mobile (mis à jour) */}
-      <MobileMenu 
-        isOpen={isMenuOpen} 
-        onClose={() => setIsMenuOpen(false)} 
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
         mainNav={mainNav}
         categories={categories}
         priorityLinks={priorityLinks}
       />
-      
+
       <SearchModal />
       <div className={`transition-all duration-700 ${isScrolled ? 'h-16' : 'h-20'}`} />
     </>
