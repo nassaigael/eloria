@@ -1,3 +1,18 @@
+import d1 from "../assets/images/dress/dress1.jpeg";
+import d2 from "../assets/images/dress/dress2.jpeg";
+import d3 from "../assets/images/dress/dress3.jpeg";
+import d4 from "../assets/images/dress/dress4.jpeg";
+
+import b1 from "../assets/images/blazers/blazer1.jpeg";
+import b4 from "../assets/images/blazers/blazer4.jpeg";
+import b6 from "../assets/images/blazers/blazer6.jpeg";
+import b7 from "../assets/images/blazers/blazer7.jpeg";
+
+import t1 from "../assets/images/tailired_suits/tailored1.jpeg";
+import t2 from "../assets/images/tailired_suits/tailored2.jpeg";
+import t3 from "../assets/images/tailired_suits/tailored3.jpeg";
+import t6 from "../assets/images/tailired_suits/tailored6.jpeg";
+
 export interface Testimonial {
   id: number;
   name: string;
@@ -27,7 +42,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-15",
     dateRelative: "Il y a 2 jours",
     productName: "Robe Fourreau Bureau Taupe",
-    productImage: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=100&auto=format",
+    productImage: d1,
     productSlug: "robe-fourreau-bureau-taupe",
     verified: true,
     helpful: 24
@@ -43,7 +58,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-10",
     dateRelative: "Il y a 1 semaine",
     productName: "Ensemble Tailleur Cache-Cœur Bleu Ciel",
-    productImage: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=100&auto=format",
+    productImage: t1,
     productSlug: "ensemble-tailleur-cache-coeur-bleu-ciel",
     verified: true,
     helpful: 18
@@ -59,7 +74,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-14",
     dateRelative: "Il y a 3 jours",
     productName: "Blazer Blanc Col Volanté",
-    productImage: "https://images.unsplash.com/photo-1551163943-3f6a855d1153?w=100&auto=format",
+    productImage: b1,
     productSlug: "blazer-blanc-col-volante",
     verified: true,
     helpful: 12
@@ -75,7 +90,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-01",
     dateRelative: "Il y a 2 semaines",
     productName: "Ensemble Tailleur Veste et Jupe Patineuse Bordeaux",
-    productImage: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=100&auto=format",
+    productImage: t2,
     productSlug: "ensemble-tailleur-veste-jupe-patineuse-bordeaux",
     verified: true,
     helpful: 31
@@ -91,7 +106,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-12",
     dateRelative: "Il y a 5 jours",
     productName: "Blazer Oversize Beige Taupe",
-    productImage: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=100&auto=format",
+    productImage: b7,
     productSlug: "blazer-oversize-beige-taupe",
     verified: true,
     helpful: 15
@@ -107,7 +122,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-09",
     dateRelative: "Il y a 1 semaine",
     productName: "Ensemble Tailleur Tweed Blanc",
-    productImage: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=100&auto=format",
+    productImage: t3,
     productSlug: "ensemble-tailleur-tweed-blanc",
     verified: true,
     helpful: 22
@@ -123,7 +138,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-05",
     dateRelative: "Il y a 1 semaine",
     productName: "Blazer Bleu Marine Classique Tailleur",
-    productImage: "https://images.unsplash.com/photo-1584917865442-6b3f5e5b7b9b?w=100&auto=format",
+    productImage: b6,
     productSlug: "blazer-bleu-marine-classique-tailleur",
     verified: true,
     helpful: 19
@@ -139,7 +154,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-08",
     dateRelative: "Il y a 6 jours",
     productName: "Robe Sirène Sequins Champagne",
-    productImage: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=100&auto=format",
+    productImage: d4,
     productSlug: "robe-sirene-sequins-champagne",
     verified: true,
     helpful: 8
@@ -155,7 +170,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-02",
     dateRelative: "Il y a 2 semaines",
     productName: "Ensemble Tailleur Blanc Péplum",
-    productImage: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=100&auto=format",
+    productImage: t6,
     productSlug: "ensemble-tailleur-blanc-peplum",
     verified: true,
     helpful: 14
@@ -171,7 +186,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-02-25",
     dateRelative: "Il y a 3 semaines",
     productName: "Blazer Croisé Beige Classique",
-    productImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=100&auto=format",
+    productImage: b4,
     productSlug: "blazer-croise-beige-classique",
     verified: true,
     helpful: 27
@@ -187,7 +202,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-07",
     dateRelative: "Il y a 1 semaine",
     productName: "Robe Blazer Patineuse Marine",
-    productImage: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=100&auto=format",
+    productImage: d2,
     productSlug: "robe-blazer-patineuse-marine",
     verified: true,
     helpful: 21
@@ -203,7 +218,7 @@ export const testimonialsData: Testimonial[] = [
     date: "2024-03-11",
     dateRelative: "Il y a 3 jours",
     productName: "Robe Militaire Chic Beige",
-    productImage: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=100&auto=format",
+    productImage: d3,
     productSlug: "robe-militaire-chic-beige",
     verified: true,
     helpful: 11
