@@ -93,16 +93,6 @@ const Contact = () => {
 
             <div className="container-custom relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center space-x-3 text-sm mb-8"
-                >
-                    <Link to="/" className="text-champagne/50 hover:text-gold transition-colors">Accueil</Link>
-                    <span className="text-champagne/30">/</span>
-                    <span className="text-gold">Contact</span>
-                </motion.div>
-
-                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-16"
